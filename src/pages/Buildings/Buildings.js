@@ -15,7 +15,9 @@ const Item = styled(Paper)(({ theme }) => ({
 const Buildings = () => {
 
     const[buildings, setBuildings] = useState([]);
+    const[saveBuildings, setSaveBuildings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [keyword, setKeyword] = useState('');
     
     const getData = () => {
         fetch("buildings.json", {
@@ -29,6 +31,7 @@ const Buildings = () => {
         })
         .then(function (myJson) {
             setBuildings(myJson.buildings);
+            setSaveBuildings(myJson.buildings);
             setIsLoading(false);
         });
     };
@@ -38,6 +41,23 @@ const Buildings = () => {
     }, []);
 
     
+    useEffect(() => {
+        search();
+    }, [keyword])
+    
+    const search = () => {
+        if(keyword) {
+            let tmp = [];
+            saveBuildings.forEach(building => {
+                if((building.Name).includes(keyword)) tmp.push(building);
+            });
+            setBuildings(tmp);
+        }
+        else {
+            setBuildings(saveBuildings);
+        }
+    }
+
     return (
         <Container maxWidth="xl">
             {
@@ -47,7 +67,7 @@ const Buildings = () => {
                         <Grid container pt={1} textAlign="right">
                             <Grid item xs={10}></Grid>
                             <Grid item xs={2}>
-                                <TextField id="outlined-basic" label="Search..." variant="outlined" size="small" />
+                                <TextField id="outlined-basic" label="Search..." variant="outlined" size="small" onChange={(e)=>setKeyword(e.target.value)} value={keyword}/>
                             </Grid>
                         </Grid>
                         <Grid container>
