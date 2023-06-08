@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -15,10 +15,9 @@ const Nfts = () => {
       `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
     );
     const data = await response.json();
-    console.log(data);
     setNfts([...nfts, ...data.results]);
     setFilteredNfts([...nfts, ...data.results]);
-    setOffset(offset + 20);
+    setOffset(offset + 20); 
   };
 
   useEffect(() => {
@@ -68,7 +67,7 @@ const Nfts = () => {
         columns={{ xs: 2, sm: 8,md: 12, lg: 16, xl: 20 }}
       >
         {filteredNfts.map((nfts, index) => (
-          <Grid item key={nfts.id} xs={2} sm={4} md={4} lg={4} xl={5}>
+          <Grid item key={index} xs={2} sm={4} md={4} lg={4} xl={5}>
             <Box sx={{ bgcolor: 'primary.main', py :'10' }}>
               <div  width="100%" height="100%"><img src={nfts.img} width="100%" height="80%" alt="" />
               <Box sx={{ display: "flex", justifyContent: "space-around" }}>
