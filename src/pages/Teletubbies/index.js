@@ -1,6 +1,6 @@
-import { Title } from '../../components/Teletubbies/title'
+import { Title } from '../../components/Teletubbies/Title'
 
-export default Teletubbies = () => {
+export const Teletubbies = () => {
   return (
     <>
       <Title />
