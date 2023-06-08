@@ -19,6 +19,18 @@ const Blog = () => {
   useEffect(() => {
     getBlog()
   }, [])
+
+  const handleSearch = e => {
+    setSearchStr(e.target.value.toLowerCase())
+  }
+  useEffect(() => {
+    setFilterBlog(
+      blogdata.filter(item =>
+        item.collectionName.toLowerCase().includes(searchStr)
+      )
+    )
+  }, [blogdata, searchStr])
+  
   return (
     <div>
       <Box sx={{ display: "flex", justifyContent: "center", padding: '30px' }}>
