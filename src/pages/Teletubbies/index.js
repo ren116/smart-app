@@ -1,6 +1,6 @@
 import { Title } from '../../components/Teletubbies/Title'
-/* import { CardMain } from '../../components/Teletubbies/CardMain' */
 import { CardImg } from '../../components/Teletubbies/CardImg'
+import { CardMain } from '../../components/Teletubbies/CardMain'
 import { Container, Box, Card } from '@mui/material';
 import teletubbiesData from '../../teletubbies.json';
 
@@ -10,7 +10,10 @@ export const Teletubbies = () => {
       <Title />
       <Box>
         {teletubbiesData.map((item, index) => {
-          <CardImg teletubby = {item}/>
+          <Card>
+            <CardImg teletubby = {item}/>
+            <CardMain teletubby = {item}/>
+          </Card>
         })}
       </Box>
     </Container>
