@@ -4,8 +4,17 @@ import { Container, Grid, TextField } from '@mui/material';
 
 export default function NFTs() {
     return (
-        <Typography gutterBottom variant="h3" component="div" sx={{ paddingTop: 5 }}>
-            NFT Marketplace
-        </Typography>
+        <Box>
+            <Typography gutterBottom variant="h3" component="div" sx={{ paddingTop: 5 }}>
+                NFT Marketplace
+            </Typography>
+            <TextField
+            placeholder="Search nft name"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearch}
+            sx={{ paddingBottom: 3 }}
+        />
+        </Box>
     );
 }
