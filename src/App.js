@@ -3,6 +3,8 @@ import Buildings from "pages/Buildings";
 import Layout from "pages/Layout";
 import Home from "pages/Home";
 import NoPage from "pages/NoPage";
+import Teletubbies from "pages/Teletubbies";
+
 import "./App.css";
 
 function App() {
@@ -12,7 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path = "/buildings" element = {<Buildings />} />
+            <Route path="/buildings" element={<Buildings />} />
+            <Route path="/teletubbies" element={<Teletubbies />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
