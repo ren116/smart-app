@@ -1,4 +1,5 @@
-import * as React from "react";
+import { getBuildingData } from "api";
+import { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -19,28 +20,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Avatar, Chip, Container } from "@mui/material";
-import builds from "../../data/buildings";
-function createData(id, Name, Alerts, Savings, Uptime, Power) {
-  return {
-    id,
-    Name,
-    Alerts,
-    Savings,
-    Uptime,
-    Power,
-  };
-}
-
-const rows = builds.buildings.map((build, index) => {
-  return createData(
-    index+1,
-    build.Name,
-    build.Alerts,
-    build.Savings,
-    build.Uptime,
-    build.Power
-  );
-});
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -230,27 +209,41 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("name");
-  const [selected, setSelected] = React.useState([]);
-  const page =  0;
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("name");
+  const [selected, setSelected] = useState([]);
+  const page = 0;
   const dense = false;
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 800
       ) {
-        setRowsPerPage(rowsPerPage+20);
+        setRowsPerPage(rowsPerPage + 20);
       }
-    }
-    window.addEventListener('scroll', handleScroll)
+    };
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [rowsPerPage]);
+  const [builds, setBuilds] = useState([]);
+
+  const getBuilds = async () => {
+    try {
+      const response = await getBuildingData();
+      setBuilds(response.data.buildings);
+    } catch (error) {
+      console.error(error);
     }
-  }, [rowsPerPage])
+  };
+
+  useEffect(() => {
+    getBuilds();
+  }, []);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -260,7 +253,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id);
+      const newSelected = builds.map((n, index) => index);
       setSelected(newSelected);
       return;
     }
@@ -290,47 +283,45 @@ export default function EnhancedTable() {
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - builds.length) : 0;
 
-  const visibleRows = React.useMemo(
+  const visibleRows = useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
+      stableSort(builds, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rowsPerPage, builds]
   );
+
   return (
     <Container maxWidth="xl" sx={{ mt: "80px" }}>
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "70%", m: "auto" }}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
-            <Table
-              sx={{ minWidth: 750 }}
-              aria-labelledby="tableTitle"
-            >
+            <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
               <EnhancedTableHead
                 numSelected={selected.length}
                 order={order}
                 orderBy={orderBy}
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
-                rowCount={rows.length}
+                rowCount={builds.length}
               />
               <TableBody>
                 {visibleRows.map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
+                  const isItemSelected = isSelected(index);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.id)}
+                      onClick={(event) => handleClick(event, index)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.id}
+                      key={index}
                       selected={isItemSelected}
                       sx={{
                         cursor: "pointer",
@@ -352,7 +343,7 @@ export default function EnhancedTable() {
                         scope="row"
                         padding="none"
                       >
-                        {row.id}
+                        {index + 1}
                       </TableCell>
                       <TableCell align="left" sx={{ fontWeight: "bold" }}>
                         {row.Name}
