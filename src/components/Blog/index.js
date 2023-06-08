@@ -65,7 +65,7 @@ const Blog = () => {
                       {item.collectionName}
                     </Typography>
                     <Typography variant="p">
-                      {item.price}$
+                      {item.price}($)
                     </Typography>
                   </CardContent>
                 </CardActionArea>
