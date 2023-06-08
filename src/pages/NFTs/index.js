@@ -15,13 +15,20 @@ export default function NFTs() {
   useEffect(() => {
     loadNftListing();
   }, []);
+  useEffect(() => {
+    setFilteredNftListing(
+      nftListing.filter(nftListing =>
+        nftListing.collectionName.toLowerCase().includes(searchTerm)
+      )
+    )
+  }, [nftListing, searchTerm])
   return (
     <div
       className="nfts"
       style={{ display: "flex", justifyContent: "center", padding: "2%" }}
     >
       <div>
-        <input onChange={handleSearch}/>
+        <input onChange={handleSearch} />
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", width: "60%" }}>
         {nftListing &&
