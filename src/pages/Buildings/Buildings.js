@@ -12,6 +12,7 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    fontSize: 20
   }));
 
 const Buildings = () => {
@@ -33,7 +34,7 @@ const Buildings = () => {
     
     useEffect(() => {
         getBuildingsData(0,20);
-    }, [allData])
+    }, [allData]);
 
     const getBuildingsData = (st, en) => {
         setIsLoading(true);
@@ -97,25 +98,25 @@ const Buildings = () => {
                             <Grid container mt={2}>
                                 <Grid item xs={1}>
                                     <Item>
-                                        No
+                                        No ˅
                                     </Item>
                                 </Grid>
                                 <Grid item xs={2}>
                                     <Item>
-                                    Site
+                                    Site ˅
                                     </Item>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <Item>Alerts</Item>
+                                    <Item>Alerts ˅</Item>
                                 </Grid>
                                 <Grid item xs={2}>
-                                    <Item>Savings</Item>
+                                    <Item>Savings ˅</Item>
                                 </Grid>
                                 <Grid item xs={2}>
-                                    <Item>Uptime</Item>
+                                    <Item>Uptime ˅</Item>
                                 </Grid>
                                 <Grid item xs={2}>
-                                    <Item>Power</Item>
+                                    <Item>Power ˅</Item>
                                 </Grid>
                             </Grid>
                             {

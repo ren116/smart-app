@@ -1,8 +1,6 @@
 import {  Typography, Grid, Fab } from "@mui/material";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 const Building = ({ num, name, alerts, saving, uptime, power  }) => {
-    
     
     return (
         <Grid container mt={2} py={2}  sx={{boxShadow: 1,border: 2,borderColor: 'primary.light', '&:hover' :{ border: 2, borderColor: '#6600ff', boxShadow: 3 },  borderRadius: 3, backgroundColor: 'white', display : "flex", alignItems : 'center'}}>
@@ -57,7 +55,7 @@ const Building = ({ num, name, alerts, saving, uptime, power  }) => {
                 <Typography sx={{color: '#b5b0b0'}}>{ uptime }</Typography>
             </Grid>
             <Grid item xs={2}>
-                <Typography sx={{color: '#9dcf7a', fontSize:14}}>{ power }</Typography>
+                <Typography sx={{color: '#00e600', fontSize:14}}>{ power }</Typography>
             </Grid>
         </Grid>
     )
