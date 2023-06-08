@@ -77,6 +77,7 @@ const Teletubbies = () => {
               color: "Blue",
               padding: 4,
               boxShadow: 3,
+              fontFamily: "Cherry Bomb One",
             }}
             mt={4}
             mb={3}
@@ -153,7 +154,7 @@ const Teletubbies = () => {
                       variant="h4"
                       component="div"
                       align="left"
-                      sx={{ px: 2, my: 1 }}
+                      sx={{ px: 2, my: 1, fontFamily: "Cherry Bomb One" }}
                     >
                       {teletubby.name}
                     </Typography>
