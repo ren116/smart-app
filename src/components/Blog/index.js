@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CardMedia, CardContent, Typography, CardActionArea, Card } from '@mui/material';
+import { CardMedia, CardContent, Typography, CardActionArea } from '@mui/material';
 import { Container, Grid, Box } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
@@ -12,7 +12,6 @@ const Blog = () => {
   const [filterBlog, setFilterBlog] = useState([])
   const [offset, setOffset] = useState(0)
   const [searchStr, setSearchStr] = useState('')
-
   const getBlog = async () => {
     const res = await fetch(
       `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
@@ -21,13 +20,12 @@ const Blog = () => {
     setblogdata([...blogdata, ...data.results])
     setFilterBlog([...blogdata, ...data.results])
     setOffset(offset + 20)
-    console.log(res)
   }
   const handleSearch = e => {
     setSearchStr(e.target.value.toLowerCase())
   }
   useEffect(() => {
-    getBlog()
+    getBlog();
   }, [])
 
   useEffect(() => {
@@ -44,7 +42,7 @@ const Blog = () => {
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100
       ) {
-        getBlog()
+        getBlog();
       }
     }
     window.addEventListener('scroll', handleScroll)
