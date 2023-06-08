@@ -18,6 +18,7 @@ export const getCurrentWeatherData = async () => {
     throw error;
   }
 };
+
 const buildingsOptions = {
   method: "GET",
   url: "/buildings.json",
@@ -31,5 +32,3 @@ export const getBuildingsData = async () => {
     throw error;
   }
 };
-
-
