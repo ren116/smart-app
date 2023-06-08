@@ -1,8 +1,8 @@
-import { Card, CardMedia, CardContent, Typography, Chip } from '@mui/material';
+import { CardContent, Typography, Chip } from '@mui/material';
 
-export const CardContent = () => {
+export const CardMain = (teletubby) => {
   return (
-    <CardContent>
+    <CardMain>
       <Typography gutterBottom variant="h5" component="div">
         {tubby.name}
       </Typography>
@@ -14,6 +14,6 @@ export const CardContent = () => {
           <Chip key={tag} label={tag} sx={{ mr: 1, mb: 1 }} />
         ))}
       </div>
-    </CardContent>
+    </CardMain>
   )
 } 
