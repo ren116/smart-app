@@ -18,8 +18,9 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-import builds from "./buildings";
 import { Avatar, Chip, Container, TextField } from "@mui/material";
+import builds from "./buildings";
+
 function createData(id, Name, Alerts, Savings, Uptime, Power) {
   return {
     id,
@@ -199,7 +200,7 @@ function EnhancedTableToolbar(props) {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: "1 1 100%" }}
+          sx={{ flex: "1 1 100%", fontSize: "2rem" }}
           variant="h6"
           id="tableTitle"
           component="div"
@@ -301,17 +302,10 @@ export default function EnhancedTable() {
     [order, orderBy, page, rowsPerPage]
   );
   const [handleSearch, setHandleSearch] = React.useState("");
-
+  
   return (
     <Container maxWidth="xl" sx={{ mt: "80px" }}>
-      <Box
-        sx={{
-          width: "70%",
-          m: "auto",
-          maxWidth: "100%",
-          mb: "50px",
-        }}
-      >
+      <Box sx={{ width: { sm:"100%", md:"85%", lg:"70%"}, m: "auto" }} >
         <TextField
           fullWidth
           label="Search"
@@ -320,9 +314,7 @@ export default function EnhancedTable() {
             setHandleSearch(event.target.value.toLowerCase());
           }}
         />
-      </Box>
-      <Box sx={{ width: "100%" }}>
-        <Paper sx={{ width: "70%", m: "auto" }}>
+        <Paper sx={{ width: "100%" }}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
             <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
