@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Typography, Box, Grid } from "@mui/material";
 import teletubbiesData from "../../Data/teletubbies.json";
 
-const Tele = () => {
+const Teletubbies = () => {
   useEffect(() => {}, []);
 
   return (
@@ -31,4 +31,4 @@ const Tele = () => {
   );
 };
 
-export default Tele;
+export default Teletubbies;
