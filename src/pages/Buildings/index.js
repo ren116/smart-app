@@ -359,7 +359,7 @@ export default function EnhancedTable() {
                         <Avatar
                           sx={{
                             bgcolor: `${
-                              row.Alerts.high.count ? "pink" : "gray"
+                              row.Alerts.high.count ? "#3df696" : "#ebebeb"
                             }`,
                           }}
                         >
@@ -368,7 +368,7 @@ export default function EnhancedTable() {
                         <Avatar
                           sx={{
                             bgcolor: `${
-                              row.Alerts.med.count ? "green" : "gray"
+                              row.Alerts.med.count ? "#f69e3d" : "#ebebeb"
                             }`,
                           }}
                         >
@@ -377,7 +377,7 @@ export default function EnhancedTable() {
                         <Avatar
                           sx={{
                             bgcolor: `${
-                              row.Alerts.low.count ? "violet" : "gray"
+                              row.Alerts.low.count ? "#ff4850" : "#ebebeb"
                             }`,
                           }}
                         >
