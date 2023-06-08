@@ -35,7 +35,7 @@ function createData(id, Name, Alerts, Savings, Uptime, Power) {
 
 const rows = builds.buildings.map((build, index) => {
   return createData(
-    index+1,
+    index + 1,
     build.Name,
     build.Alerts,
     build.Savings,
@@ -303,10 +303,10 @@ export default function EnhancedTable() {
     [order, orderBy, page, rowsPerPage]
   );
   const [handleSearch, setHandleSearch] = React.useState("");
-  
+
   return (
     <Container maxWidth="xl" sx={{ mt: "80px" }}>
-      <Box sx={{ width: { sm:"100%", md:"85%", lg:"70%"}, m: "auto" }} >
+      <Box sx={{ width: { sm: "100%", md: "85%", lg: "70%" }, m: "auto" }}>
         <TextField
           fullWidth
           label="Search"
