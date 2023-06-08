@@ -14,9 +14,9 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="buildings" element={<BuildingList />} />
+            <Route path="Teletubbies" element={<Teletubbies />}/>
             <Route path="*" element={<NoPage />} />
           </Route>
-          <Route path="/Teletubbies" element={<Teletubbies />}/>
         </Routes>
       </BrowserRouter>
     </div>
