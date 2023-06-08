@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Container from "@material-ui/core/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -57,7 +57,7 @@ const Nfts = () => {
       <TextField
         label="Search NFTs"
         value={searchQuery}
-       sx={{m:'50px'}}
+       sx={{my:'50px'}}
         
         onChange={handleSearch}
       />
@@ -65,14 +65,17 @@ const Nfts = () => {
        sx={{m:'100px'}}
         container
         spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 2, sm: 8, md: 16, xl: 20 }}
+        columns={{ xs: 2, sm: 8,md: 12, lg: 16, xl: 20 }}
       >
         {filteredNfts.map((nfts, index) => (
           <Grid item key={nfts.id} xs={2} sm={4} md={4} lg={4} xl={5}>
-            <img src={nfts.img} width="100%" height="80%" alt="" />
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <h4>{nfts.collectionTitle}</h4>
-              <p>{nfts.price}</p>
+            <Box sx={{ bgcolor: 'primary.main', py :'10' }}>
+              <div  width="100%" height="100%"><img src={nfts.img} width="100%" height="80%" alt="" />
+              <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                <h4>{nfts.collectionTitle}</h4>
+                <p>{nfts.price}</p>
+              </Box>
+              </div>
             </Box>
           </Grid>
         ))}
@@ -81,4 +84,4 @@ const Nfts = () => {
   );
 };
 
-export default Nfts;
+export default Nfts;           
