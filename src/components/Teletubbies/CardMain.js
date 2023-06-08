@@ -2,7 +2,7 @@ import { CardContent, Typography, Chip } from '@mui/material';
 
 export const CardMain = (teletubby) => {
   return (
-    <CardMain>
+    <CardContent>
       <Typography gutterBottom variant="h5" component="div">
         {teletubby.name}
       </Typography>
@@ -11,6 +11,6 @@ export const CardMain = (teletubby) => {
       </Typography>
       <div sx={{ mt: 2 }}>
       </div>
-    </CardMain>
+    </CardContent>
   )
 } 

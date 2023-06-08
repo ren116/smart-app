@@ -10,7 +10,7 @@ export const Teletubbies = () => {
       <Title />
       <Box>
         {teletubbiesData.map((item, index) => {
-          <Card>
+          return <Card key = {index}>
             <CardImg teletubby = {item}/>
             <CardMain teletubby = {item}/>
           </Card>
