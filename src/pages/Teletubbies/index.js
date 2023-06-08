@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Container, Typography, Grid, Paper, TextField } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Grid,
+  Paper,
+  TextField,
+  InputAdornment,
+} from "@mui/material";
 import axios from "axios";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Teletubbies = () => {
   const [teletubbies, setTeletubbies] = useState([]);
