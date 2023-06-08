@@ -26,7 +26,8 @@ const Teletubbies = () => {
     const handleScroll = () => {
       if (
         window.scrollY + window.innerHeight >=
-        document.documentElement.scrollHeight
+        document.documentElement.scrollHeight  &&
+        searchTerm === ""
       ) {
         setVisibleTeletubbies(visibleTeletubbies + 20);
       }
@@ -38,6 +39,9 @@ const Teletubbies = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [visibleTeletubbies]);
+  const filteredTeletubbies = teletubbies.filter((teletubby) =>
+  teletubby.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
   return (
     <>
