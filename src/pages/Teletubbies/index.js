@@ -7,7 +7,7 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-import axios from "axios";
+import {getCurrenTeletubbyData} from "api";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Teletubbies = () => {
@@ -15,20 +15,7 @@ const Teletubbies = () => {
   const [page, setPage] = useState(1); // keep track of current page number
   const [searchQuery, setSearchQuery] = useState(""); // keep track of search query
 
-  const teletubbyOptions = {
-    method: "GET",
-    url: "./teletubbies.json",
-  };
-
-  const getCurrenTeletubbyData = async () => {
-    try {
-      const response = await axios.request(teletubbyOptions);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  };
-
+ 
   const getTeletubbies = async () => {
     try {
       const response = await getCurrenTeletubbyData();
