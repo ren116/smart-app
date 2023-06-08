@@ -22,7 +22,7 @@ const Teletubbies = () => {
     const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 1000
+        document.body.offsetHeight 
       ) {
         setOffset(offset+20);
       }
