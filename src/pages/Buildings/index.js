@@ -19,7 +19,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Avatar, Chip, Container, TextField } from "@mui/material";
-import builds from "./buildings";
+
+import builds from "../../data/buildings";
 
 function createData(id, Name, Alerts, Savings, Uptime, Power) {
   return {
@@ -34,7 +35,7 @@ function createData(id, Name, Alerts, Savings, Uptime, Power) {
 
 const rows = builds.buildings.map((build, index) => {
   return createData(
-    build.id,
+    index+1,
     build.Name,
     build.Alerts,
     build.Savings,
