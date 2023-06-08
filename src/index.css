@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.css-46bh2p-MuiCardContent-root:last-child {
+  padding-bottom: 0 !important;
+}
+.css-46bh2p-MuiCardContent-root {
+  padding: 0 !important;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
