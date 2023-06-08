@@ -7,7 +7,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,8 +15,6 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
@@ -237,9 +234,24 @@ export default function EnhancedTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const page =  0;
+  const dense = false;
+  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 800
+      ) {
+        setRowsPerPage(rowsPerPage+20);
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [rowsPerPage])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -276,18 +288,8 @@ export default function EnhancedTable() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -302,13 +304,12 @@ export default function EnhancedTable() {
   return (
     <Container maxWidth="xl" sx={{ mt: "80px" }}>
       <Box sx={{ width: "100%" }}>
-        <Paper sx={{ width: "70%", mb: 2, m: "auto" }}>
+        <Paper sx={{ width: "70%", m: "auto" }}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
             <Table
               sx={{ minWidth: 750 }}
               aria-labelledby="tableTitle"
-              size={dense ? "small" : "medium"}
             >
               <EnhancedTableHead
                 numSelected={selected.length}
@@ -332,7 +333,10 @@ export default function EnhancedTable() {
                       tabIndex={-1}
                       key={row.id}
                       selected={isItemSelected}
-                      sx={{ cursor: "pointer", border:`${isItemSelected?'blue 3px solid':''}` }}
+                      sx={{
+                        cursor: "pointer",
+                        border: `${isItemSelected ? "blue 3px solid" : ""}`,
+                      }}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
@@ -351,7 +355,9 @@ export default function EnhancedTable() {
                       >
                         {row.id}
                       </TableCell>
-                      <TableCell align="left" sx={{fontWeight:'bold'}}>{row.Name}</TableCell>
+                      <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                        {row.Name}
+                      </TableCell>
                       <TableCell
                         align="left"
                         sx={{ display: "flex", gap: "10px" }}
@@ -385,25 +391,37 @@ export default function EnhancedTable() {
                         </Avatar>
                       </TableCell>
                       <TableCell align="right">
-                        <Chip label={row.Savings} variant="outlined"
+                        <Chip
+                          label={row.Savings}
+                          variant="outlined"
                           sx={{
-                            width:"58px",
-                            bgcolor: `${(parseInt(row.Savings)) > 70 ? "" : "pink"}`, color: `${ (parseInt(row.Savings)) > 70 ? "" : "red"}`,
+                            width: "58px",
+                            bgcolor: `${
+                              parseInt(row.Savings) > 70 ? "" : "pink"
+                            }`,
+                            color: `${parseInt(row.Savings) > 70 ? "" : "red"}`,
                           }}
-                        >
-                        </Chip>
+                        ></Chip>
                       </TableCell>
                       <TableCell align="right">
-                        <Chip label={row.Uptime} variant="outlined"
+                        <Chip
+                          label={row.Uptime}
+                          variant="outlined"
                           sx={{
-                            width:"58px",
-                            bgcolor: `${(parseInt(row.Uptime)) > 70 ? "" : "pink"}`, color: `${ (parseInt(row.Uptime)) > 70 ? "" : "red"}`,
+                            width: "58px",
+                            bgcolor: `${
+                              parseInt(row.Uptime) > 70 ? "" : "pink"
+                            }`,
+                            color: `${parseInt(row.Uptime) > 70 ? "" : "red"}`,
                           }}
-                        >
-                          
-                        </Chip>
+                        ></Chip>
                       </TableCell>
-                      <TableCell align="right" sx={{color:'#00b900', fontWeight:'bold'}}>{row.Power}</TableCell>
+                      <TableCell
+                        align="right"
+                        sx={{ color: "#00b900", fontWeight: "bold" }}
+                      >
+                        {row.Power}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -419,15 +437,6 @@ export default function EnhancedTable() {
               </TableBody>
             </Table>
           </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
         </Paper>
       </Box>
     </Container>
