@@ -16,6 +16,9 @@ const Blog = () => {
         setFilterBlog([...blogdata, ...data.results])
         console.log(res)
     }
+    useEffect(() => {
+        getBlog()
+    }, [])
     return (
         <div>
             <Box sx={{ display: "flex", justifyContent: "center", padding: '30px' }}>
