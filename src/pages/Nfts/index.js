@@ -33,6 +33,20 @@ const Nfts = () => {
     );
   }, [nfts, searchQuery]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 800
+      ) {
+        fetchData();
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [offset]);
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value.toLowerCase());
