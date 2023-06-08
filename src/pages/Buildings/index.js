@@ -1,5 +1,5 @@
-// import React from "react";
-import { useState, useMemo } from "react";
+import { getBuildingData } from "api";
+import { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -22,29 +22,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Avatar, Chip, Container } from "@mui/material";
 
-import builds from "../../data/buildings";
-
-function createData(id, Name, Alerts, Savings, Uptime, Power) {
-  return {
-    id,
-    Name,
-    Alerts,
-    Savings,
-    Uptime,
-    Power,
-  };
-}
-
-const rows = builds.buildings.map((build, index) => {
-  return createData(
-    build.id,
-    build.Name,
-    build.Alerts,
-    build.Savings,
-    build.Uptime,
-    build.Power
-  );
-});
+import buildObject from "../../data/buildings";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -234,12 +212,51 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
+  const buildData = buildObject.buildings;
+  const [builds, setBuilds] = useState([]);
+
+  const getBuilds = async () => {
+    try {
+      const response = await getBuildingData();
+      setBuilds(response.data.buildings);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getBuilds();
+  }, []);
+
+  function createData(id, Name, Alerts, Savings, Uptime, Power) {
+    return {
+      id,
+      Name,
+      Alerts,
+      Savings,
+      Uptime,
+      Power,
+    };
+  }
+
+  const rows = !builds
+    ? []
+    : builds.map((build, index) => {
+        return createData(
+          index + 1,
+          build.Name,
+          build.Alerts,
+          build.Savings,
+          build.Uptime,
+          build.Power
+        );
+      });
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const dense = false;
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -287,7 +304,6 @@ export default function EnhancedTable() {
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -299,6 +315,7 @@ export default function EnhancedTable() {
       ),
     [order, orderBy, page, rowsPerPage]
   );
+
   return (
     <Container maxWidth="xl" sx={{ mt: "80px" }}>
       <Box sx={{ width: "100%" }}>
@@ -437,7 +454,7 @@ export default function EnhancedTable() {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[5, 10, 20]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}
