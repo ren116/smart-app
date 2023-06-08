@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Search from "components/Search";
-import { Container, Typography, Box } from "@mui/material";
+import React from "react";
+import { Box } from "@mui/material";
+import Blog from "components/Blog";
 
 const Nfts = () => {
   return (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { CardMedia, CardContent, Typography, CardActionArea, Card } from '@mui/material';
 import { Container, Grid, Box } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
@@ -7,25 +8,28 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Blog = () => {
-  const [offset, setOffset] = useState(0)
   const [blogdata, setblogdata] = useState([])
   const [filterBlog, setFilterBlog] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [searchStr, setSearchStr] = useState('')
+
   const getBlog = async () => {
     const res = await fetch(
       `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
     )
     const data = await res.json()
+    setblogdata([...blogdata, ...data.results])
     setFilterBlog([...blogdata, ...data.results])
     setOffset(offset + 20)
-
+    console.log(res)
+  }
+  const handleSearch = e => {
+    setSearchStr(e.target.value.toLowerCase())
   }
   useEffect(() => {
     getBlog()
   }, [])
 
-  const handleSearch = e => {
-    setSearchStr(e.target.value.toLowerCase())
-  }
   useEffect(() => {
     setFilterBlog(
       blogdata.filter(item =>
@@ -33,20 +37,21 @@ const Blog = () => {
       )
     )
   }, [blogdata, searchStr])
+
   useEffect(() => {
     const handleScroll = () => {
-        if (
-            window.innerHeight + window.scrollY >=
-            document.body.offsetHeight - 100
-        ) {
-            getBlog()
-        }
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100
+      ) {
+        getBlog()
+      }
     }
     window.addEventListener('scroll', handleScroll)
     return () => {
-        window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', handleScroll)
     }
-}, [offset])
+  }, [offset])
 
   return (
     <div>
@@ -59,6 +64,8 @@ const Blog = () => {
             sx={{ ml: 1, flex: 1 }}
             placeholder="Search NFT"
             inputProps={{ 'aria-label': 'search google maps' }}
+            value={searchStr}
+            onChange={handleSearch}
           />
           <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
             <SearchIcon />
