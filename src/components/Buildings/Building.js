@@ -1,10 +1,11 @@
 import {  Typography, Grid, Fab } from "@mui/material";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const Building = ({ num, name, alerts, saving, uptime, power  }) => {
     
     
     return (
-        <Grid container mt={2} py={2}  sx={{boxShadow: 1,border: 1,borderColor: 'primary.light',  borderRadius: 3, backgroundColor: 'white', display : "flex", alignItems : 'center'}}>
+        <Grid container mt={2} py={2}  sx={{boxShadow: 1,border: 2,borderColor: 'primary.light', '&:hover' :{ border: 2, borderColor: '#6600ff', boxShadow: 3 },  borderRadius: 3, backgroundColor: 'white', display : "flex", alignItems : 'center'}}>
             <Grid item xs={1} >
                 <Typography>{num}</Typography>
             </Grid>

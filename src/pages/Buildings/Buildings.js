@@ -57,7 +57,7 @@ const Buildings = () => {
     const handleChange = (e) => {
         setKeyword(e.target.value);
     }
-    
+
     useEffect(() => {
         if(buildings.length < 9) {
             getBuildingsData(0, 40);
@@ -68,7 +68,7 @@ const Buildings = () => {
         if(keyword) {
             let tmp = [];
             saveBuildings.forEach(building => {
-                if((building.Name.toLowerCase()).includes(keyword)) tmp.push(building);
+                if((building.Name.toLowerCase()).includes(keyword.toLowerCase())) tmp.push(building);
             });
             setBuildings(tmp);
         }
@@ -91,7 +91,7 @@ const Buildings = () => {
                         <Container maxWidth="lg" sx={{ minWidth: 350}}>
                             <Grid container pt={3} textAlign="right">
                                 <Grid>
-                                    <TextField id="outlined-basic" label="Search..." variant="outlined" size="small" onChange={(e) =>handleChange(e)} value={keyword}/>
+                                    <TextField id="outlined-basic" label="Search..."  variant="outlined" size="small" onChange={(e) =>handleChange(e)} value={keyword}/>
                                 </Grid>
                             </Grid>
                             <Grid container mt={2}>
