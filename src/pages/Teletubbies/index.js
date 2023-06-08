@@ -38,7 +38,9 @@ const Teletubbies = () => {
                 onChange ={handleInput}
             />
             {
-                data.slice(0, 20 + postNumber).map((item, key) => {
+                data.slice(0, 20 + postNumber)
+                .filter(list =>list.name.toLowerCase().includes(searchWord))
+                .map((item, key) => {
                     return (
                         <Teletubbie
                             dir={key % 2}
