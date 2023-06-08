@@ -22,7 +22,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import builds from "./buildings";
-import { Avatar, Container } from "@mui/material";
+import { Avatar, Chip, Container } from "@mui/material";
 function createData(id, Name, Alerts, Savings, Uptime, Power) {
   return {
     id,
@@ -62,10 +62,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -87,13 +83,13 @@ const headCells = [
   },
   {
     id: "Name",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
-    label: "Name",
+    label: "Site",
   },
   {
     id: "Alerts",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: "Alerts",
   },
@@ -253,7 +249,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -289,11 +285,7 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (id) => selected.indexOf(id) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -307,94 +299,137 @@ export default function EnhancedTable() {
       ),
     [order, orderBy, page, rowsPerPage]
   );
-
   return (
-    <Container maxWidth="xl" sx={{mt:'80px'}}>
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.name);
-                const labelId = `enhanced-table-checkbox-${index}`;
+    <Container maxWidth="xl" sx={{ mt: "80px" }}>
+      <Box sx={{ width: "100%" }}>
+        <Paper sx={{ width: "70%", mb: 2, m: "auto" }}>
+          <EnhancedTableToolbar numSelected={selected.length} />
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? "small" : "medium"}
+            >
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {visibleRows.map((row, index) => {
+                  const isItemSelected = isSelected(row.id);
+                  const labelId = `enhanced-table-checkbox-${index}`;
 
-                return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.id)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row.id}
-                    selected={isItemSelected}
-                    sx={{ cursor: "pointer" }}
-                  >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          "aria-labelledby": labelId,
-                        }}
-                      />
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
+                  return (
+                    <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, row.id)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.id}
+                      selected={isItemSelected}
+                      sx={{ cursor: "pointer", border:`${isItemSelected?'blue 3px solid':''}` }}
                     >
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="right">{row.Name}</TableCell>
-                    <TableCell align="right" sx={{display:'flex', gap:'10px'}}>
-                      <Avatar sx={{bgcolor:`${row.Alerts.high.count? "pink":"gray"}`}}>{row.Alerts.high.count}</Avatar>
-                      <Avatar sx={{bgcolor:`${row.Alerts.med.count? "green":"gray"}`}}>{row.Alerts.med.count}</Avatar>
-                      <Avatar sx={{bgcolor:`${row.Alerts.low.count? "violet":"gray"}`}}>{row.Alerts.low.count}</Avatar>
-                    </TableCell>
-                    <TableCell align="right">{row.Savings}</TableCell>
-                    <TableCell align="right">{row.Uptime}</TableCell>
-                    <TableCell align="right">{row.Power}</TableCell>
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          color="primary"
+                          checked={isItemSelected}
+                          inputProps={{
+                            "aria-labelledby": labelId,
+                          }}
+                        />
+                      </TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                      >
+                        {row.id}
+                      </TableCell>
+                      <TableCell align="left" sx={{fontWeight:'bold'}}>{row.Name}</TableCell>
+                      <TableCell
+                        align="left"
+                        sx={{ display: "flex", gap: "10px" }}
+                      >
+                        <Avatar
+                          sx={{
+                            bgcolor: `${
+                              row.Alerts.high.count ? "pink" : "gray"
+                            }`,
+                          }}
+                        >
+                          {row.Alerts.high.count}
+                        </Avatar>
+                        <Avatar
+                          sx={{
+                            bgcolor: `${
+                              row.Alerts.med.count ? "green" : "gray"
+                            }`,
+                          }}
+                        >
+                          {row.Alerts.med.count}
+                        </Avatar>
+                        <Avatar
+                          sx={{
+                            bgcolor: `${
+                              row.Alerts.low.count ? "violet" : "gray"
+                            }`,
+                          }}
+                        >
+                          {row.Alerts.low.count}
+                        </Avatar>
+                      </TableCell>
+                      <TableCell align="right">
+                        <Chip label={row.Savings} variant="outlined"
+                          sx={{
+                            width:"58px",
+                            bgcolor: `${(parseInt(row.Savings)) > 70 ? "" : "pink"}`, color: `${ (parseInt(row.Savings)) > 70 ? "" : "red"}`,
+                          }}
+                        >
+                        </Chip>
+                      </TableCell>
+                      <TableCell align="right">
+                        <Chip label={row.Uptime} variant="outlined"
+                          sx={{
+                            width:"58px",
+                            bgcolor: `${(parseInt(row.Uptime)) > 70 ? "" : "pink"}`, color: `${ (parseInt(row.Uptime)) > 70 ? "" : "red"}`,
+                          }}
+                        >
+                          
+                        </Chip>
+                      </TableCell>
+                      <TableCell align="right" sx={{color:'#00b900', fontWeight:'bold'}}>{row.Power}</TableCell>
+                    </TableRow>
+                  );
+                })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
                   </TableRow>
-                );
-              })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Box>
     </Container>
   );
 }
