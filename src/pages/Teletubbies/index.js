@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Typography, Grid, Paper } from "@mui/material";
-import  { getCurrenTeletubbyData } from "api"
+import { getCurrenTeletubbyData } from "api";
 
 const Teletubbies = () => {
   const [teletubbies, setTeletubbies] = useState([]);
@@ -39,6 +39,7 @@ const Teletubbies = () => {
             <>
               <Grid
                 container
+                alignItems="center"
                 sx={{
                   border: "2px solid",
                   borderColor: "success.main",
@@ -68,34 +69,23 @@ const Teletubbies = () => {
                       variant="h4"
                       component="div"
                       align="left"
-                      sx={{ px: 2 }}
+                      sx={{ px: 2, my: 1}}
                     >
                       {teletubby.name}
                     </Typography>
-                    <Typography variant="body1" component="div" sx={{ px: 2 }}>
+                    <Typography variant="body1" component="div" sx={{ px: 2, my: 1 }}>
                       {teletubby.description}
                     </Typography>
                     <Grid container spacing={2} justifyContent="flex-start">
-                      <Grid item>
-                        <Paper variant="outlined" sx={{ p: 1 }}>
-                          {teletubby.traits[0]}
-                        </Paper>
-                      </Grid>
-                      <Grid item>
-                        <Paper variant="outlined" sx={{ p: 1 }}>
-                          {teletubby.traits[1]}
-                        </Paper>
-                      </Grid>
-                      <Grid item>
-                        <Paper variant="outlined" sx={{ p: 1 }}>
-                          {teletubby.traits[2]}
-                        </Paper>
-                      </Grid>
-                      <Grid item>
-                        <Paper variant="outlined" sx={{ p: 1 }}>
-                          {teletubby.traits[3]}
-                        </Paper>
-                      </Grid>
+                      {teletubby.traits.map((item, key) => {
+                        return (
+                          <Grid item key={key} my={1}>
+                            <Paper variant="outlined" sx={{ p: 1 }}>
+                              {item}
+                            </Paper>
+                          </Grid>
+                        );
+                      })}
                     </Grid>
                   </Grid>
                 </Grid>
