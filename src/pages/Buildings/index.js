@@ -18,8 +18,8 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-import builds from "./buildings";
 import { Avatar, Chip, Container } from "@mui/material";
+import builds from "../../data/buildings";
 function createData(id, Name, Alerts, Savings, Uptime, Power) {
   return {
     id,
@@ -33,7 +33,7 @@ function createData(id, Name, Alerts, Savings, Uptime, Power) {
 
 const rows = builds.buildings.map((build, index) => {
   return createData(
-    build.id,
+    index+1,
     build.Name,
     build.Alerts,
     build.Savings,
