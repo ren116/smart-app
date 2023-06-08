@@ -7,6 +7,15 @@ import Teletubbie from '../../components/Teletubbie'
 const Teletubbies = () => {
 
     const [data, setData] = useState([]);
+    const [postNumber, setPostNumber] =useState(0);
+
+    function handleScroll(){
+        const isAtBottom = document.documentElement.scrollHeight - document.documentElement.scrollTop <= document.documentElement.clientHeight; 
+        if(isAtBottom){
+            setPostNumber(postNumber + 20);
+        }
+    }
+    window.addEventListener("scroll",handleScroll);
 
     useEffect(() => {
         getData().then(data =>
@@ -19,7 +28,7 @@ const Teletubbies = () => {
                 Teletubbies
             </Typography>
             {
-                data.slice(0, 20).map((item, key) => {
+                data.slice(0, 20 + postNumber).map((item, key) => {
                     return (
                         <Teletubbie
                             dir={key % 2}
