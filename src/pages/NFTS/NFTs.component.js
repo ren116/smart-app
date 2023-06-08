@@ -7,21 +7,35 @@ import Box from '@mui/material/Box'
 
 const Nfts_PAGE = () => {
   const [listing, setListing] = useState([])
+  const [offset, setOffset] = useState(0)
 
   const loadListing = async () => {
     const response = await fetch(
-      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0`
+      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
     )
     const data = await response.json()
     setListing([...listing, ...data.results])
-
-    console.log(response)
+    setOffset(offset + 20)
   }
 
   useEffect(() => {
     loadListing()
-    // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 1000
+      ) {
+        loadListing()
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [offset])
 
   return (
     <Container maxWidth='xl'>
