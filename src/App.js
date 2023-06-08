@@ -6,6 +6,7 @@ import Teletubbies from "pages/Teletubbies";
 import Buildings from "pages/Buildings";
 import NFTs from "pages/NFTs";
 import NoPage from "pages/NoPage";
+
 import "./App.css";
 
 function App() {
