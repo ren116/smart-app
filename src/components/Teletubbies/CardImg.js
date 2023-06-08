@@ -5,9 +5,9 @@ export const CardImg = (teletubby) => {
     <CardMedia
         component="img"
         alt={teletubby.name}
-        height="140"
         image={teletubby.image_url}
         title={teletubby.name}
+        sx={{width: "140px", height: "140px"}}
       />
   )
 } 
