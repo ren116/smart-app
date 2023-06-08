@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { getData } from '../../api'
 import Teletubbie from '../../components/Teletubbie'
-
+import { TELETUBBIE_SIZE } from "utils/constants";
 const Teletubbies = () => {
 
     const [data, setData] = useState([]);
@@ -19,7 +19,7 @@ const Teletubbies = () => {
                 Teletubbies
             </Typography>
             {
-                data.slice(0, 20).map((item, key) => {
+                data.slice(0, TELETUBBIE_SIZE).map((item, key) => {
                     return (
                         <Teletubbie
                             dir={key % 2}
