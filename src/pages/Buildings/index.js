@@ -5,10 +5,10 @@ import Paper from "@mui/material/Paper";
 import { Container } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { getBuildingsData } from "api";
+import { BUILDINGS_SIZE } from "utils/constants";
 
 function Buildings() {
   const [data, setData] = useState([]);
-  const [end, setEnd] = useState();
   const [searchText, setSearchText] = useState();
   const handleChange = (e) => {
     setSearchText(e.target.value);
@@ -20,9 +20,8 @@ function Buildings() {
       setData(temp);
     };
     fetchData();
-    setEnd(20);
   }, []);
-  
+
   return (
     <div className="container">
       <Container sx={{ mt: 15 }}>
@@ -36,7 +35,7 @@ function Buildings() {
           onChange={handleChange}
         />
         <TableContainer component={Paper}>
-          <BuildingsView data={data} end={end} />
+          <BuildingsView data={data} end={BUILDINGS_SIZE} />
         </TableContainer>
       </Container>
     </div>
