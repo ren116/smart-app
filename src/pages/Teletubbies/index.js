@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Typography, Grid,Paper } from "@mui/material";
+import { Container, Typography, Grid, Paper } from "@mui/material";
 import teletubbiesData from "../../Data/teletubbies.json";
 
 const Teletubbies = () => {
@@ -8,7 +8,20 @@ const Teletubbies = () => {
   return (
     <>
       <Container>
-        <Typography variant="h4">Teletubbies</Typography>
+        <Grid>
+          <Typography
+            variant="h2"
+            sx={{
+              border: "2px solid",
+              borderColor: "primary.main",
+              color: "Blue",
+            }}
+            mt={4}
+            mb={3}
+          >
+            Teletubbies
+          </Typography>
+        </Grid>
         {teletubbiesData.map((teletubby, index) => (
           <Grid key={index}>
             <>
