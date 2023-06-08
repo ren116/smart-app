@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Typography, Grid, Paper } from "@mui/material";
+import { Container, Typography, Grid,Paper } from "@mui/material";
 import teletubbiesData from "../../Data/teletubbies.json";
 
 const Teletubbies = () => {
@@ -21,6 +21,7 @@ const Teletubbies = () => {
                 }}
                 p={2}
                 my={2}
+                direction={`${index % 2 ? "row-reverse" : ""}`}
               >
                 <Grid item xs={12} md={3} lg={3}>
                   <div className="img-container">
