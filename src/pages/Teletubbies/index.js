@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Typography, Box } from '@mui/material'
 import Teletubbie from 'components/Teletubbie'
-import { getData } from 'api'
+import { getTeletubbies } from 'api'
 
 const Teletubbies = () => {
-  const [data, setData] = useState([]);
+  const [teletubbies, setTeletubbies] = useState([]);
   const [offset,setOffset] = useState(0);
 
   useEffect(() => {
     try{
       (async function () {
-        const data = await getData()
-        setData(data)
+        const teletubbies = await getTeletubbies()
+        setTeletubbies(teletubbies)
       })()
     }
     catch(err){
@@ -37,7 +37,7 @@ const Teletubbies = () => {
       <Typography variant='h1' sx={{ marginTop: '30px' }}>
         Teletubbies
       </Typography>
-      {data.slice(0,20+offset)
+      {teletubbies.slice(0 , 20+offset)
          .map((item, key) => {
            return (
              <Teletubbie
