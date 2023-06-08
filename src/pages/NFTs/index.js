@@ -1,55 +1,32 @@
+import { useState,useEffect } from "react";
 export default function NFTs() {
-    return (
-        <div className="nfts">
-            <div className="nfts_seacrh">
-                <h1>NFTs Market Place</h1>
-                <input placeholder="search nfts name" />
+  const [nftListing, setNftListing] = useState([]);
+  const loadNftListing = async () => {
+    const response = await fetch(
+      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0`
+    )
+    const data = await response.json()
+    setNftListing([...nftListing, ...data.results])
+  }
+  useEffect(() => {
+    loadNftListing();
+  }, []);
+  return (
+    <div
+      className="nfts"
+      style={{ display: "flex", justifyContent: "center", padding: "2%" }}
+    >
+      <div style={{ display: "flex", flexWrap: "wrap", width: "60%" }}>
+        {nftListing &&
+          nftListing.length > 0 &&
+          nftListing.map((item, key) => (
+            <div key={key} style={{ width: "20%", height: "15%" }}>
+              <img width="100%" src={item.img} alt="as" />
+              <p>Name:{item.onChainCollection.data.name}</p>
+              <p> Price:{item.price}</p>
             </div>
-            <div className="nfts_list" style={{ display: "flex", justifyContent: "center" }}>
-                <div className="nfts_data" style={{ width: "80%", display: "flex", flexWrap: "wrap" }} >
-                    <div className="card" style={{ width: "20%", height: "100px", padding: "10px" }}>
-                        <img src="image source" class="img-fluid rounded-top" alt="img" style={{ width: "100%", height: "100px" }} />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-
-                    <div className="card" style={{ width: "20%", padding: "10px" }}>
-                        <img src="image source" class="img-fluid rounded-top" alt="img" style={{ width: "100%", height: "100px" }} />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card" style={{ width: "20%", padding: "10px" }}>
-                        <img src="image source" class="img-fluid rounded-top" alt="img" style={{ width: "100%", height: "100px" }} />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card" style={{ width: "20%", padding: "10px" }}>
-                        <img src="image source" class="img-fluid rounded-top" alt="img" style={{ width: "100%", height: "100px" }} />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card" style={{ width: "20%", padding: "10px" }}>
-                        <img src="image source" class="img-fluid rounded-top" alt="img" style={{ width: "100%", height: "100px" }} />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card" style={{ width: "20%", padding: "10px" }}>
-                        <img src="image source" class="img-fluid rounded-top" alt="img" style={{ width: "100%", height: "100px" }} />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card" style={{ width: "20%", padding: "10px" }}>
-                        <img src="image source" class="img-fluid rounded-top" alt="img" style={{ width: "100%", height: "100px" }} />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-                    <div className="card" style={{ width: "20%", padding: "10px" }}>
-                        <img src="image source" class="img-fluid rounded-top" alt="img" style={{ width: "100%", height: "100px" }} />
-                        <p>Name</p>
-                        <p>Price</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+          ))}
+      </div>
+    </div>
+  );
 }
