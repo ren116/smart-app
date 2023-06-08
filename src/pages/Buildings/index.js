@@ -19,8 +19,10 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-import builds from "./buildings";
 import { Avatar, Chip, Container } from "@mui/material";
+
+import builds from "../../data/buildings";
+
 function createData(id, Name, Alerts, Savings, Uptime, Power) {
   return {
     id,
@@ -43,7 +45,6 @@ const rows = builds.buildings.map((build, index) => {
   );
 });
 
-console.log(rows);
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -330,7 +331,10 @@ export default function EnhancedTable() {
                       tabIndex={-1}
                       key={row.id}
                       selected={isItemSelected}
-                      sx={{ cursor: "pointer", border:`${isItemSelected?'blue 3px solid':''}` }}
+                      sx={{
+                        cursor: "pointer",
+                        border: `${isItemSelected ? "blue 3px solid" : ""}`,
+                      }}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
@@ -349,7 +353,9 @@ export default function EnhancedTable() {
                       >
                         {row.id}
                       </TableCell>
-                      <TableCell align="left" sx={{fontWeight:'bold'}}>{row.Name}</TableCell>
+                      <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                        {row.Name}
+                      </TableCell>
                       <TableCell
                         align="left"
                         sx={{ display: "flex", gap: "10px" }}
@@ -383,25 +389,37 @@ export default function EnhancedTable() {
                         </Avatar>
                       </TableCell>
                       <TableCell align="right">
-                        <Chip label={row.Savings} variant="outlined"
+                        <Chip
+                          label={row.Savings}
+                          variant="outlined"
                           sx={{
-                            width:"58px",
-                            bgcolor: `${(parseInt(row.Savings)) > 70 ? "" : "pink"}`, color: `${ (parseInt(row.Savings)) > 70 ? "" : "red"}`,
+                            width: "58px",
+                            bgcolor: `${
+                              parseInt(row.Savings) > 70 ? "" : "pink"
+                            }`,
+                            color: `${parseInt(row.Savings) > 70 ? "" : "red"}`,
                           }}
-                        >
-                        </Chip>
+                        ></Chip>
                       </TableCell>
                       <TableCell align="right">
-                        <Chip label={row.Uptime} variant="outlined"
+                        <Chip
+                          label={row.Uptime}
+                          variant="outlined"
                           sx={{
-                            width:"58px",
-                            bgcolor: `${(parseInt(row.Uptime)) > 70 ? "" : "pink"}`, color: `${ (parseInt(row.Uptime)) > 70 ? "" : "red"}`,
+                            width: "58px",
+                            bgcolor: `${
+                              parseInt(row.Uptime) > 70 ? "" : "pink"
+                            }`,
+                            color: `${parseInt(row.Uptime) > 70 ? "" : "red"}`,
                           }}
-                        >
-                          
-                        </Chip>
+                        ></Chip>
                       </TableCell>
-                      <TableCell align="right" sx={{color:'#00b900', fontWeight:'bold'}}>{row.Power}</TableCell>
+                      <TableCell
+                        align="right"
+                        sx={{ color: "#00b900", fontWeight: "bold" }}
+                      >
+                        {row.Power}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
