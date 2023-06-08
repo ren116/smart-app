@@ -3,9 +3,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { getData } from '../../api'
 import Teletubbie, {SearchField} from '../../components/Teletubbie'
-
-import Teletubbie from '../../components/Teletubbie'
 import { TELETUBBIE_SIZE } from "utils/constants";
+
 const Teletubbies = () => {
 
     const [data, setData] = useState([]);
@@ -28,8 +27,8 @@ const Teletubbies = () => {
 
     const handleInput = event =>{
         setSearchWord(event.target.value.toLowerCase())
-        console.log(searchWord);
     }
+    
     return (
         <Container maxwidth="md">
             <Typography variant="h2" >
