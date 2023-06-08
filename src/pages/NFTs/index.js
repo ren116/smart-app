@@ -1,22 +1,31 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
+import { CardMedia, CardContent, Typography, CardActionArea, Card } from '@mui/material';
+import { Container, Grid, TextField } from '@mui/material';
+
 export default function NFTs() {
-  const [nftListing, setNftListing] = useState([]);
-  const [filteredNftListing, setFilteredNftListing] = useState([]);
+  const [nftListing, setNftListing] = useState([])
+  const [filteredNftListing, setFilteredNftListing] = useState([])
   const [offset, setOffset] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
   const loadNftListing = async () => {
     const response = await fetch(
-      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0`
+      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
     )
     const data = await response.json()
     setNftListing([...nftListing, ...data.results])
+    setFilteredNftListing([...nftListing, ...data.results])
+    setOffset(offset + 20)
+    console.log(response)
   }
+
   const handleSearch = event => {
     setSearchTerm(event.target.value.toLowerCase())
   }
+
   useEffect(() => {
-    loadNftListing();
-  }, []);
+    loadNftListing()
+  }, [])
+
   useEffect(() => {
     setFilteredNftListing(
       nftListing.filter(nftListing =>
@@ -24,6 +33,22 @@ export default function NFTs() {
       )
     )
   }, [nftListing, searchTerm])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100
+      ) {
+        loadNftListing()
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [offset])
+
   return (
     <Typography>
       <Typography gutterBottom variant="h3" component="div" sx={{ paddingTop: 5 }}>
