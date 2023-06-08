@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 export default function NFTs() {
   const [nftListing, setNftListing] = useState([]);
   const [filteredNftListing, setFilteredNftListing] = useState([])
@@ -9,6 +9,9 @@ export default function NFTs() {
     const data = await response.json()
     setNftListing([...nftListing, ...data.results])
   }
+  const handleSearch = event => {
+    setSearchTerm(event.target.value.toLowerCase())
+  }
   useEffect(() => {
     loadNftListing();
   }, []);
@@ -17,6 +20,9 @@ export default function NFTs() {
       className="nfts"
       style={{ display: "flex", justifyContent: "center", padding: "2%" }}
     >
+      <div>
+        <input onChange={handleSearch}/>
+      </div>
       <div style={{ display: "flex", flexWrap: "wrap", width: "60%" }}>
         {nftListing &&
           nftListing.length > 0 &&
