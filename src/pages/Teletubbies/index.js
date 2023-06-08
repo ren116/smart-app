@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Typography, Grid, Paper } from "@mui/material";
-import { getCurrenTeletubbyData } from "api";
+import {getCurrenTeletubbyData} from "api"
 
 const Teletubbies = () => {
+ 
   const [teletubbies, setTeletubbies] = useState([]);
+  const [visibleTeletubbies, setVisibleTeletubbies] = useState(20);
+
   const getTeletubbies = async () => {
     try {
       const response = await getCurrenTeletubbyData();
@@ -16,6 +19,8 @@ const Teletubbies = () => {
   useEffect(() => {
     getTeletubbies();
   }, []);
+
+  
 
   return (
     <>
@@ -36,7 +41,7 @@ const Teletubbies = () => {
             Teletubbies
           </Typography>
         </Grid>
-        {teletubbies.map((teletubby, index) => (
+        {teletubbies.slice(0, visibleTeletubbies).map((teletubby, index) => (
           <Grid key={index}>
             <>
               <Grid
