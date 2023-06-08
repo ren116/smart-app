@@ -5,13 +5,18 @@ import { getData } from 'api'
 
 const Teletubbies = () => {
   const [data, setData] = useState([]);
-  const [offset,setOffset]=useState(0);
+  const [offset,setOffset] = useState(0);
 
   useEffect(() => {
-    (async function () {
-      const data = await getData()
-      setData(data)
-    })()
+    try{
+      (async function () {
+        const data = await getData()
+        setData(data)
+      })()
+    }
+    catch(err){
+      throw err;
+    }
   }, []);
   useEffect(() => {
     const handleScroll = () => {
