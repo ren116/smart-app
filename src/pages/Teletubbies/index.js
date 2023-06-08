@@ -15,11 +15,12 @@ const Teletubbies = () => {
             setPostNumber(postNumber + TELETUBBIE_SIZE);
         }
     }
-    window.addEventListener("scroll",handleScroll);
-
+    
     useEffect(() => {
+        window.addEventListener("scroll",handleScroll);
         getData().then(data =>
             setData(data))
+        return () => window.removeEventListener("scroll", handleScroll);
     }, [])
 
     return (
