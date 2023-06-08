@@ -6,7 +6,7 @@ export const Title = () => {
     <>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Avatar alt="Logo" src="./teletubbies_logo.png" variant="square" 
-          sx={{ width: "auto", height: 140 , }}/>
+          sx={{ width: "auto", height: 180 , }}/>
       </Box>
     </>
     
