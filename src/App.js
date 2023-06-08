@@ -4,7 +4,7 @@ import Layout from "pages/Layout";
 import Home from "pages/Home";
 import NoPage from "pages/NoPage";
 import "./App.css";
-import NFTs from "pages/NFTs/Nfts";
+import NFTs from "pages/NFTs/NFTs";
 
 function App() {
   return (
