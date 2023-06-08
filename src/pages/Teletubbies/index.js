@@ -56,6 +56,39 @@ const Teletubbies = () => {
             Teletubbies
           </Typography>
         </Grid>
+        <TextField
+          fullWidth
+          variant="outlined"
+          placeholder="Search Teletubbies by name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+            sx: {
+              bgcolor: "background.paper",
+              borderRadius: 2,
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "primary.main",
+              },
+              "&:hover .MuiOutlinedInput-notchedOutline": {
+                borderColor: "primary.light",
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "secondary.main",
+              },
+              "& .MuiOutlinedInput-input": {
+                color: "text.primary",
+              },
+              "& .MuiInputLabel-root": {
+                color: "text.secondary",
+              },
+            },
+          }}
+        />
         {teletubbies.slice(0, visibleTeletubbies).map((teletubby, index) => (
           <Grid key={index}>
             <>
