@@ -19,7 +19,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import builds from "./buildings";
-import { Avatar, Chip, Container } from "@mui/material";
+import { Avatar, Chip, Container, TextField } from "@mui/material";
 function createData(id, Name, Alerts, Savings, Uptime, Power) {
   return {
     id,
@@ -42,7 +42,6 @@ const rows = builds.buildings.map((build, index) => {
   );
 });
 
-console.log(rows);
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -234,7 +233,7 @@ export default function EnhancedTable() {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
-  const page =  0;
+  const page = 0;
   const dense = false;
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
 
@@ -244,14 +243,14 @@ export default function EnhancedTable() {
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 800
       ) {
-        setRowsPerPage(rowsPerPage+20);
+        setRowsPerPage(rowsPerPage + 20);
       }
-    }
-    window.addEventListener('scroll', handleScroll)
+    };
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [rowsPerPage])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [rowsPerPage]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -301,16 +300,32 @@ export default function EnhancedTable() {
       ),
     [order, orderBy, page, rowsPerPage]
   );
+  const [handleSearch, setHandleSearch] = React.useState("");
+
   return (
     <Container maxWidth="xl" sx={{ mt: "80px" }}>
+      <Box
+        sx={{
+          width: "70%",
+          m: "auto",
+          maxWidth: "100%",
+          mb: "50px",
+        }}
+      >
+        <TextField
+          fullWidth
+          label="Search"
+          value={handleSearch}
+          onChange={(event) => {
+            setHandleSearch(event.target.value.toLowerCase());
+          }}
+        />
+      </Box>
       <Box sx={{ width: "100%" }}>
         <Paper sx={{ width: "70%", m: "auto" }}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
-            <Table
-              sx={{ minWidth: 750 }}
-              aria-labelledby="tableTitle"
-            >
+            <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
               <EnhancedTableHead
                 numSelected={selected.length}
                 order={order}
@@ -320,111 +335,119 @@ export default function EnhancedTable() {
                 rowCount={rows.length}
               />
               <TableBody>
-                {visibleRows.map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                {visibleRows
+                  .filter((rows) =>
+                    rows.Name.toLowerCase().includes(handleSearch)
+                  )
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row.id);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.id)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.id}
-                      selected={isItemSelected}
-                      sx={{
-                        cursor: "pointer",
-                        border: `${isItemSelected ? "blue 3px solid" : ""}`,
-                      }}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            "aria-labelledby": labelId,
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.id)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.id}
+                        selected={isItemSelected}
+                        sx={{
+                          cursor: "pointer",
+                          border: `${isItemSelected ? "blue 3px solid" : ""}`,
+                        }}
                       >
-                        {row.id}
-                      </TableCell>
-                      <TableCell align="left" sx={{ fontWeight: "bold" }}>
-                        {row.Name}
-                      </TableCell>
-                      <TableCell
-                        align="left"
-                        sx={{ display: "flex", gap: "10px" }}
-                      >
-                        <Avatar
-                          sx={{
-                            bgcolor: `${
-                              row.Alerts.high.count ? "#3df696" : "#ebebeb"
-                            }`,
-                          }}
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            color="primary"
+                            checked={isItemSelected}
+                            inputProps={{
+                              "aria-labelledby": labelId,
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
                         >
-                          {row.Alerts.high.count}
-                        </Avatar>
-                        <Avatar
-                          sx={{
-                            bgcolor: `${
-                              row.Alerts.med.count ? "#f69e3d" : "#ebebeb"
-                            }`,
-                          }}
+                          {row.id}
+                        </TableCell>
+                        <TableCell align="left" sx={{ fontWeight: "bold" }}>
+                          {row.Name}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          sx={{ display: "flex", gap: "10px" }}
                         >
-                          {row.Alerts.med.count}
-                        </Avatar>
-                        <Avatar
-                          sx={{
-                            bgcolor: `${
-                              row.Alerts.low.count ? "#ff4850" : "#ebebeb"
-                            }`,
-                          }}
+                          <Avatar
+                            sx={{
+                              bgcolor: `${
+                                row.Alerts.high.count ? "#3df696" : "#ebebeb"
+                              }`,
+                            }}
+                          >
+                            {row.Alerts.high.count}
+                          </Avatar>
+                          <Avatar
+                            sx={{
+                              bgcolor: `${
+                                row.Alerts.med.count ? "#f69e3d" : "#ebebeb"
+                              }`,
+                            }}
+                          >
+                            {row.Alerts.med.count}
+                          </Avatar>
+                          <Avatar
+                            sx={{
+                              bgcolor: `${
+                                row.Alerts.low.count ? "#ff4850" : "#ebebeb"
+                              }`,
+                            }}
+                          >
+                            {row.Alerts.low.count}
+                          </Avatar>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Chip
+                            label={row.Savings}
+                            variant="outlined"
+                            sx={{
+                              width: "58px",
+                              bgcolor: `${
+                                parseInt(row.Savings) > 70 ? "" : "pink"
+                              }`,
+                              color: `${
+                                parseInt(row.Savings) > 70 ? "" : "red"
+                              }`,
+                            }}
+                          ></Chip>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Chip
+                            label={row.Uptime}
+                            variant="outlined"
+                            sx={{
+                              width: "58px",
+                              bgcolor: `${
+                                parseInt(row.Uptime) > 70 ? "" : "pink"
+                              }`,
+                              color: `${
+                                parseInt(row.Uptime) > 70 ? "" : "red"
+                              }`,
+                            }}
+                          ></Chip>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          sx={{ color: "#00b900", fontWeight: "bold" }}
                         >
-                          {row.Alerts.low.count}
-                        </Avatar>
-                      </TableCell>
-                      <TableCell align="right">
-                        <Chip
-                          label={row.Savings}
-                          variant="outlined"
-                          sx={{
-                            width: "58px",
-                            bgcolor: `${
-                              parseInt(row.Savings) > 70 ? "" : "pink"
-                            }`,
-                            color: `${parseInt(row.Savings) > 70 ? "" : "red"}`,
-                          }}
-                        ></Chip>
-                      </TableCell>
-                      <TableCell align="right">
-                        <Chip
-                          label={row.Uptime}
-                          variant="outlined"
-                          sx={{
-                            width: "58px",
-                            bgcolor: `${
-                              parseInt(row.Uptime) > 70 ? "" : "pink"
-                            }`,
-                            color: `${parseInt(row.Uptime) > 70 ? "" : "red"}`,
-                          }}
-                        ></Chip>
-                      </TableCell>
-                      <TableCell
-                        align="right"
-                        sx={{ color: "#00b900", fontWeight: "bold" }}
-                      >
-                        {row.Power}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                          {row.Power}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
                 {emptyRows > 0 && (
                   <TableRow
                     style={{
