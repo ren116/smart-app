@@ -77,7 +77,6 @@ const Teletubbies = () => {
               color: "Blue",
               padding: 4,
               boxShadow: 3,
-              fontFamily: "Cherry Bomb One",
             }}
             mt={4}
             mb={3}
@@ -85,41 +84,7 @@ const Teletubbies = () => {
             Teletubbies
           </Typography>
         </Grid>
-        <TextField
-          fullWidth
-          variant="outlined"
-          placeholder="Search Teletubbies by name"
-          value={searchQuery}
-          onChange={handleSearchQueryChange}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="center">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            sx: {
-              bgcolor: "background.paper",
-              borderRadius: 2,
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "primary.main",
-              },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: "primary.light",
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "secondary.main",
-              },
-              "& .MuiOutlinedInput-input": {
-                color: "text.primary",
-              },
-              "& .MuiInputLabel-root": {
-                color: "text.secondary",
-              },
-            },
-          }}
-        />
-
-        {filteredTeletubbies.map((teletubby, index) => (
+        {teletubbies.map((teletubby, index) => (
           <Grid key={index}>
             <>
               <Grid
@@ -154,7 +119,7 @@ const Teletubbies = () => {
                       variant="h4"
                       component="div"
                       align="left"
-                      sx={{ px: 2, my: 1, fontFamily: "Cherry Bomb One" }}
+                      sx={{ px: 2, my: 1 }}
                     >
                       {teletubby.name}
                     </Typography>
