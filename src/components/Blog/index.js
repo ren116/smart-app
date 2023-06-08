@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Blog = () => {
+  const [offset, setOffset] = useState(0)
   const [blogdata, setblogdata] = useState([])
   const [filterBlog, setFilterBlog] = useState([])
   const getBlog = async () => {
@@ -15,6 +16,8 @@ const Blog = () => {
     )
     const data = await res.json()
     setFilterBlog([...blogdata, ...data.results])
+    setOffset(offset + 20)
+
   }
   useEffect(() => {
     getBlog()
@@ -30,7 +33,21 @@ const Blog = () => {
       )
     )
   }, [blogdata, searchStr])
-  
+  useEffect(() => {
+    const handleScroll = () => {
+        if (
+            window.innerHeight + window.scrollY >=
+            document.body.offsetHeight - 100
+        ) {
+            getBlog()
+        }
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+        window.removeEventListener('scroll', handleScroll)
+    }
+}, [offset])
+
   return (
     <div>
       <Box sx={{ display: "flex", justifyContent: "center", padding: '30px' }}>
