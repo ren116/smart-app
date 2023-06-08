@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import { getData } from '../../api'
 import Teletubbie, {SearchField} from '../../components/Teletubbie'
 
+import Teletubbie from '../../components/Teletubbie'
+import { TELETUBBIE_SIZE } from "utils/constants";
 const Teletubbies = () => {
 
     const [data, setData] = useState([]);
@@ -13,14 +15,15 @@ const Teletubbies = () => {
     function handleScroll(){
         const isAtBottom = document.documentElement.scrollHeight - document.documentElement.scrollTop <= document.documentElement.clientHeight; 
         if(isAtBottom){
-            setPostNumber(postNumber + 20);
+            setPostNumber(postNumber + TELETUBBIE_SIZE);
         }
     }
-    window.addEventListener("scroll",handleScroll);
-
+    
     useEffect(() => {
+        window.addEventListener("scroll",handleScroll);
         getData().then(data =>
             setData(data))
+        return () => window.removeEventListener("scroll", handleScroll);
     }, [])
 
     const handleInput = event =>{
@@ -38,9 +41,7 @@ const Teletubbies = () => {
                 onChange ={handleInput}
             />
             {
-                data.slice(0, 20 + postNumber)
-                .filter(list =>list.name.toLowerCase().includes(searchWord))
-                .map((item, key) => {
+                data.slice(0, TELETUBBIE_SIZE + postNumber).map((item, key) => {
                     return (
                         <Teletubbie
                             dir={key % 2}
