@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 export default function NFTs() {
   const [nftListing, setNftListing] = useState([]);
   const loadNftListing = async () => {
@@ -8,9 +8,11 @@ export default function NFTs() {
     const data = await response.json()
     setNftListing([...nftListing, ...data.results])
   }
+
   useEffect(() => {
     loadNftListing();
   }, []);
+
   return (
     <div
       className="nfts"
