@@ -11,6 +11,20 @@ const Teletubbies = () => {
     useEffect(() => {
         getData().then(data =>
             setData(data))
+    const [postNumber, setPostNumber] =useState(0);
+
+    function handleScroll(){
+        const isAtBottom = document.documentElement.scrollHeight - document.documentElement.scrollTop <= document.documentElement.clientHeight; 
+        if(isAtBottom){
+            setPostNumber(postNumber + TELETUBBIE_SIZE);
+        }
+    }
+    
+    useEffect(() => {
+        window.addEventListener("scroll",handleScroll);
+        getData().then(data =>
+            setData(data))
+        return () => window.removeEventListener("scroll", handleScroll);
     }, [])
 
     return (
@@ -20,6 +34,7 @@ const Teletubbies = () => {
             </Typography>
             {
                 data.slice(0, TELETUBBIE_SIZE).map((item, key) => {
+                data.slice(0, TELETUBBIE_SIZE + postNumber).map((item, key) => {
                     return (
                         <Teletubbie
                             dir={key % 2}
