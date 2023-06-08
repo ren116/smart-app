@@ -24,9 +24,11 @@ const Teletubbies = () => {
           <Typography
             variant="h2"
             sx={{
-              border: "2px solid",
+              border: "3px solid",
               borderColor: "primary.main",
               color: "Blue",
+              padding: 4,
+              boxShadow: 3,
             }}
             mt={4}
             mb={3}
@@ -43,7 +45,7 @@ const Teletubbies = () => {
                 sx={{
                   border: "2px solid",
                   borderColor: "success.main",
-                  position: "relative",
+                  boxShadow: 2,
                 }}
                 p={2}
                 my={2}
@@ -69,11 +71,15 @@ const Teletubbies = () => {
                       variant="h4"
                       component="div"
                       align="left"
-                      sx={{ px: 2, my: 1}}
+                      sx={{ px: 2, my: 1 }}
                     >
                       {teletubby.name}
                     </Typography>
-                    <Typography variant="body1" component="div" sx={{ px: 2, my: 1 }}>
+                    <Typography
+                      variant="body1"
+                      component="div"
+                      sx={{ px: 2, my: 1 }}
+                    >
                       {teletubby.description}
                     </Typography>
                     <Grid container spacing={2} justifyContent="flex-start">
