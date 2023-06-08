@@ -22,8 +22,6 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Avatar, Chip, Container } from "@mui/material";
 
-import buildObject from "../../data/buildings";
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -212,7 +210,6 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
-  const buildData = buildObject.buildings;
   const [builds, setBuilds] = useState([]);
 
   const getBuilds = async () => {
