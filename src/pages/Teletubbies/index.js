@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Typography,
-  Grid,
-  Paper,
-  TextField,
-  InputAdornment,
-} from "@mui/material";
+import { Container, Typography, Grid, Paper, TextField } from "@mui/material";
 import axios from "axios";
-import SearchIcon from "@mui/icons-material/Search";
 
 const Teletubbies = () => {
   const [teletubbies, setTeletubbies] = useState([]);
@@ -84,39 +76,18 @@ const Teletubbies = () => {
             Teletubbies
           </Typography>
         </Grid>
-        <TextField
-          fullWidth
-          variant="outlined"
-          placeholder="Search Teletubbies by name"
-          value={searchQuery}
-          onChange={handleSearchQueryChange}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="center">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            sx: {
-              bgcolor: "background.paper",
-              borderRadius: 2,
-              "& .MuiOutlinedInput-notchedOutline": {
-                borderColor: "primary.main",
-              },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: "primary.light",
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "secondary.main",
-              },
-              "& .MuiOutlinedInput-input": {
-                color: "text.primary",
-              },
-              "& .MuiInputLabel-root": {
-                color: "text.secondary",
-              },
-            },
-          }}
-        />
+
+        <Grid container direction="row" alignItems="center" spacing={2}>
+          <Grid item xs={12} md={6}>
+            <TextField
+              label="Search"
+              variant="outlined"
+              value={searchQuery}
+              onChange={handleSearchQueryChange}
+              fullWidth
+            />
+          </Grid>
+        </Grid>
 
         {filteredTeletubbies.map((teletubby, index) => (
           <Grid key={index}>
