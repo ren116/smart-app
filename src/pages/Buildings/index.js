@@ -22,28 +22,6 @@ import { Avatar, Chip, Container, TextField } from "@mui/material";
 
 import builds from "../../data/buildings";
 
-function createData(id, Name, Alerts, Savings, Uptime, Power) {
-  return {
-    id,
-    Name,
-    Alerts,
-    Savings,
-    Uptime,
-    Power,
-  };
-}
-
-const rows = builds.buildings.map((build, index) => {
-  return createData(
-    index + 1,
-    build.Name,
-    build.Alerts,
-    build.Savings,
-    build.Uptime,
-    build.Power
-  );
-});
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -232,6 +210,28 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
+  function createData(id, Name, Alerts, Savings, Uptime, Power) {
+    return {
+      id,
+      Name,
+      Alerts,
+      Savings,
+      Uptime,
+      Power,
+    };
+  }
+  
+  const rows = builds.buildings.map((build, index) => {
+    return createData(
+      index + 1,
+      build.Name,
+      build.Alerts,
+      build.Savings,
+      build.Uptime,
+      build.Power
+    );
+  });
+  
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
