@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react";
 export default function NFTs() {
   const [nftListing, setNftListing] = useState([]);
+  const [filteredNftListing, setFilteredNftListing] = useState([])
   const loadNftListing = async () => {
     const response = await fetch(
       `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0`
