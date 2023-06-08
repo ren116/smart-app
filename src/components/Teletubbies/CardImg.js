@@ -7,7 +7,7 @@ export const CardImg = (teletubby) => {
         alt={teletubby.name}
         image={teletubby.image_url}
         title={teletubby.name}
-        sx={{width: "140px", height: "140px"}}
+        sx={{minWidth: "100px", width: "100px", height: "100px"}}
       />
   )
 } 
