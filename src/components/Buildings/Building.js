@@ -4,7 +4,7 @@ const Building = ({ num, name, alerts, saving, uptime, power  }) => {
     
     
     return (
-        <Grid container mt={2}   sx={{boxShadow: 1,border: 1,borderColor: 'primary.light',  borderRadius: 3, backgroundColor: 'white', display : "flex", alignItems : 'center'}}>
+        <Grid container mt={2} py={2}  sx={{boxShadow: 1,border: 1,borderColor: 'primary.light',  borderRadius: 3, backgroundColor: 'white', display : "flex", alignItems : 'center'}}>
             <Grid item xs={1} >
                 <Typography>{num}</Typography>
             </Grid>
@@ -21,21 +21,39 @@ const Building = ({ num, name, alerts, saving, uptime, power  }) => {
                 </Typography>
             </Grid>
             <Grid item xs={3} sx={{display: 'flex', flexWrap: 'wrap', justifyContent: { xs: 'center', md: 'space-evenly'}}}>
-                <Fab color="primary" size="small" aria-label="high">
-                    <Typography>{ alerts.high.count >= 0 ? alerts.high.count : alerts.high }</Typography>
-                </Fab>
-                <Fab sx={{backgroundColor: '#f69e3d'}} size="small" aria-label="mid">
-                    <Typography>{ alerts.med.count }</Typography>
-                </Fab>
-                <Fab sx={{backgroundColor: '#ff4850'}} size="small" aria-label="low">
-                    <Typography>{ alerts.low.count }</Typography>
-                </Fab>
+                {
+                    alerts.high.count === 0 || alerts.high === 0?
+                            <Fab sx={{backgroundColor: '#e6e6e6'}} size="small" aria-label="high">
+                                <Typography>{ alerts.high.count >= 0 ? alerts.high.count : alerts.high }</Typography>
+                            </Fab> :
+                            <Fab color="primary" size="small" aria-label="high">
+                                <Typography>{ alerts.high.count >= 0 ? alerts.high.count : alerts.high }</Typography>
+                            </Fab>
+                }
+                {
+                    alerts.med.count === 0 ?
+                        <Fab sx={{backgroundColor: '#e6e6e6'}} size="small" aria-label="low">
+                            <Typography>{ alerts.med.count }</Typography>
+                        </Fab> :
+                        <Fab sx={{backgroundColor: '#f69e3d'}} size="small" aria-label="low">
+                            <Typography>{ alerts.med.count }</Typography>
+                        </Fab>
+                }
+                {
+                    alerts.low.count === 0 ?
+                        <Fab sx={{backgroundColor: '#e6e6e6'}} size="small" aria-label="low">
+                            <Typography>{ alerts.low.count }</Typography>
+                        </Fab> :
+                        <Fab sx={{backgroundColor: '#ff4850'}} size="small" aria-label="low">
+                            <Typography>{ alerts.low.count }</Typography>
+                        </Fab>
+                }
             </Grid>
             <Grid item xs={2}>
-                <Typography sx={{color: '#cdc9c9'}}>{ saving }</Typography>
+                <Typography sx={{color: '#b5b0b0'}}>{ saving }</Typography>
             </Grid>
             <Grid item xs={2}>
-                <Typography sx={{color: '#cdc9c9'}}>{ uptime }</Typography>
+                <Typography sx={{color: '#b5b0b0'}}>{ uptime }</Typography>
             </Grid>
             <Grid item xs={2}>
                 <Typography sx={{color: '#9dcf7a', fontSize:14}}>{ power }</Typography>
