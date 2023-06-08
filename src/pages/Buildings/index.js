@@ -1,4 +1,5 @@
-import * as React from "react";
+import { getBuildingData } from "api";
+import { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -19,8 +20,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Avatar, Chip, Container, TextField } from "@mui/material";
-
-import builds from "../../data/buildings";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -210,36 +209,14 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
-  function createData(id, Name, Alerts, Savings, Uptime, Power) {
-    return {
-      id,
-      Name,
-      Alerts,
-      Savings,
-      Uptime,
-      Power,
-    };
-  }
-  
-  const rows = builds.buildings.map((build, index) => {
-    return createData(
-      index + 1,
-      build.Name,
-      build.Alerts,
-      build.Savings,
-      build.Uptime,
-      build.Power
-    );
-  });
-  
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("name");
-  const [selected, setSelected] = React.useState([]);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("name");
+  const [selected, setSelected] = useState([]);
   const page = 0;
   const dense = false;
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
@@ -253,6 +230,20 @@ export default function EnhancedTable() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [rowsPerPage]);
+  const [builds, setBuilds] = useState([]);
+
+  const getBuilds = async () => {
+    try {
+      const response = await getBuildingData();
+      setBuilds(response.data.buildings);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getBuilds();
+  }, []);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -262,7 +253,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id);
+      const newSelected = builds.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -292,17 +283,17 @@ export default function EnhancedTable() {
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - builds.length) : 0;
 
-  const visibleRows = React.useMemo(
+  const visibleRows = useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
+      stableSort(builds, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rowsPerPage, builds]
   );
-  const [handleSearch, setHandleSearch] = React.useState("");
+  const [handleSearch, setHandleSearch] = useState("");
 
   return (
     <Container maxWidth="xl" sx={{ mt: "80px" }}>
@@ -325,7 +316,7 @@ export default function EnhancedTable() {
                 orderBy={orderBy}
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
-                rowCount={rows.length}
+                rowCount={builds.length}
               />
               <TableBody>
                 {visibleRows
