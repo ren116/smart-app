@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import { getData } from '../../api'
+import { getData } from '../../api';
 import Teletubbie from '../../components/Teletubbie';
-import SearchField from '../../components/Teletubbie/searchfield'
+import SearchField from '../../components/Teletubbie/searchfield';
 import { TELETUBBIE_SIZE } from "utils/constants";
 
 const Teletubbies = () => {
@@ -22,14 +22,14 @@ const Teletubbies = () => {
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
         getData().then(data =>
-            setData(data))
+            setData(data));
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
     }, [])
 
     const handleInput = event => {
-        setSearchWord(event.target.value.toLowerCase())
+        setSearchWord(event.target.value.toLowerCase());
     }
 
     return (
@@ -54,11 +54,11 @@ const Teletubbies = () => {
                                 name={item.name}
                                 description={item.description}
                                 traits={item.traits} />
-                        )
+                        );
                     })
-            }
+            };
         </Container>
-    )
+    );
 };
 
 export default Teletubbies;
