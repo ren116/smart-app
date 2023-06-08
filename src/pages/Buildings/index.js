@@ -240,7 +240,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = builds.map((n) => n.id);
+      const newSelected = builds.map((n, index) => index);
       setSelected(newSelected);
       return;
     }
@@ -311,17 +311,17 @@ export default function EnhancedTable() {
               />
               <TableBody>
                 {visibleRows.map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
+                  const isItemSelected = isSelected(index);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.id)}
+                      onClick={(event) => handleClick(event, index)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.id}
+                      key={index}
                       selected={isItemSelected}
                       sx={{
                         cursor: "pointer",
@@ -343,7 +343,7 @@ export default function EnhancedTable() {
                         scope="row"
                         padding="none"
                       >
-                        {row.id}
+                        {index+1}
                       </TableCell>
                       <TableCell align="left" sx={{ fontWeight: "bold" }}>
                         {row.Name}
