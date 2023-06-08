@@ -76,61 +76,60 @@ const Buildings = () => {
         <Container maxWidth="xl">
             {
                 isLoading ?
-                            <Spinner/> :
-                        <InfiniteScroll
-                            dataLength={saveBuildings.length}
-                            next={handleNext}
-                            hasMore={true}
-                        >
-                            <Container maxWidth="lg" sx={{ minWidth: 350}}>
-                                <Grid container pt={3} textAlign="right">
-                                    <Grid item xs={10}></Grid>
-                                    <Grid item xs={2}>
-                                        <TextField id="outlined-basic" label="Search..." variant="outlined" size="small" onChange={(e)=>setKeyword(e.target.value)} value={keyword}/>
-                                    </Grid>
+                    <Spinner/> :
+                    <InfiniteScroll
+                        dataLength={saveBuildings.length}
+                        next={handleNext}
+                        hasMore={true}
+                    >
+                        <Container maxWidth="lg" sx={{ minWidth: 350}}>
+                            <Grid container pt={3} textAlign="right">
+                                <Grid>
+                                    <TextField id="outlined-basic" label="Search..." variant="outlined" size="small" onChange={(e)=>setKeyword(e.target.value)} value={keyword}/>
                                 </Grid>
-                                <Grid container mt={2}>
-                                    <Grid item xs={1}>
-                                        <Item>
-                                            No
-                                        </Item>
-                                    </Grid>
-                                    <Grid item xs={2}>
-                                        <Item>
-                                        Site
-                                        </Item>
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <Item>Alerts</Item>
-                                    </Grid>
-                                    <Grid item xs={2}>
-                                        <Item>Savings</Item>
-                                    </Grid>
-                                    <Grid item xs={2}>
-                                        <Item>Uptime</Item>
-                                    </Grid>
-                                    <Grid item xs={2}>
-                                        <Item>Power</Item>
-                                    </Grid>
+                            </Grid>
+                            <Grid container mt={2}>
+                                <Grid item xs={1}>
+                                    <Item>
+                                        No
+                                    </Item>
                                 </Grid>
-                                {
-                                    buildings.map((building, key) => {
-                                        return (
-                                            <Building 
-                                                key = { key }
-                                                num = { key + 1 }
-                                                name = { building.Name }
-                                                alerts = { building.Alerts }
-                                                saving = { building.Savings }
-                                                uptime = { building.Uptime }
-                                                power = { building.Power}
-                                            />
-                                        );
-                                    })
-                                }
-                            </Container>
-                        </InfiniteScroll>            
-                    }
+                                <Grid item xs={2}>
+                                    <Item>
+                                    Site
+                                    </Item>
+                                </Grid>
+                                <Grid item xs={3}>
+                                    <Item>Alerts</Item>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Item>Savings</Item>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Item>Uptime</Item>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Item>Power</Item>
+                                </Grid>
+                            </Grid>
+                            {
+                                buildings.map((building, key) => {
+                                    return (
+                                        <Building 
+                                            key = { key }
+                                            num = { key + 1 }
+                                            name = { building.Name }
+                                            alerts = { building.Alerts }
+                                            saving = { building.Savings }
+                                            uptime = { building.Uptime }
+                                            power = { building.Power}
+                                        />
+                                    );
+                                })
+                            }
+                        </Container>
+                    </InfiniteScroll>            
+                }
         </Container>
     )
 }
