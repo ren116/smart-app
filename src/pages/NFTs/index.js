@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+
 export default function NFTs() {
   const [nftListing, setNftListing] = useState([]);
   const [filteredNftListing, setFilteredNftListing] = useState([])
+
   const loadNftListing = async () => {
     const response = await fetch(
       `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0`
@@ -9,12 +11,15 @@ export default function NFTs() {
     const data = await response.json()
     setNftListing([...nftListing, ...data.results])
   }
+
   const handleSearch = event => {
     setSearchTerm(event.target.value.toLowerCase())
   }
+
   useEffect(() => {
     loadNftListing();
   }, []);
+
   useEffect(() => {
     setFilteredNftListing(
       nftListing.filter(nftListing =>
@@ -22,6 +27,7 @@ export default function NFTs() {
       )
     )
   }, [nftListing, searchTerm])
+
   return (
     <Typography>
       <Typography gutterBottom variant="h3" component="div" sx={{ paddingTop: 5 }}>
