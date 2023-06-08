@@ -7,6 +7,15 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Blog = () => {
+
+    const getBlog = async () => {
+        const res = await fetch(
+            `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
+        )
+        const data = await res.json()
+        setFilterBlog([...blogdata, ...data.results])
+        console.log(res)
+    }
     return (
         <div>
             <Box sx={{ display: "flex", justifyContent: "center", padding: '30px' }}>
@@ -27,9 +36,9 @@ const Blog = () => {
             </Box>
             <Container maxWidth="xl">
                 <div id='blogdata'>
-                    <Grid container spacing={10}>
+                <Grid container spacing={10}>
                         {filterBlog.map(item => (
-                            <Grid item lg={3} md={4} sm={6} xs={12} >
+                            <Grid key={blogdata.id} item lg={3} md={4} sm={6} xs={12} >
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
