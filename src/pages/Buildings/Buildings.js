@@ -39,6 +39,7 @@ const Buildings = () => {
         setIsLoading(true);
         setBuildings(allData.slice(st, en));
         setSaveBuildings(allData.slice(st, en));
+        search(keyword);
         setIsLoading(false);
     };
       
@@ -51,8 +52,12 @@ const Buildings = () => {
 
     useEffect(() => {
         search(keyword);
-    }, [keyword, saveBuildings]);
+    }, [keyword]);
 
+    const handleChange = (e) => {
+        setKeyword(e.target.value);
+    }
+    
     useEffect(() => {
         if(buildings.length < 9) {
             getBuildingsData(0, 40);
@@ -63,12 +68,13 @@ const Buildings = () => {
         if(keyword) {
             let tmp = [];
             saveBuildings.forEach(building => {
-                if((building.Name).includes(keyword)) tmp.push(building);
+                if((building.Name.toLowerCase()).includes(keyword)) tmp.push(building);
             });
             setBuildings(tmp);
         }
-        else {
+        if(keyword === "") {
             setBuildings(saveBuildings);
+            return;
         }
     }
 
@@ -85,7 +91,7 @@ const Buildings = () => {
                         <Container maxWidth="lg" sx={{ minWidth: 350}}>
                             <Grid container pt={3} textAlign="right">
                                 <Grid>
-                                    <TextField id="outlined-basic" label="Search..." variant="outlined" size="small" onChange={(e)=>setKeyword(e.target.value)} value={keyword}/>
+                                    <TextField id="outlined-basic" label="Search..." variant="outlined" size="small" onChange={(e) =>handleChange(e)} value={keyword}/>
                                 </Grid>
                             </Grid>
                             <Grid container mt={2}>
@@ -113,6 +119,7 @@ const Buildings = () => {
                                 </Grid>
                             </Grid>
                             {
+                                buildings?
                                 buildings.map((building, key) => {
                                     return (
                                         <Building 
@@ -126,6 +133,7 @@ const Buildings = () => {
                                         />
                                     );
                                 })
+                                :<>No data</>
                             }
                         </Container>
                     </InfiniteScroll>            
