@@ -18,7 +18,19 @@ const Teletubbies = () => {
             <Typography variant="h2" >
                 Teletubbies
             </Typography>
-           
+            {
+                data.slice(0, 20).map((item, key) => {
+                    return (
+                        <Teletubbie
+                            dir={key % 2}
+                            key={`teletubbie_${key}`}
+                            image_url={item.image_url}
+                            name={item.name}
+                            description={item.description}
+                            traits={item.traits} />
+                    )
+                })
+            }
         </Container>
     )
 };
