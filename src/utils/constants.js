@@ -1,0 +1,1 @@
+export const TELETUBBIE_SIZE = 20
