@@ -23,24 +23,40 @@ export default function NFTs() {
     )
   }, [nftListing, searchTerm])
   return (
-    <div
-      className="nfts"
-      style={{ display: "flex", justifyContent: "center", padding: "2%" }}
-    >
-      <div>
-        <input onChange={handleSearch} />
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", width: "60%" }}>
-        {nftListing &&
-          nftListing.length > 0 &&
-          nftListing.map((item, key) => (
-            <div key={key} style={{ width: "20%", height: "15%" }}>
-              <img width="100%" src={item.img} alt="as" />
-              <p>Name:{item.onChainCollection.data.name}</p>
-              <p> Price:{item.price}</p>
-            </div>
+    <Typography>
+      <Typography gutterBottom variant="h3" component="div" sx={{ paddingTop: 5 }}>
+        NFT Marketplace
+      </Typography>
+      <TextField
+        placeholder="Search nft name"
+        variant="outlined"
+        value={searchTerm}
+        onChange={handleSearch}
+        sx={{ paddingBottom: 3 }}
+      />
+      <Container maxWidth="lg">
+        <Grid container spacing={5}>
+          {filteredNftListing.map(nftListing => (
+            <Grid key={nftListing.id} className="grid" item lg={3} md={4} sm={6} xs={12} >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  image={nftListing.img}
+                  alt={nftListing.name}
+                />
+                <CardContent sx={{ display: 'flex', justifyContent: "space-between", backgroundColor: "lightgreen" }}>
+                  <Typography gutterBottom variant="p" component="h3">
+                    {nftListing.collectionName}
+                  </Typography>
+                  <Typography variant="p" component="h3">
+                    {nftListing.price}$
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Grid>
           ))}
-      </div>
-    </div>
+        </Grid>
+      </Container>
+    </Typography>
   );
 }
