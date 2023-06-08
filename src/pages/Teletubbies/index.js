@@ -9,11 +9,6 @@ import { TELETUBBIE_SIZE } from "utils/constants";
 const Teletubbies = () => {
 
     const [data, setData] = useState([]);
-
-    useEffect(() => {
-        getData().then(data =>
-            setData(data))
-    const [postNumber, setPostNumber] =useState(0);
     const [postNumber, setPostNumber] = useState(0);
     const [searchWord, setSearchWord] = useState('');
 
@@ -48,19 +43,6 @@ const Teletubbies = () => {
                 onChange={handleInput}
             />
             {
-                data.slice(0, TELETUBBIE_SIZE).map((item, key) => {
-                data.slice(0, TELETUBBIE_SIZE + postNumber).map((item, key) => {
-                    return (
-                        <Teletubbie
-                            dir={key % 2}
-                            key={`teletubbie_${key}`}
-                            image_url={item.image_url}
-                            name={item.name}
-                            description={item.description}
-                            traits={item.traits} />
-                    )
-                })
-            }
                 data.slice(0, TELETUBBIE_SIZE + postNumber)
                     .filter(list => list.name.toLowerCase().includes(searchWord))
                     .map((item, key) => {
