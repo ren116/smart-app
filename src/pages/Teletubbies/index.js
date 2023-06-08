@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 const Teletubbies = () => {
  
   const [teletubbies, setTeletubbies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [visibleTeletubbies, setVisibleTeletubbies] = useState(20);
 
   const getTeletubbies = async () => {
