@@ -228,29 +228,6 @@ export default function EnhancedTable() {
     getBuilds();
   }, []);
 
-  function createData(id, Name, Alerts, Savings, Uptime, Power) {
-    return {
-      id,
-      Name,
-      Alerts,
-      Savings,
-      Uptime,
-      Power,
-    };
-  }
-
-  const rows = !builds
-    ? []
-    : builds.map((build, index) => {
-        return createData(
-          index + 1,
-          build.Name,
-          build.Alerts,
-          build.Savings,
-          build.Uptime,
-          build.Power
-        );
-      });
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("name");
   const [selected, setSelected] = useState([]);
@@ -266,7 +243,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.id);
+      const newSelected = builds.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -305,15 +282,15 @@ export default function EnhancedTable() {
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - builds.length) : 0;
 
   const visibleRows = useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
+      stableSort(builds, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rowsPerPage, builds]
   );
 
   return (
@@ -333,7 +310,7 @@ export default function EnhancedTable() {
                 orderBy={orderBy}
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
-                rowCount={rows.length}
+                rowCount={builds.length}
               />
               <TableBody>
                 {visibleRows.map((row, index) => {
@@ -456,7 +433,7 @@ export default function EnhancedTable() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 20]}
             component="div"
-            count={rows.length}
+            count={builds.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
