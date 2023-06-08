@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { getData } from '../../api'
-import Teletubbie from '../../components/Teletubbie'
+import Teletubbie, {SearchField} from '../../components/Teletubbie'
 
 const Teletubbies = () => {
 
     const [data, setData] = useState([]);
     const [postNumber, setPostNumber] =useState(0);
+    const [searchWord,setSearchWord] =useState('');
 
     function handleScroll(){
         const isAtBottom = document.documentElement.scrollHeight - document.documentElement.scrollTop <= document.documentElement.clientHeight; 
@@ -22,11 +23,20 @@ const Teletubbies = () => {
             setData(data))
     }, [])
 
+    const handleInput = event =>{
+        setSearchWord(event.target.value.toLowerCase())
+        console.log(searchWord);
+    }
     return (
         <Container maxwidth="md">
             <Typography variant="h2" >
                 Teletubbies
             </Typography>
+            <SearchField
+                placeholder="Search"
+                value = {searchWord}
+                onChange ={handleInput}
+            />
             {
                 data.slice(0, 20 + postNumber).map((item, key) => {
                     return (
