@@ -4,21 +4,40 @@ import {
   Typography,
   Grid,
   Paper,
-  InputAdornment,
   TextField,
+  InputAdornment,
 } from "@mui/material";
-import { getCurrenTeletubbyData } from "api";
+import axios from "axios";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Teletubbies = () => {
   const [teletubbies, setTeletubbies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [visibleTeletubbies, setVisibleTeletubbies] = useState(20);
+  const [page, setPage] = useState(1); // keep track of current page number
+  const [searchQuery, setSearchQuery] = useState(""); // keep track of search query
+
+  const teletubbyOptions = {
+    method: "GET",
+    url: "./teletubbies.json",
+  };
+
+  const getCurrenTeletubbyData = async () => {
+    try {
+      const response = await axios.request(teletubbyOptions);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const getTeletubbies = async () => {
     try {
       const response = await getCurrenTeletubbyData();
-      setTeletubbies(response.data);
+      const newTeletubbies = response.data.slice((page - 1) * 20, page * 20); // fetch only 20 teletubbies per page
+      setTeletubbies((prevTeletubbies) => [
+        ...prevTeletubbies,
+        ...newTeletubbies,
+      ]); // concatenate the new teletubbies with the existing ones
+      setPage((prevPage) => prevPage + 1); // increment the page number
     } catch (error) {
       console.error(error);
     }
@@ -26,27 +45,24 @@ const Teletubbies = () => {
 
   useEffect(() => {
     getTeletubbies();
-  }, []);
+  }, []); // fetch the first set of teletubbies on mount
 
   useEffect(() => {
     const handleScroll = () => {
-      if (
-        window.scrollY + window.innerHeight >=
-          document.documentElement.scrollHeight &&
-        searchTerm === ""
-      ) {
-        setVisibleTeletubbies(visibleTeletubbies + 20);
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        getTeletubbies(); // fetch more teletubbies when scroll position reaches the end
       }
     };
-
     window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [teletubbies]); // add a scroll event listener and remove it on cleanup, while also watching for changes in the teletubbies array
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [visibleTeletubbies]);
+  const handleSearchQueryChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   const filteredTeletubbies = teletubbies.filter((teletubby) =>
-    teletubby.name.toLowerCase().includes(searchTerm.toLowerCase())
+    teletubby.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -72,11 +88,11 @@ const Teletubbies = () => {
           fullWidth
           variant="outlined"
           placeholder="Search Teletubbies by name"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchQuery}
+          onChange={handleSearchQueryChange}
           InputProps={{
             startAdornment: (
-              <InputAdornment position="start">
+              <InputAdornment position="center">
                 <SearchIcon />
               </InputAdornment>
             ),
@@ -101,71 +117,70 @@ const Teletubbies = () => {
             },
           }}
         />
-        {filteredTeletubbies
-          .slice(0, visibleTeletubbies)
-          .map((teletubby, index) => (
-            <Grid key={index}>
-              <>
-                <Grid
-                  container
-                  alignItems="center"
-                  sx={{
-                    border: "2px solid",
-                    borderColor: "success.main",
-                    boxShadow: 2,
-                  }}
-                  p={2}
-                  my={2}
-                  direction={`${index % 2 ? "row-reverse" : ""}`}
-                >
-                  <Grid item xs={12} md={3} lg={3}>
-                    <div className="img-container">
-                      <img
-                        src={teletubby.image_url}
-                        alt={teletubby.image_url}
-                        style={{
-                          width: "180px",
-                          height: "180px",
-                          padding: "auto",
-                        }}
-                      />
-                    </div>
-                  </Grid>
 
-                  <Grid item xs={12} md={9} lg={9}>
-                    <Grid component="div">
-                      <Typography
-                        variant="h4"
-                        component="div"
-                        align="left"
-                        sx={{ px: 2, my: 1 }}
-                      >
-                        {teletubby.name}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        component="div"
-                        sx={{ px: 2, my: 1 }}
-                      >
-                        {teletubby.description}
-                      </Typography>
-                      <Grid container spacing={2} justifyContent="flex-start">
-                        {teletubby.traits.map((item, key) => {
-                          return (
-                            <Grid item key={key} my={1}>
-                              <Paper variant="outlined" sx={{ p: 1 }}>
-                                {item}
-                              </Paper>
-                            </Grid>
-                          );
-                        })}
-                      </Grid>
+        {filteredTeletubbies.map((teletubby, index) => (
+          <Grid key={index}>
+            <>
+              <Grid
+                container
+                alignItems="center"
+                sx={{
+                  border: "2px solid",
+                  borderColor: "success.main",
+                  boxShadow: 2,
+                }}
+                p={2}
+                my={2}
+                direction={`${index % 2 ? "row-reverse" : ""}`}
+              >
+                <Grid item xs={12} md={3} lg={3}>
+                  <div className="img-container">
+                    <img
+                      src={teletubby.image_url}
+                      alt={teletubby.image_url}
+                      style={{
+                        width: "180px",
+                        height: "180px",
+                        padding: "auto",
+                      }}
+                    />
+                  </div>
+                </Grid>
+
+                <Grid item xs={12} md={9} lg={9}>
+                  <Grid component="div">
+                    <Typography
+                      variant="h4"
+                      component="div"
+                      align="left"
+                      sx={{ px: 2, my: 1 }}
+                    >
+                      {teletubby.name}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      component="div"
+                      sx={{ px: 2, my: 1 }}
+                    >
+                      {teletubby.description}
+                    </Typography>
+                    <Grid container spacing={2} justifyContent="flex-start">
+                      {teletubby.traits.map((item, key) => {
+                        return (
+                          <Grid item key={key} my={1}>
+                            <Paper variant="outlined" sx={{ p: 1 }}>
+                              {item}
+                            </Paper>
+                          </Grid>
+                        );
+                      })}
                     </Grid>
                   </Grid>
                 </Grid>
-              </>
-            </Grid>
-          ))}
+              </Grid>
+            </>
+          </Grid>
+        ))}
       </Container>
     </>
   );
