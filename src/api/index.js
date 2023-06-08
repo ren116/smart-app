@@ -18,3 +18,19 @@ export const getCurrentWeatherData = async () => {
     throw error;
   }
 };
+
+export const getData = async() => {
+  try{
+    const response=await fetch('teletubbies.json',{
+       headers: {
+         'Content-Type': 'application/json',
+         'Accept': 'application/json'
+       }
+     })
+     const myJson = await response.json();
+     return myJson;
+  }
+  catch (err){
+    console.log(err);
+  }
+ }
