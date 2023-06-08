@@ -10,6 +10,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Margin } from "@mui/icons-material";
 
+const row = {
+  site: "Barley",
+  alerts: { high: 0, med: 3, low: 1 },
+  savings: 89,
+  uptime: 104,
+  power: 1165,
+};
+
 const Buildings = () => {
   return (
     <>
@@ -52,7 +60,27 @@ const Buildings = () => {
                 <TableCell align="left">Power ˅</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody></TableBody>
+            <TableBody>
+              {
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.site}
+                  </TableCell>
+                  <TableCell align="left">
+                    {row.alerts.high +
+                      " " +
+                      row.alerts.med +
+                      " " +
+                      row.alerts.low}
+                  </TableCell>
+                  <TableCell align="left">{row.savings + "%"}</TableCell>
+                  <TableCell align="left">{row.uptime + "%"}</TableCell>
+                  <TableCell align="left">{row.power + "KW"}</TableCell>
+                </TableRow>
+              }
+            </TableBody>
           </Table>
         </TableContainer>
       </Box>
