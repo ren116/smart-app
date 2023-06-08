@@ -22,13 +22,13 @@ export const getCurrentWeatherData = async () => {
 export const getData = async() => {
   try{
     const response=await fetch('teletubbies.json',{
-       headers: {
-         'Content-Type': 'application/json',
-         'Accept': 'application/json'
-       }
-     })
-     const myJson = await response.json();
-     return myJson;
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    const myJson = await response.json();
+    return myJson;
   }
   catch (err){
     throw error;
