@@ -20,7 +20,22 @@ const Teletubbies = () => {
     getTeletubbies();
   }, []);
 
-  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight
+      ) {
+        setVisibleTeletubbies(visibleTeletubbies + 20);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [visibleTeletubbies]);
 
   return (
     <>
