@@ -9,6 +9,7 @@ const Teletubbies = () => {
       <Typography variant='h1' sx={{ marginTop: '30px' }}>
         Teletubbies
       </Typography>
+      <TextField id='outlined-basic' label='Search by name' variant='outlined' />
       {data
          .map((item, key) => {
            return (
