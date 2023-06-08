@@ -26,18 +26,29 @@ const Blog = () => {
                 </Paper>
             </Box>
             <Container maxWidth="xl">
-                <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={164}>
-                    {itemData.map((item) => (
-                        <ImageListItem key={item.img}>
-                            <img
-                                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                                srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                alt={item.title}
-                                loading="lazy"
-                            />
-                        </ImageListItem>
-                    ))}
-                </ImageList>
+                <div id='blogdata'>
+                    <Grid container spacing={10}>
+                        {filterBlog.map(item => (
+                            <Grid item lg={3} md={4} sm={6} xs={12} >
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        image={item.img}
+                                        alt={item.bear}
+                                    />
+                                    <CardContent sx={{ display: 'flex', justifyContent: "space-between", backgroundColor: "#80cbc4" }}>
+                                        <Typography gutterBottom variant="p">
+                                            {item.collectionName}
+                                        </Typography>
+                                        <Typography variant="p">
+                                            {item.price}$
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </div>
             </Container>
         </div>
     )
