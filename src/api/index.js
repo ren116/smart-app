@@ -18,3 +18,18 @@ export const getCurrentWeatherData = async () => {
     throw error;
   }
 };
+const buildingsOptions = {
+  method: "GET",
+  url: "/buildings.json",
+};
+
+export const getBuildingsData = async () => {
+  try {
+    const response = await axios.request(buildingsOptions);
+    return response.data.buildings;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
