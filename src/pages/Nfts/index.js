@@ -5,13 +5,12 @@ import { Container, Typography, Box } from "@mui/material";
 const Nfts = () => {
 
     return (
-        <Container maxWidth="xl">
-            <Box sx={{ display: 'flex', justifyContent: "center", marginTop: '90px' }}>
-                <Search />
-            </Box>
-            <Box sx={{ display: 'flex', justifyContent: "center", marginTop: '90px' }}>
-            </Box>
-        </Container>
+        <Box sx={{ bgcolor: '#bcaaa4',}}>
+        <Box sx={{ display: "flex", justifyContent: "center", paddingTop: '60px' }}>
+            <Blog />
+        </Box>
+
+    </Box>
     )
 };
 
