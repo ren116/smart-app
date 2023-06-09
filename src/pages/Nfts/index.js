@@ -2,6 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import Blog from "components/Blog";
 
+
 const Nfts = () => {
   return (
     <Box sx={{ bgcolor: '#bcaaa4', }}>
