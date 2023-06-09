@@ -58,18 +58,20 @@ export const Teletubbies = () => {
                 key={index}
                 sx={
                   index % 2 == 0
-                    ? {
-                        display: "flex",
-                        marginBottom: "20px",
-                        paddingX: "10px",
-                      }
-                    : {
-                        display: "flex",
-                        marginBottom: "20px",
-                        paddingX: "10px",
-                        flexDirection: "row-reverse",
-                        justifyContent: "space-between",
-                      }
+                  ? 
+                  {
+                    display: "flex",
+                    marginBottom: "20px",
+                    paddingX: "10px",
+                  }
+                  : 
+                  {
+                      display: "flex",
+                      marginBottom: "20px",
+                      paddingX: "10px",
+                      flexDirection: "row-reverse",
+                      justifyContent: "space-between",
+                  }
                 }
               >
                 <CardImg teletubby={item} />
