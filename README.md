@@ -1,38 +1,58 @@
-# NTFs, Buildings, Teletubbies Web Smart App
+# Getting Started with Smart App
 
-This is a web application that displays information about NTFs (Non-Fungible Tokens), Buildings, and Teletubbies. The data is imported from an API endpoint and displayed in a user-friendly interface.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Features
+# How to run the project
 
-The app has the following features:
+```
+npm install
+npm start
+```
 
-- NTFs: Displays a list of NFTs along with their names, images, descriptions, and prices.
-- Buildings: Displays a list of buildings along with their names, alert status, savings, uptime, and power consumption.
-- Teletubbies: Displays a list of Teletubbies along with their names, images, and descriptions.
-  All three sections are accessible from the navbar at the top of the page.
+# Requirements
 
-## Technologies Used
+## NFTs page
 
-The app was built using the following technologies:
+We have endpoints to return paginated NFT listings:
 
-- Frontend: React.js, Material UI
-- Backend: Use online backend or load local json file
-- API: The data for NFTs, Buildings, and Teletubbies is imported from an external API endpoint.
+```
+https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0
+```
 
-## Installation and Usage
+Build a page with the following requirements:
 
-To install the app, follow these steps:
+- On load, show first 20 NFT listings in a grid, the grid should be responsive
+- Each card will consist of an image, name, price
+- Show more listing as user scrolls down the page
+- Searh NFTs by name (frontend side)
+- A design mock is as following:
 
-1. Clone or download the repository to your local machine.
-2. Navigate to the root directory of the project.
-3. Run `npm install` to install the node_modules.
-4. Run `npm start` to start the app. The app will be available at http://localhost:3000.
+  <img src="./public/NFTs.png" />
 
-## License
+## Teletubbies page
 
-This project is licensed under the MIT License.
+We have `teletubbies.json` in `public` directory.
 
-## Acknowledgements
+Build a page with the following requirements:
 
-The data for NTFs is provided by [https://weatherapi-com.p.rapidapi.com/current.json].
-The data for Buildings, and Teletubbies is provided from public folder at local machine.
+- On load, show 20 teletubbies, it should be responsive
+- Each card will consist of an image, name, description, tags
+- Show more listing as user scrolls down the page
+- Searh Teletubbies by name (frontend side)
+- A design mock is as following:
+
+  <img src="./public/teletubbies.png" />
+
+## Buildings page
+
+We have `buildings.json` in `public` directory.
+
+Build a page with the following requirements:
+
+- On load, show 20 buildings, it should be responsive
+- Each card will consist of an name, alerts, savings, uptime, power
+- Show more listing as user scrolls down the page
+- Searh Buildings by name (frontend side)
+- A design mock is as following:
+
+  <img src="./public/buildings.png" />
