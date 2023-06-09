@@ -1,1 +1,1 @@
-export const TELETUBBIE_SIZE = 20
+export const Nftplus = 20;
