@@ -54,7 +54,6 @@ const Teletubbies = () => {
   return (
     <Container>
       <Typography
-        variant="h2"
         sx={{
           border: "4px solid",
           borderColor: "primary.main",
@@ -62,6 +61,7 @@ const Teletubbies = () => {
           padding: 4,
           boxShadow: 3,
           fontFamily: "Cherry Bomb One",
+          fontSize: "13vw",
         }}
         mt={4}
         mb={3}
