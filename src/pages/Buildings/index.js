@@ -20,6 +20,7 @@ function Buildings() {
     };
     fetchData();
   }, []);
+  
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
@@ -38,6 +39,14 @@ function Buildings() {
 
   const paginate = () => {
     setPageLength((pageLength) => pageLength + BUILDINGS_SIZE);
+  };
+
+  const buildings = useMemo(() => {
+    return data.slice(0, pageLength);
+  }, [data, pageLength]);
+
+  const paginate = () => {
+    setPageLength((pageLength) => pageLength + 20);
   };
 
   return (

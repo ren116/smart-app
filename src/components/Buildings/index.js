@@ -87,3 +87,4 @@ function BuildingsView(props) {
 }
 
 export default BuildingsView;
+

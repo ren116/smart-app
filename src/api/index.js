@@ -59,3 +59,17 @@ export const getData = () => {
     });
   });
 };
+=========
+    fetch('teletubbies.json'
+      , {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then(function (myJson) {
+        resolve(myJson.json());
+      });
+    })
+  }
+>>>>>>>>> Temporary merge branch 2
