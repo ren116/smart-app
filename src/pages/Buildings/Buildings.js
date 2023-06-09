@@ -43,8 +43,8 @@ const Buildings = () => {
       ...saveBuildings,
       ...allData.slice(st, en),
     ]);
-    search(keyword);
     setIsLoading(false);
+    search(keyword);
   };
 
   const handleNext = () => {
@@ -85,47 +85,47 @@ const Buildings = () => {
 
   return (
     <Container maxWidth="xl">
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <InfiniteScroll
-          dataLength={saveBuildings.length}
-          next={handleNext}
-          hasMore={true}
-        >
-          <Container maxWidth="lg" sx={{ minWidth: 350 }}>
-            <Grid container pt={3} textAlign="right">
-              <Grid>
-                <TextField
-                  id="outlined-basic"
-                  label="Search..."
-                  variant="outlined"
-                  size="small"
-                  onChange={(e) => handleChange(e)}
-                  value={keyword}
-                />
-              </Grid>
-            </Grid>
-            <Grid container mt={2}>
-              <Grid item xs={1}>
-                <Item>No</Item>
-              </Grid>
-              <Grid item xs={2}>
-                <Item>Site</Item>
-              </Grid>
-              <Grid item xs={3}>
-                <Item>Alerts</Item>
-              </Grid>
-              <Grid item xs={2}>
-                <Item>Savings</Item>
-              </Grid>
-              <Grid item xs={2}>
-                <Item>Uptime</Item>
-              </Grid>
-              <Grid item xs={2}>
-                <Item>Power</Item>
-              </Grid>
-            </Grid>
+      <Container maxWidth="lg" sx={{ minWidth: 350 }}>
+        <Grid container pt={3} textAlign="right">
+          <Grid>
+            <TextField
+              id="outlined-basic"
+              label="Search..."
+              variant="outlined"
+              size="small"
+              onChange={(e) => handleChange(e)}
+              value={keyword}
+            />
+          </Grid>
+        </Grid>
+        <Grid container mt={2}>
+          <Grid item xs={1}>
+            <Item>No</Item>
+          </Grid>
+          <Grid item xs={2}>
+            <Item>Site</Item>
+          </Grid>
+          <Grid item xs={3}>
+            <Item>Alerts</Item>
+          </Grid>
+          <Grid item xs={2}>
+            <Item>Savings</Item>
+          </Grid>
+          <Grid item xs={2}>
+            <Item>Uptime</Item>
+          </Grid>
+          <Grid item xs={2}>
+            <Item>Power</Item>
+          </Grid>
+        </Grid>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <InfiniteScroll
+            dataLength={saveBuildings.length}
+            next={handleNext}
+            hasMore={true}
+          >
             {buildings ? (
               buildings.map((building, key) => {
                 return (
@@ -143,9 +143,9 @@ const Buildings = () => {
             ) : (
               <>No data</>
             )}
-          </Container>
-        </InfiniteScroll>
-      )}
+          </InfiniteScroll>
+        )}
+      </Container>
     </Container>
   );
 };
