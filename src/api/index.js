@@ -28,11 +28,15 @@ export const getNTFsData = async () => {
   try {
     const response = await axios.request(NTFsOptions);
     return response;
-  }catch(error){
+  } catch (error) {
     throw error;
   }
-}
+};
 
+const buildingsOptions = {
+  method: "GET",
+  url: "/buildings.json"
+};
 
 export const getBuildingsData = async () => {
   try {

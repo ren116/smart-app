@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { BuildingsView } from "components/Buildings";
+import React, { useState, useEffect, useMemo } from "react";
+import BuildingsView from "components/Buildings";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import { Container } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { getBuildingsData } from "api";
-import { BUILDINGS_SIZE } from "utils/constants";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Buildings() {
   const [data, setData] = useState([]);
+  const [pageLength, setPageLength] = useState(20);
   const [searchText, setSearchText] = useState();
+  
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
@@ -21,6 +23,14 @@ function Buildings() {
     };
     fetchData();
   }, []);
+
+  const buildings = useMemo(() => {
+    return data.slice(0, pageLength);
+  }, [data, pageLength]);
+
+  const paginate = () => {
+    setPageLength((pageLength) => pageLength + 20);
+  };
 
   return (
     <div className="container">
@@ -35,7 +45,13 @@ function Buildings() {
           onChange={handleChange}
         />
         <TableContainer component={Paper}>
-          <BuildingsView data={data} end={BUILDINGS_SIZE} />
+          <InfiniteScroll
+            dataLength={buildings.length}
+            next={paginate}
+            hasMore={true}
+          >
+            <BuildingsView data={buildings} />
+          </InfiniteScroll>
         </TableContainer>
       </Container>
     </div>
