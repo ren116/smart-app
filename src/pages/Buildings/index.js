@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
 import { amber, deepOrange, green, lightGreen } from "@mui/material/colors";
 
 const Buildings = () => {
@@ -83,6 +84,24 @@ const Buildings = () => {
           BUILDINGS
         </Typography>
       </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          mt: 5,
+          mb: 1,
+        }}
+      >
+        <TextField
+          id="outlined-search"
+          label="Search field"
+          type="search"
+          sx={{ width: 1000 }}
+        />
+      </Box>
+
       <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
         <TableContainer component={Paper} sx={{ maxWidth: 1000 }}>
           <Table aria-label="simple table">
