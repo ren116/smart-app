@@ -5,7 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import Spinner from "components/Spinner";
 import { GetData } from "../../api/buildings";
-import BuildingField from "components/Buildings/BuildingField";
+import BuildingItem from "components/Buildings/BuildingItem";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -130,7 +130,7 @@ const Buildings = () => {
             {buildings ? (
               buildings.map((building, key) => {
                 return (
-                  <BuildingField
+                  <BuildingItem
                     key={key}
                     num={key + 1}
                     name={building.Name}

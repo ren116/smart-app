@@ -1,8 +1,8 @@
 import { Typography, Grid } from "@mui/material";
-import FabField from "./FabField";
-import ItemField from "./ItemField";
+import TypoItem from "./TypoItem";
+import FabItem from "./FabItem";
 
-const BuildingField = ({ num, name, alerts, saving, uptime, power }) => {
+const BuildingItem = ({ num, name, alerts, saving, uptime, power }) => {
   return (
     <Grid
       container
@@ -44,32 +44,32 @@ const BuildingField = ({ num, name, alerts, saving, uptime, power }) => {
         }}
       >
         {alerts.high.count === 0 || alerts.high === 0 ? (
-          <FabField
+          <FabItem
             count={alerts.high.count >= 0 ? alerts.high.count : alerts.high}
             bgColor={
               alerts.high.count > 0 || alerts.high > 0 ? "#3385ff" : "#e6e6e6"
             }
           />
         ) : (
-          <FabField
+          <FabItem
             count={alerts.high.count >= 0 ? alerts.high.count : alerts.high}
             bgColor={alerts.high.count >= 0 ? "#3385ff" : "#e6e6e6"}
           />
         )}
-        <FabField
+        <FabItem
           count={alerts.med.count}
           bgColor={alerts.med.count === 0 ? "#e6e6e6" : "#ff9900"}
         />
-        <FabField
+        <FabItem
           count={alerts.med.count}
           bgColor={alerts.med.count === 0 ? "#e6e6e6" : "#ff4850"}
         />
       </Grid>
-      <ItemField color="#b5b0b0" value={saving} />
-      <ItemField color="#b5b0b0" value={uptime} />
-      <ItemField color="#00e600" value={power} />
+      <TypoItem color="#b5b0b0" value={saving} />
+      <TypoItem color="#b5b0b0" value={uptime} />
+      <TypoItem color="#00e600" value={power} />
     </Grid>
   );
 };
 
-export default BuildingField;
+export default BuildingItem;

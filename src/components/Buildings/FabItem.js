@@ -1,6 +1,6 @@
 import { Fab, Typography } from "@mui/material";
 
-const FabField = ({ count, bgColor }) => {
+const FabItem = ({ count, bgColor }) => {
   return (
     <Fab sx={{ backgroundColor: bgColor }} size="small" aria-label="low">
       <Typography>{count}</Typography>
@@ -8,4 +8,4 @@ const FabField = ({ count, bgColor }) => {
   );
 };
 
-export default FabField;
+export default FabItem;
