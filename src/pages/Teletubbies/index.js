@@ -1,37 +1,51 @@
 import React, { useState } from "react";
 import { Container, Box, Card, TextField } from "@mui/material";
-import teletubbiesData from "../../teletubbies.json";
+import originalteletubbiesData from "../../teletubbies.json";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Title } from "../../components/Teletubbies/Title";
 import { CardImg } from "../../components/Teletubbies/CardImg";
 import { CardMain } from "../../components/Teletubbies/CardMain";
 
-const savedTeletubbiesData = teletubbiesData;
+const allTeletubbiesData = originalteletubbiesData;
 
 export const Teletubbies = () => {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const [teletubbies, setTeletubbies] = useState(teletubbiesData.slice(0, 20));
+  const [teletubbies, setTeletubbies] = useState(originalteletubbiesData.slice(0, 20));
+
+  const leftPlaceCss = {
+    display: "flex",
+    marginBottom: "20px",
+    paddingX: "10px",
+  }
+
+  const RightPlaceCss = {
+    display: "flex",
+    marginBottom: "20px",
+    paddingX: "10px",
+    flexDirection: "row-reverse",
+    justifyContent: "space-between",
+  }
 
   const filterOptions = (e) => {
     setSearchTerm(e.target.value);
 
-    const filteredItems = teletubbiesData.filter((teletubby) =>
+    const filteredItems = originalteletubbiesData.filter((teletubby) =>
       teletubby.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
 
     setTeletubbies(filteredItems.slice(0, page * 20));
-    teletubbiesData = filteredItems;
+    originalteletubbiesData = filteredItems;
 
     if (e.target.value == "") {
-      teletubbiesData = savedTeletubbiesData;
-      setTeletubbies(teletubbiesData.slice(0, 20));
+      originalteletubbiesData = allTeletubbiesData;
+      setTeletubbies(originalteletubbiesData.slice(0, 20));
     }
   };
 
   const loadMoreTeletubbies = () => {
-    setTeletubbies(teletubbiesData.slice(0, page * 20));
-    if (teletubbies.length <= teletubbiesData.length) {
+    setTeletubbies(originalteletubbiesData.slice(0, page * 20));
+    if (teletubbies.length <= originalteletubbiesData.length) {
       setPage(page + 1);
     }
   };
@@ -62,19 +76,9 @@ export const Teletubbies = () => {
                 sx={
                   index % 2 == 0
                   ? 
-                  {
-                    display: "flex",
-                    marginBottom: "20px",
-                    paddingX: "10px",
-                  }
+                  leftPlaceCss
                   : 
-                  {
-                      display: "flex",
-                      marginBottom: "20px",
-                      paddingX: "10px",
-                      flexDirection: "row-reverse",
-                      justifyContent: "space-between",
-                  }
+                  RightPlaceCss
                 }
               >
                 <CardImg cardInfo={item} />
