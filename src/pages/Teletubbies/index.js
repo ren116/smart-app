@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Grid, Typography, TextField } from '@mui/material';
 import { getCurrenTeletubbyData } from 'api';
-import renderTeletubbyCard from '../../components/Teletubby/index';
+import TeletubbyCard from 'components/Teletubby/index';
 
 const Teletubbies = () => {
   const [numTeletubbiesToShow, setNumTeletubbiesToShow] = useState(20);
@@ -57,10 +57,10 @@ const Teletubbies = () => {
         <TextField
           label='Search Teletubbies'
           variant='outlined'
-          width='50%'
+          fullWidth
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
-          style={{ marginBottom: '20px' }}
+          style={{ marginBottom: '20px', width:"50%" }}
         />
         {filteredTeletubbies.length === 0 ? (
           <p>There is no teletubby</p>
@@ -75,7 +75,9 @@ const Teletubbies = () => {
         >
           {filteredTeletubbies
             .slice(0, numTeletubbiesToShow)
-            .map((teletubby, index) => renderTeletubbyCard(teletubby, index))}
+            .map((teletubby, index) => 
+              <TeletubbyCard teletubby={teletubby} key={index} index={index} />
+            )}
         </Grid>)}
       </div>
     </div>
