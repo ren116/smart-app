@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Box, Card, Pagination, TextField } from "@mui/material";
+import { Container, Box, Card, TextField } from "@mui/material";
 import teletubbiesData from "../../teletubbies.json";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Title } from "../../components/Teletubbies/Title";
@@ -58,17 +58,17 @@ export const Teletubbies = () => {
                 sx={
                   index % 2 == 0
                     ? {
-                      display: "flex",
-                      marginBottom: "20px",
-                      paddingX: "10px",
-                    }
+                        display: "flex",
+                        marginBottom: "20px",
+                        paddingX: "10px",
+                      }
                     : {
-                      display: "flex",
-                      marginBottom: "20px",
-                      paddingX: "10px",
-                      flexDirection: "row-reverse",
-                      justifyContent: "space-between",
-                    }
+                        display: "flex",
+                        marginBottom: "20px",
+                        paddingX: "10px",
+                        flexDirection: "row-reverse",
+                        justifyContent: "space-between",
+                      }
                 }
               >
                 <CardImg teletubby={item} />
