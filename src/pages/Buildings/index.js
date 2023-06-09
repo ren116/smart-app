@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
-import Building from "../../components/Buildings/Building";
 import { Container } from "@mui/material";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import { Grid, TextField, Typography, Box } from "@mui/material";
+import Building from "../../components/Buildings/Building";
 import buildingsData from "./buildings.json";
 
 var PAGE_SIZE = 20;
