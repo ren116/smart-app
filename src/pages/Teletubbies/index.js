@@ -61,7 +61,7 @@ const Teletubbies = () => {
           padding: 4,
           boxShadow: 3,
           fontFamily: "Cherry Bomb One",
-          fontSize: "13vw",
+          fontSize: "10vw",
         }}
         mt={4}
         mb={3}
