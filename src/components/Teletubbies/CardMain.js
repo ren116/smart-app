@@ -16,4 +16,4 @@ export const CardMain = (props) => {
       </div>
     </CardContent>
   )
-} 
+}

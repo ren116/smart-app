@@ -1,6 +1,5 @@
 import { Avatar } from '@mui/material';
 import  { Box }  from '@mui/material';
-
 export const Title = () => {
   return (
     <>
@@ -8,7 +7,6 @@ export const Title = () => {
         <Avatar alt="Logo" src="./teletubbies_logo.png" variant="square" 
           sx={{ width: "auto", height: 180 , }}/>
       </Box>
-    </>
-    
+    </>    
   )
 } 
