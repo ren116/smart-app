@@ -88,7 +88,9 @@ const Teletubbies = () => {
 
   return (
     <>
-      <Typography variant="h2">Teletubbies</Typography>
+      <Typography variant="h2" sx={{ marginTop: "64px" }}>
+        Teletubbies
+      </Typography>
 
       <TextField
         label="Search"
@@ -123,7 +125,7 @@ const Teletubbies = () => {
                   </Grid>
                   <div style={{ display: "flex" }}>
                     {data.traits.map((name, key) => (
-                      <Section>{data.traits[key]}</Section>
+                      <Section key={key}>{data.traits[key]}</Section>
                     ))}
                   </div>
                 </Div>
