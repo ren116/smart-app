@@ -11,7 +11,13 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
-import { amber, deepOrange, green, lightGreen } from "@mui/material/colors";
+import {
+  amber,
+  deepOrange,
+  green,
+  lightGreen,
+  red,
+} from "@mui/material/colors";
 
 const Buildings = () => {
   const [buildings, setBuildings] = useState([]);
@@ -172,33 +178,47 @@ const Buildings = () => {
                           </Avatar>
                         </Stack>
                       </TableCell>
-                      <TableCell
-                        align="left"
-                        sx={[
-                          {
-                            fontFamily: "arial",
-                            fontSize: 18,
-                            color: "grey",
-                          },
-                          row.savings < 100 && { color: "red" },
-                        ]}
-                        key={"cell-" + key * 5 + 2}
-                      >
-                        {row.savings + "%"}
+                      <TableCell align="left" key={"cell-" + key * 5 + 2}>
+                        <Typography
+                          sx={[
+                            {
+                              fontSize: 18,
+                              fontFamily: "arial",
+                              color: "grey",
+                              textDecoration: "none",
+                              textAlign: "center",
+                              width: 60,
+                            },
+                            row.savings < 100 && {
+                              color: red[500],
+                              backgroundColor: red[100],
+                              borderRadius: 1.5,
+                            },
+                          ]}
+                        >
+                          {row.savings + "%"}
+                        </Typography>
                       </TableCell>
-                      <TableCell
-                        align="left"
-                        sx={[
-                          {
-                            fontFamily: "arial",
-                            fontSize: 18,
-                            color: "grey",
-                          },
-                          row.uptime < 100 && { color: "red" },
-                        ]}
-                        key={"cell-" + key * 5 + 3}
-                      >
-                        {row.uptime + "h"}
+                      <TableCell align="left" key={"cell-" + key * 5 + 3}>
+                        <Typography
+                          sx={[
+                            {
+                              fontSize: 18,
+                              fontFamily: "arial",
+                              color: "grey",
+                              textDecoration: "none",
+                              textAlign: "center",
+                              width: 60,
+                            },
+                            row.uptime < 100 && {
+                              color: red[500],
+                              backgroundColor: red[100],
+                              borderRadius: 1.5,
+                            },
+                          ]}
+                        >
+                          {row.uptime + "h"}
+                        </Typography>
                       </TableCell>
                       <TableCell
                         align="left"
