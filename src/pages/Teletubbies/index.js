@@ -12,17 +12,17 @@ export const Teletubbies = () => {
         {teletubbiesData.map((item, index) => {
           return <Card key = {index} sx={{display: "flex", marginBottom: "20px", paddingX: "10px"}}>
             {
-            index % 2 == 0 ? 
-            <>
-            <CardImg teletubby = {item}/>
-            <CardMain teletubby = {item}/>
-            </>
-             : 
-             <>
-             <CardMain teletubby = {item}/>
-             <CardImg teletubby = {item}/>
+              index % 2 == 0 ? 
+              <>
+                <CardImg teletubby = {item}/>
+                <CardMain teletubby = {item}/>
               </>
-              }
+              : 
+              <>
+                <CardMain teletubby = {item}/>
+                <CardImg teletubby = {item}/>
+              </>
+            }
           </Card>
         })}
       </Box>
