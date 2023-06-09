@@ -14,7 +14,7 @@ const Blog = () => {
   const [searchStr, setSearchStr] = useState('')
   const getBlog = async () => {
     const res = await fetch(
-      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
+      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0`
     )
     const data = await res.json()
     setblogdata([...blogdata, ...data.results])
@@ -74,25 +74,26 @@ const Blog = () => {
       <Container maxWidth="xl">
         <div id='blogdata'>
           <Grid container spacing={10}>
-            {filterBlog.map(item => (
+            {(filterBlog.map(item => (
               <Grid key={blogdata.id} item lg={3} md={4} sm={6} xs={12} >
                 <CardActionArea>
                   <CardMedia
                     component="img"
                     image={item.img}
                     alt={item.bear}
+                    onError={(e) => { e.target.onerror = null; e.target.src = "error.jpg" }}
                   />
                   <CardContent sx={{ display: 'flex', justifyContent: "space-between", backgroundColor: "#80cbc4" }}>
                     <Typography gutterBottom variant="p">
                       {item.collectionName}
                     </Typography>
                     <Typography variant="p">
-                      {item.price}($)
+                      ($){item.price}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
               </Grid>
-            ))}
+            )))}
           </Grid>
         </div>
       </Container>
@@ -100,4 +101,4 @@ const Blog = () => {
   )
 }
 
-export default Blog
+export default Blog;
