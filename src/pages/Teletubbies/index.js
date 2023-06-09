@@ -53,23 +53,22 @@ const Teletubbies = () => {
 
   return (
     <Container>
-      <Grid>
-        <Typography
-          variant="h2"
-          sx={{
-            border: "4px solid",
-            borderColor: "primary.main",
-            color: "Blue",
-            padding: 4,
-            boxShadow: 3,
-            fontFamily: "Cherry Bomb One",
-          }}
-          mt={4}
-          mb={3}
-        >
-          Teletubbies
-        </Typography>
-      </Grid>
+      <Typography
+        variant="h2"
+        sx={{
+          border: "4px solid",
+          borderColor: "primary.main",
+          color: "Blue",
+          padding: 4,
+          boxShadow: 3,
+          fontFamily: "Cherry Bomb One",
+        }}
+        mt={4}
+        mb={3}
+      >
+        Teletubbies
+      </Typography>
+
       <TextField
         fullWidth
         variant="outlined"
@@ -78,7 +77,7 @@ const Teletubbies = () => {
         onChange={handleSearchQueryChange}
         InputProps={{
           startAdornment: (
-            <InputAdornment position="center">
+            <InputAdornment position="start">
               <SearchIcon />
             </InputAdornment>
           ),
@@ -117,13 +116,16 @@ const Teletubbies = () => {
               }}
               p={2}
               my={2}
-              direction={`${index % 2 ? "row-reverse" : ""}`}
+              direction={{
+                xs: index % 2 ? "row-reverse" : "",
+                md: "row",
+              }}
             >
               <Grid item xs={12} md={3} lg={3}>
                 <div className="img-container">
                   <img
                     src={teletubby.image_url}
-                    alt={teletubby.image_url}
+                    alt={teletubby.name}
                     style={{
                       width: "180px",
                       height: "180px",
