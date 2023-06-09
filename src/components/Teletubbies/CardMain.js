@@ -14,24 +14,28 @@ export const CardMain = (props) => {
       >
         {props.teletubby.name}
       </Typography>
+
       <Typography variant="body2" color="text.secondary">
         {props.teletubby.description}
       </Typography>
+      
       <div>
         {props.teletubby.traits.map((tag) => (
           <Chip
             size="small"
             key={tag}
             label={tag}
-            sx={{
-              mr: 1,
-              mb: 1,
-              mt: 1,
-              color: props.teletubby.color,
-              backgroundColor: "transparent",
-              fontWeight: "bold",
-              fontSize: "14px",
-            }}
+            sx={
+              {
+                mr: 1,
+                mb: 1,
+                mt: 1,
+                color: props.teletubby.color,
+                backgroundColor: "transparent",
+                fontWeight: "bold",
+                fontSize: "14px"
+              }
+            }
           />
         ))}
       </div>
