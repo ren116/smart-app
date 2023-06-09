@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
+import Container from "@mui/material/Container";
 import {
   amber,
   deepOrange,
@@ -18,17 +19,19 @@ import {
   lightGreen,
   red,
 } from "@mui/material/colors";
+import { getBuildings } from "api";
 
 const Buildings = () => {
   const [buildings, setBuildings] = useState([]);
   const [offset, setOffset] = useState(0);
   const [searchWord, setSearchWord] = useState("");
+  const [alert, setAlert] = React.useState(false);
 
   useEffect(() => {
-    fetch("/buildings.json")
-      .then((response) => response.json())
-      .then((data) => {
-        let newTypeBuildings = data.buildings.map((item) => {
+    try {
+      (async function () {
+        const data = await getBuildings();
+        const newTypeBuildings = data.buildings.map((item) => {
           return {
             site: item.Name,
             alerts: {
@@ -42,7 +45,10 @@ const Buildings = () => {
           };
         });
         setBuildings(newTypeBuildings);
-      });
+      })();
+    } catch (err) {
+      setAlert(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -63,181 +69,195 @@ const Buildings = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          mt: 7,
-          mb: 1,
-        }}
-      >
-        <Typography
-          variant="h6"
-          noWrap
-          component="a"
+      <Container maxWidth="xl">
+        <Box
           sx={{
-            mr: 2,
-            display: { xs: "none", md: "flex" },
-            fontFamily: "monospace",
-            fontWeight: 900,
-            fontSize: 40,
-            letterSpacing: ".3rem",
-            color: "inherit",
-            textDecoration: "none",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            mt: 7,
+            mb: 1,
           }}
         >
-          BUILDINGS
-        </Typography>
-      </Box>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 900,
+              fontSize: 40,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            BUILDINGS
+          </Typography>
+        </Box>
 
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          mt: 5,
-          mb: 1,
-        }}
-      >
-        <TextField
-          id="outlined-search"
-          label="Search field"
-          type="search"
-          sx={{ width: 1000 }}
-          onChange={onchange}
-        />
-      </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            mt: 5,
+            mb: 1,
+          }}
+        >
+          <TextField
+            id="outlined-search"
+            label="Search field"
+            type="search"
+            sx={{ width: 1000 }}
+            onChange={onchange}
+          />
+        </Box>
 
-      <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
-        <TableContainer component={Paper} sx={{ maxWidth: 1000 }}>
-          <Table aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell sx={{ fontSize: 18, color: "grey" }}>
-                  Site ˅
-                </TableCell>
-                <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
-                  Alerts ˅
-                </TableCell>
-                <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
-                  Savings ˅
-                </TableCell>
-                <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
-                  Uptime ˅
-                </TableCell>
-                <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
-                  Power ˅
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {buildings
-                .filter((list) => list.site.toLowerCase().includes(searchWord))
-                .slice(0, 20 + offset)
-                .map((row, key) => {
-                  return (
-                    <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                      key={"row-" + key}
-                    >
-                      <TableCell
-                        component="th"
-                        scope="row"
+        <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontSize: 18, color: "grey" }}>
+                    Site ˅
+                  </TableCell>
+                  <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
+                    Alerts ˅
+                  </TableCell>
+                  <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
+                    Savings ˅
+                  </TableCell>
+                  <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
+                    Uptime ˅
+                  </TableCell>
+                  <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
+                    Power ˅
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {buildings
+                  .filter((list) =>
+                    list.site.toLowerCase().includes(searchWord)
+                  )
+                  .slice(0, 20 + offset)
+                  .map((row, key) => {
+                    return (
+                      <TableRow
                         sx={{
-                          fontFamily: "arial",
-                          fontWeight: 900,
-                          fontSize: 20,
-                          color: "inherit",
+                          "&:last-child td, &:last-child th": { border: 0 },
                         }}
-                        key={"cell-" + key * 5 + 0}
+                        key={"row-" + key}
                       >
-                        {row.site}
-                      </TableCell>
-                      <TableCell align="left" key={"cell-" + key * 5 + 1}>
-                        <Stack direction="row" spacing={2} key={"stack-" + key}>
-                          <Avatar
-                            sx={row.alerts.high ? { bgcolor: green[500] } : {}}
-                            key={"avatar-" + key * 3 + 0}
-                          >
-                            {row.alerts.high}
-                          </Avatar>
-                          <Avatar
-                            sx={row.alerts.med ? { bgcolor: amber[500] } : {}}
-                            key={"avatar-" + key * 3 + 1}
-                          >
-                            {row.alerts.med}
-                          </Avatar>
-                          <Avatar
-                            sx={
-                              row.alerts.low ? { bgcolor: deepOrange[500] } : {}
-                            }
-                            key={"avatar-" + key * 3 + 2}
-                          >
-                            {row.alerts.low}
-                          </Avatar>
-                        </Stack>
-                      </TableCell>
-                      <TableCell align="left" key={"cell-" + key * 5 + 2}>
-                        <Typography
-                          sx={[
-                            {
-                              fontSize: 18,
-                              fontFamily: "arial",
-                              color: "grey",
-                              textDecoration: "none",
-                              textAlign: "center",
-                              width: 60,
-                            },
-                            row.savings < 100 && {
-                              color: red[500],
-                              backgroundColor: red[100],
-                              borderRadius: 1.5,
-                            },
-                          ]}
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          sx={{
+                            fontFamily: "arial",
+                            fontWeight: 900,
+                            fontSize: 20,
+                            color: "inherit",
+                          }}
+                          key={"cell-" + key * 5 + 0}
                         >
-                          {row.savings + "%"}
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="left" key={"cell-" + key * 5 + 3}>
-                        <Typography
-                          sx={[
-                            {
-                              fontSize: 18,
-                              fontFamily: "arial",
-                              color: "grey",
-                              textDecoration: "none",
-                              textAlign: "center",
-                              width: 60,
-                            },
-                            row.uptime < 100 && {
-                              color: red[500],
-                              backgroundColor: red[100],
-                              borderRadius: 1.5,
-                            },
-                          ]}
+                          {row.site}
+                        </TableCell>
+                        <TableCell align="left" key={"cell-" + key * 5 + 1}>
+                          <Stack
+                            direction="row"
+                            spacing={2}
+                            key={"stack-" + key}
+                          >
+                            <Avatar
+                              sx={
+                                row.alerts.high ? { bgcolor: green[500] } : {}
+                              }
+                              key={"avatar-" + key * 3 + 0}
+                            >
+                              {row.alerts.high}
+                            </Avatar>
+                            <Avatar
+                              sx={row.alerts.med ? { bgcolor: amber[500] } : {}}
+                              key={"avatar-" + key * 3 + 1}
+                            >
+                              {row.alerts.med}
+                            </Avatar>
+                            <Avatar
+                              sx={
+                                row.alerts.low
+                                  ? { bgcolor: deepOrange[500] }
+                                  : {}
+                              }
+                              key={"avatar-" + key * 3 + 2}
+                            >
+                              {row.alerts.low}
+                            </Avatar>
+                          </Stack>
+                        </TableCell>
+                        <TableCell align="left" key={"cell-" + key * 5 + 2}>
+                          <Typography
+                            sx={[
+                              {
+                                fontSize: 18,
+                                fontFamily: "arial",
+                                color: "grey",
+                                textDecoration: "none",
+                                textAlign: "center",
+                                width: 60,
+                              },
+                              row.savings < 100 && {
+                                color: red[500],
+                                backgroundColor: red[100],
+                                borderRadius: 1.5,
+                              },
+                            ]}
+                          >
+                            {row.savings + "%"}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="left" key={"cell-" + key * 5 + 3}>
+                          <Typography
+                            sx={[
+                              {
+                                fontSize: 18,
+                                fontFamily: "arial",
+                                color: "grey",
+                                textDecoration: "none",
+                                textAlign: "center",
+                                width: 60,
+                              },
+                              row.uptime < 100 && {
+                                color: red[500],
+                                backgroundColor: red[100],
+                                borderRadius: 1.5,
+                              },
+                            ]}
+                          >
+                            {row.uptime + "h"}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          sx={{
+                            fontFamily: "arial",
+                            fontSize: 20,
+                            color: lightGreen[500],
+                          }}
+                          key={"cell-" + key * 5 + 4}
                         >
-                          {row.uptime + "h"}
-                        </Typography>
-                      </TableCell>
-                      <TableCell
-                        align="left"
-                        sx={{
-                          fontFamily: "arial",
-                          fontSize: 20,
-                          color: lightGreen[500],
-                        }}
-                        key={"cell-" + key * 5 + 4}
-                      >
-                        {row.power + "KW"}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
+                          {row.power + "KW"}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+      </Container>
     </>
   );
 };
