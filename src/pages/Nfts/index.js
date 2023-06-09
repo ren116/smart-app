@@ -6,27 +6,17 @@ import {
   CardActionArea,
 } from "@mui/material";
 import { Container, Grid, TextField } from "@mui/material";
+
 const Nfts = () => {
   const [nftlist, setNftlist] = useState([]);
   const [filterednftlist, setFilteredNftlist] = useState([]);
   const [offset, setOffset] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-  const loadNftlist = async () => {
-    const response = await fetch(
-      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
-    );
-    const data = await response.json();
-    setNftlist([...nftlist, ...data.results]);
-    setFilteredNftlist([...nftlist, ...data.results]);
-    setOffset(offset + 20);
-    console.log(response);
-  };
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value.toLowerCase());
-  };
+
   useEffect(() => {
     loadNftlist();
   }, []);
+
   useEffect(() => {
     setFilteredNftlist(
       nftlist.filter((nftlist) =>
@@ -34,6 +24,7 @@ const Nfts = () => {
       )
     );
   }, [nftlist, searchTerm]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -48,13 +39,29 @@ const Nfts = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [offset]);
+
+  const loadNftlist = async () => {
+    const response = await fetch(
+      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
+    );
+    const data = await response.json();
+    setNftlist([...nftlist, ...data.results]);
+    setFilteredNftlist([...filterednftlist, ...data.results]);
+    setOffset(offset + 20);
+  };
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value.toLowerCase());
+  };
+
   return (
     <div>
       <Typography
         gutterBottom
         variant="h3"
         component="div"
-        sx={{ paddingTop: 5 }}>
+        sx={{ paddingTop: 5 }}
+      >
         NFT Page
       </Typography>
       <TextField
@@ -75,7 +82,8 @@ const Nfts = () => {
                 lg={3}
                 md={4}
                 sm={6}
-                xs={12}>
+                xs={12}
+              >
                 <CardActionArea sx={{ backgroundColor: "black" }}>
                   <CardMedia
                     component="img"
