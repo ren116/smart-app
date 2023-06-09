@@ -11,15 +11,6 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import { amber, deepOrange, green, lightGreen } from "@mui/material/colors";
-import { Margin } from "@mui/icons-material";
-
-const row = {
-  site: "Barley",
-  alerts: { high: 0, med: 3, low: 1 },
-  savings: 89,
-  uptime: 104,
-  power: 1165,
-};
 
 const Buildings = () => {
   const [buildings, setBuildings] = useState([]);
