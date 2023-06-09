@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="/Teletubbies" element={<Teletubbies />} />
+            <Route path="/teletubbies" element={<Teletubbies />} />
             <Route path="/nfts" element={<NFTs />} />
             <Route path="*" element={<NoPage />} />
           </Route>
