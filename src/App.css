@@ -7,6 +7,14 @@
   pointer-events: none;
 }
 
+@font-face {
+  font-family: 'bubble';
+  src: url('./BUBBLEBO.TTF') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
