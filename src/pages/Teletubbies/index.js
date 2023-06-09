@@ -42,6 +42,28 @@ const Teletubbies = () => {
     }
   }
 
+<<<<<<< Updated upstream
+=======
+
+  useEffect(() => {
+    // Add scroll listener on mount
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+    // Remove scroll listener on unmount
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+
+  const filteredTeletubbies = dataList.filter((teletubby) =>
+  teletubby.name.toLowerCase().includes(searchKey.toLowerCase())
+);
+
+
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   const Img = styled("img")({
     margin: "auto",
     display: "block",
@@ -82,12 +104,20 @@ const Teletubbies = () => {
     <>
       <Header />
       <Typography variant="h2">Teletubbies</Typography>
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <TextField
         label="Search"
         variant="standard"
         value={searchKey}
         onChange={(e) => setSearchKey(e.target.value)}
       />
+=======
+      <TextField label="Search" variant="standard" value={searchKey} onChange={(e) => setSearchKey(e.target.value)}/>
+>>>>>>> Stashed changes
+=======
+      <TextField label="Search" variant="standard" value={searchKey} onChange={(e) => setSearchKey(e.target.value)}/>
+>>>>>>> Stashed changes
 
       {filteredTeletubbies.map((data, key) => (
         <Paper
