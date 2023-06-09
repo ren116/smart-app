@@ -6,8 +6,8 @@ const weatherOptions = {
   params: { q: "22.3, 114.1" },
   headers: {
     "X-RapidAPI-Key": "cf1d6bd258msh581225dc1a5493fp11399bjsn09a7b76afe60",
-    "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
-  },
+    "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
+  }
 };
 
 export const getCurrentWeatherData = async () => {
@@ -19,9 +19,23 @@ export const getCurrentWeatherData = async () => {
   }
 };
 
+const NTFsOptions = {
+  method: "GET",
+  url: "https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=100&offset=0"
+};
+
+export const getNTFsData = async () => {
+  try {
+    const response = await axios.request(NTFsOptions);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const buildingsOptions = {
   method: "GET",
-  url: "/buildings.json",
+  url: "/buildings.json"
 };
 
 export const getBuildingsData = async () => {
@@ -35,15 +49,13 @@ export const getBuildingsData = async () => {
 
 export const getData = () => {
   return new Promise((resolve, reject) => {
-    fetch('teletubbies.json'
-      , {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-      .then(function (myJson) {
-        resolve(myJson.json());
-      });
-    })
-  }
+    fetch("teletubbies.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    }).then(function (myJson) {
+      resolve(myJson.json());
+    });
+  });
+};
