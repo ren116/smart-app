@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import TextField from "@mui/material/TextField";
 import Data from "../../teletubbies.json";
+import { styled } from "@mui/material/styles";
 import {style} from "../../style.js";
 
 const Teletubbies = () => {
@@ -164,6 +164,7 @@ const Teletubbies = () => {
         </Paper>
       ))}
     </>
-  );
-};
+  )
+}
+
 export default Teletubbies;

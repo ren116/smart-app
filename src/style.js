@@ -1,4 +1,4 @@
-export  const style={
-     "width": 200,
-    "height": 128 
-    }
+export const style = {
+  width: 200,
+  height: 128,
+};
