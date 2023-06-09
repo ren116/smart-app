@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { getData } from '../../api';
 import Teletubbie from '../../components/Teletubbie';
-import SearchField from '../../components/Teletubbie/SearchField';
+import SearchField from '../../components/Teletubbie/searchfield';
 import { TELETUBBIE_SIZE } from "utils/constants";
 
 const Teletubbies = () => {
