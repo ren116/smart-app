@@ -15,7 +15,7 @@ export default function NFTs() {
     setNftListing([...nftListing, ...data.results])
     setFilteredNftListing([...nftListing, ...data.results])
     setOffset(offset + 20)
-    console.log(response)
+
   }
 
   const handleSearch = event => {
@@ -24,6 +24,7 @@ export default function NFTs() {
 
   useEffect(() => {
     loadNftListing()
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -46,8 +47,10 @@ export default function NFTs() {
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
+
     }
-  }, [offset])
+
+  }, [offset, loadNftListing])
 
   return (
     <Typography>
@@ -64,10 +67,10 @@ export default function NFTs() {
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           {filteredNftListing.map(nftListing => (
-            <Grid key={nftListing.id} className="grid" item lg={3} md={4} sm={6} xs={12} sx={{my:'25px'}}>
-              <CardActionArea  sx={{height:{sm:"100%", md:"230px"}}}>
+            <Grid key={nftListing.id} className="grid" item lg={3} md={4} sm={6} xs={12} sx={{ my: '25px' }}>
+              <CardActionArea sx={{ height: { sm: "100%", md: "230px" } }}>
                 <CardMedia
-                  sx={{height:"100%"}}
+                  sx={{ height: "100%" }}
                   component="img"
                   image={nftListing.img}
                   alt={nftListing.name}
