@@ -80,8 +80,8 @@ const Blog = () => {
                   <CardMedia
                     component="img"
                     image={item.img}
-                    alt={item.bear}
                     onError={(e) => { e.target.onerror = null; e.target.src = "error.jpg" }}
+                    alt={item.bear}
                   />
                   <CardContent sx={{ display: 'flex', justifyContent: "space-between", backgroundColor: "#80cbc4" }}>
                     <Typography gutterBottom variant="p">
