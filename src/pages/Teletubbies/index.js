@@ -26,8 +26,6 @@ const Teletubbies = () => {
     };
   });
 
-
-
   function handleScroll() {
     if (
       window.innerHeight + window.scrollY >= document.body.offsetHeight &&
@@ -40,21 +38,18 @@ const Teletubbies = () => {
     }
   }
 
-
   useEffect(() => {
     // Add scroll listener on mount
     window.addEventListener("scroll", handleScroll);
     return () => {
-    // Remove scroll listener on unmount
+      // Remove scroll listener on unmount
       window.removeEventListener("scroll", handleScroll);
     };
   });
 
-
   const filteredTeletubbies = dataList.filter((teletubby) =>
-  teletubby.name.toLowerCase().includes(searchKey.toLowerCase())
-);
-
+    teletubby.name.toLowerCase().includes(searchKey.toLowerCase())
+  );
 
   const Img = styled("img")({
     margin: "auto",
@@ -128,7 +123,7 @@ const Teletubbies = () => {
                     </Grid>
                   </Grid>
                   <div style={{ display: "flex" }}>
-                    {data.traits.map((name,key)=>(
+                    {data.traits.map((name, key) => (
                       <Section>{data.traits[key]}</Section>
                     ))}
                   </div>
@@ -157,8 +152,8 @@ const Teletubbies = () => {
                       </Typography>
                     </Grid>
                   </Grid>
-                  <div style={{ display:"flex",  flexWarp:"wrap" }}>
-                    {data.traits.map((name,key)=>(
+                  <div style={{ display: "flex", flexWarp: "wrap" }}>
+                    {data.traits.map((name, key) => (
                       <Section>{data.traits[key]}</Section>
                     ))}
                   </div>
