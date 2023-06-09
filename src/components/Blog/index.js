@@ -11,9 +11,10 @@ const Blog = () => {
   const [blogdata, setblogdata] = useState([])
   const [filterBlog, setFilterBlog] = useState([])
   const [offset, setOffset] = useState(0)
+  const [searchStr, setSearchStr] = useState('')
   const getBlog = async () => {
     const res = await fetch(
-      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0`
+      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears`
     )
     const data = await res.json()
     setblogdata([...blogdata, ...data.results])
