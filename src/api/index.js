@@ -19,13 +19,13 @@ export const getCurrentWeatherData = async () => {
   }
 };
 
-export const getTeletubbies = async() => {
-  const response = await fetch('teletubbies.json',{
+export const getTeletubbies = async () => {
+  const response = await fetch("teletubbies.json", {
     headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-  })
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
   const teletubbies = await response.json();
   return teletubbies;
-}
+};
