@@ -34,7 +34,6 @@ const Buildings = () => {
   }, [allData]);
 
   const getBuildingsData = (st, en) => {
-    setIsLoading(true);
     setBuildings((saveBuildings) => [
       ...saveBuildings,
       ...allData.slice(st, en),
@@ -44,7 +43,7 @@ const Buildings = () => {
       ...allData.slice(st, en),
     ]);
     setIsLoading(false);
-    search(keyword);
+    if(keyword) search(keyword);
   };
 
   const handleNext = () => {
@@ -126,7 +125,7 @@ const Buildings = () => {
             next={handleNext}
             hasMore={true}
           >
-            {buildings ? (
+            {
               buildings.map((building, key) => {
                 return (
                   <BuildingItem
@@ -140,9 +139,7 @@ const Buildings = () => {
                   />
                 );
               })
-            ) : (
-              <>No data</>
-            )}
+            }
           </InfiniteScroll>
         )}
       </Container>
