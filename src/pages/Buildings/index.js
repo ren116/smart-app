@@ -10,8 +10,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 function Buildings() {
   const [data, setData] = useState([]);
   const [pageLength, setPageLength] = useState(20);
-  const [searchText, setSearchText] = useState();
-  
+  const [searchText, setSearchText] = useState("");
+
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
@@ -24,9 +24,17 @@ function Buildings() {
     fetchData();
   }, []);
 
+  const filteredItems = useMemo(() => {
+    return (
+      data?.filter(
+        (item) => item.Name.toLowerCase().indexOf(searchText) >= 0
+      ) || []
+    );
+  }, [searchText, data]);
+
   const buildings = useMemo(() => {
-    return data.slice(0, pageLength);
-  }, [data, pageLength]);
+    return filteredItems.slice(0, pageLength);
+  }, [filteredItems, pageLength]);
 
   const paginate = () => {
     setPageLength((pageLength) => pageLength + 20);
