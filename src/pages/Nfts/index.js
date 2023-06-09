@@ -65,14 +65,14 @@ const Nfts = () => {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 2, sm: 8, md: 12, lg: 16, xl: 20 }}
         >
-          {filteredNfts.map((nfts, id) => (
+          {filteredNfts.map((nft, id) => (
             <Grid item key={id} xs={2} sm={4} md={4} lg={4} xl={5}>
               <Box sx={{ bgcolor: "primary.main", py: "10" }}>
                 <div width="100%" height="100%">
-                  <img src={nfts.img} width="100%" height="80%" alt="" />
+                  <img src={nft.img} width="100%" height="80%" alt="" />
                   <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-                    <h4>{nfts.collectionTitle}</h4>
-                    <p>{nfts.price}</p>
+                    <h4>{nft.collectionTitle}</h4>
+                    <p>{nft.price}</p>
                   </Box>
                 </div>
               </Box>
