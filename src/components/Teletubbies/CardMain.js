@@ -36,10 +36,5 @@ export const CardMain = (props) => {
         ))}
       </div>
     </CardContent>
-<<<<<<< HEAD
   );
 };
-=======
-  )
-}
->>>>>>> 83aae5255bc68fc92a8e2f0391d08e4c4ccc50f4

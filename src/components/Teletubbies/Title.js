@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 import { Avatar } from "@mui/material";
 import { Box } from "@mui/material";
 
-=======
-import { Avatar } from '@mui/material';
-import  { Box }  from '@mui/material';
->>>>>>> 83aae5255bc68fc92a8e2f0391d08e4c4ccc50f4
 export const Title = () => {
   return (
     <>
@@ -17,12 +12,6 @@ export const Title = () => {
           sx={{ width: "auto", height: 180 }}
         />
       </Box>
-<<<<<<< HEAD
     </>
   );
 };
-=======
-    </>    
-  )
-} 
->>>>>>> 83aae5255bc68fc92a8e2f0391d08e4c4ccc50f4
