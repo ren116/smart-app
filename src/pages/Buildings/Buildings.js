@@ -3,9 +3,9 @@ import { Container, Grid, TextField, Paper } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import Building from "components/Buildings/Building";
 import Spinner from "components/Spinner";
 import { GetData } from "../../api/buildings";
+import BuildingField from "components/Buildings/BuildingField";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -16,14 +16,12 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 const Buildings = () => {
-
     const [buildings, setBuildings] = useState([]);
     const [saveBuildings, setSaveBuildings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [keyword, setKeyword] = useState('');
     const [allData, setAllData] = useState([]);
 
-    
     useEffect(() => {
         const getAllData = async () => {
             const { data } = await GetData();
@@ -38,14 +36,14 @@ const Buildings = () => {
 
     const getBuildingsData = (st, en) => {
         setIsLoading(true);
-        setBuildings(allData.slice(st, en));
-        setSaveBuildings(allData.slice(st, en));
+        setBuildings(saveBuildings => [...saveBuildings, ...allData.slice(st, en)]);
+        setSaveBuildings(saveBuildings => [...saveBuildings, ...allData.slice(st, en)]);
         search(keyword);
         setIsLoading(false);
     };
       
     const handleNext= () => {
-        getBuildingsData(0, saveBuildings.length + 20);
+        getBuildingsData(saveBuildings.length, saveBuildings.length + 20);
         if(keyword) {
             search(keyword);
         }
@@ -60,7 +58,7 @@ const Buildings = () => {
     }
 
     useEffect(() => {
-        if(buildings.length < 9) {
+        if(buildings.length < 20) {
             getBuildingsData(0, 40);
         }
     }, [buildings.length])
@@ -98,32 +96,32 @@ const Buildings = () => {
                             <Grid container mt={2}>
                                 <Grid item xs={1}>
                                     <Item>
-                                        No ˅
+                                        No
                                     </Item>
                                 </Grid>
                                 <Grid item xs={2}>
                                     <Item>
-                                    Site ˅
+                                    Site
                                     </Item>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <Item>Alerts ˅</Item>
+                                    <Item>Alerts</Item>
                                 </Grid>
                                 <Grid item xs={2}>
-                                    <Item>Savings ˅</Item>
+                                    <Item>Savings</Item>
                                 </Grid>
                                 <Grid item xs={2}>
-                                    <Item>Uptime ˅</Item>
+                                    <Item>Uptime</Item>
                                 </Grid>
                                 <Grid item xs={2}>
-                                    <Item>Power ˅</Item>
+                                    <Item>Power</Item>
                                 </Grid>
                             </Grid>
                             {
                                 buildings?
                                 buildings.map((building, key) => {
                                     return (
-                                        <Building 
+                                        <BuildingField 
                                             key = { key }
                                             num = { key + 1 }
                                             name = { building.Name }
