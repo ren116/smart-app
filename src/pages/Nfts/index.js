@@ -1,9 +1,5 @@
-import React,{ useState, useEffect } from "react";
-import Container from "@material-ui/core/Container";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 
+<<<<<<< HEAD
 const Nfts = () => {
   const [nfts, setNfts] = useState([]);
   const [filteredNfts, setFilteredNfts] = useState([]);
@@ -84,3 +80,5 @@ const Nfts = () => {
 };
 
 export default Nfts;           
+=======
+>>>>>>> 1fb7ee329e02a3d65d52867f42a23f7cd9ac563f
