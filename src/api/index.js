@@ -18,6 +18,20 @@ export const getCurrentWeatherData = async () => {
     throw error;
   }
 };
+const buildingsOptions = {
+  method: "GET",
+  url: "/buildings.json",
+};
+
+export const getBuildingsData = async () => {
+  try {
+    const response = await axios.request(buildingsOptions);
+    return response.data.buildings;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getData = () => {
   return new Promise((resolve, reject) => {
     fetch('teletubbies.json'
@@ -31,4 +45,5 @@ export const getData = () => {
         resolve(myJson.json());
       });
   })
+}
 }
