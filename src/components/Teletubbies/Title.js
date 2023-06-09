@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 
 export const Title = () => {
   return (
-    <>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Avatar
           alt="Logo"
@@ -12,6 +11,5 @@ export const Title = () => {
           sx={{ width: "auto", height: 180, mt: 2 }}
         />
       </Box>
-    </>
   );
 };

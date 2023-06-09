@@ -10,28 +10,32 @@ export const CardMain = (props) => {
         gutterBottom
         variant="h5"
         component="div"
-        sx={{ color: props.teletubby.color, fontFamily: "bubble !important" }}
+        sx={{ color: props.cardInfo.color, fontFamily: "bubble !important" }}
       >
-        {props.teletubby.name}
+        {props.cardInfo.name}
       </Typography>
+
       <Typography variant="body2" color="text.secondary">
-        {props.teletubby.description}
+        {props.cardInfo.description}
       </Typography>
+
       <div>
-        {props.teletubby.traits.map((tag) => (
+        {props.cardInfo.traits.map((tag) => (
           <Chip
             size="small"
             key={tag}
             label={tag}
-            sx={{
-              mr: 1,
-              mb: 1,
-              mt: 1,
-              color: props.teletubby.color,
-              backgroundColor: "transparent",
-              fontWeight: "bold",
-              fontSize: "14px",
-            }}
+            sx={
+              {
+                mr: 1,
+                mb: 1,
+                mt: 1,
+                color: props.cardInfo.color,
+                backgroundColor: "transparent",
+                fontWeight: "bold",
+                fontSize: "14px"
+              }
+            }
           />
         ))}
       </div>
