@@ -12,7 +12,6 @@ const Home = () => {
     setIsLoadingWeatherData(true);
     const { data } = await getCurrentWeatherData();
     setCurrentWeatherData(data);
-    console.log(data)
     setIsLoadingWeatherData(false);
   };
 
