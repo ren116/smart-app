@@ -51,7 +51,7 @@ const BuildingList = () => {
       }}
     >
       <Container maxWidth="lg" sx={{ marginTop: "64px" }}>
-        <Typography variant="h2" mb={1} >
+        <Typography variant="h2" mb={1}>
           Buildings Page
         </Typography>
         <Grid container item xs={12} sm={12} md={12}>
@@ -91,7 +91,7 @@ const BuildingList = () => {
                 Site
               </Typography>
               <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
               />
             </Box>
             <Box
@@ -104,7 +104,7 @@ const BuildingList = () => {
                 Alerts
               </Typography>
               <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
               />
             </Box>
             <Box
@@ -117,7 +117,7 @@ const BuildingList = () => {
                 Savings
               </Typography>
               <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
               />
             </Box>
             <Box
@@ -130,7 +130,7 @@ const BuildingList = () => {
                 Uptime
               </Typography>
               <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
               />
             </Box>
             <Box
@@ -143,7 +143,7 @@ const BuildingList = () => {
                 Power
               </Typography>
               <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" } }}
+                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
               />
             </Box>
           </Grid>

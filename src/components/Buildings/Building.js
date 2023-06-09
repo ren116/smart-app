@@ -20,7 +20,9 @@ const Building = (props) => {
           spacing={1}
         >
           <Grid item xs={12} sm={2} md={2}>
-            <Typography variant="h6">{Name}</Typography>
+            <Typography variant="h6" sx={{ pt: {xs: "10px", md: 0} }}>
+              {Name}
+            </Typography>
           </Grid>
           <Grid item xs={12} sm={2} md={2}>
             <List
@@ -138,7 +140,7 @@ const Building = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={2} md={2}>
-            <Typography sx={{ p: 0, color: "green" }}>{Power}</Typography>
+            <Typography sx={{ p: 0, color: "green", pb: {xs: "10px", md: 0} }}>{Power}</Typography>
           </Grid>
         </Grid>
       </Box>
