@@ -33,6 +33,14 @@ function Buildings() {
     );
   }, [searchText, data]);
 
+  const filteredItems = useMemo(() => {
+    return (
+      data?.filter(
+        (item) => item.Name.toLowerCase().indexOf(searchText) >= 0
+      ) || []
+    );
+  }, [searchText, data]);
+
   const buildings = useMemo(() => {
     return filteredItems.slice(0, pageLength);
   }, [filteredItems, pageLength]);
