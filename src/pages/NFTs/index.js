@@ -17,7 +17,7 @@ export default function NFTs() {
     setFilteredNftListing([...nftListing, ...data.results])
     setOffset(offset + 20)
 
-  },[])
+  },[offset,loadNftListing])
 
   const handleSearch = event => {
     setSearchTerm(event.target.value.toLowerCase())
