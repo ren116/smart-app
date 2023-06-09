@@ -75,11 +75,7 @@ const Buildings = () => {
         dataLength={buildings.length}
         next={handleNext}
         hasMore={true}
-        loader={
-          <h4>
-            <Spinner />
-          </h4>
-        }
+        loader={<h4>{filteredBuidings.length ? <Spinner /> : <div></div>}</h4>}
       >
         <Table sx={{ minWidth: 650 }} stickyHeader aria-label='sticky table'>
           <TableHead sx={{ zIndex: 2 }}>
@@ -100,7 +96,9 @@ const Buildings = () => {
               )
             ) : (
               <TableRow>
-                <TableCell>Matching data doesn't exist!</TableCell>
+                <TableCell colSpan={6} align='center'>
+                  Matching data doesn't exist!
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
