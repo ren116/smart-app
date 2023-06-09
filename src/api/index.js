@@ -28,10 +28,15 @@ export const getNTFsData = async () => {
   try {
     const response = await axios.request(NTFsOptions);
     return response;
-}catch(error){
-  throw error;
-}
-}
+  } catch (error) {
+    throw error;
+  }
+};
+
+const buildingsOptions = {
+  method: "GET",
+  url: "/buildings.json"
+};
 
 export const getBuildingsData = async () => {
   try {
@@ -44,16 +49,13 @@ export const getBuildingsData = async () => {
 
 export const getData = () => {
   return new Promise((resolve, reject) => {
-    fetch('teletubbies.json'
-      , {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-      .then(function (myJson) {
-        resolve(myJson.json());
-      });
-  })
-}
-
+    fetch("teletubbies.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    }).then(function (myJson) {
+      resolve(myJson.json());
+    });
+  });
+};
