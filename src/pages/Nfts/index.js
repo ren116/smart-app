@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   CardMedia,
   CardContent,
@@ -7,27 +7,43 @@ import {
 } from "@mui/material";
 import { Container, Grid, TextField } from "@mui/material";
 import Header from "components/Header";
+
 const Nfts = () => {
-  const [filterednftList, setFilteredNftList] = useState([]);
+  const [nftListing, setNftListing] = useState([]);
+  const [filteredNftListing, setFilteredNftListing] = useState([]);
   const [offset, setOffset] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const loadNftListing = async () => {
+    const response = await fetch(
+      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
+    );
+    const data = await response.json();
+    setNftListing([...nftListing, ...data.results]);
+    setFilteredNftListing([...nftListing, ...data.results]);
+    setOffset(offset + 20);
+    console.log(response);
+  };
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value.toLowerCase());
+  };
   useEffect(() => {
-    loadNftList();
+    loadNftListing();
   }, []);
   useEffect(() => {
-    setFilteredNftList(
-      filterednftList.filter((nftList) =>
-        nftList.collectionName.toLowerCase().includes(searchTerm)
+    setFilteredNftListing(
+      nftListing.filter((nftListing) =>
+        nftListing.collectionName.toLowerCase().includes(searchTerm)
       )
     );
-  }, [filterednftList, searchTerm]);
+  }, [nftListing, searchTerm]);
   useEffect(() => {
     const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100
       ) {
-        loadNftList();
+        loadNftListing();
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -35,17 +51,6 @@ const Nfts = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [offset]);
-  const loadNftList = useCallback(async () => {
-    const response = await fetch(
-      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
-    );
-    const data = await response.json();
-    setFilteredNftList([...filterednftList, ...data.results]);
-    setOffset(offset + 20);
-  }, [offset]);
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value.toLowerCase());
-  };
   return (
     <div>
       <Header />
@@ -65,11 +70,11 @@ const Nfts = () => {
         sx={{ padding: 4 }}
       />
       <Container maxWidth="lg">
-        <div id="nftList">
+        <div id="nftListing">
           <Grid container spacing={3}>
-            {filterednftList.map((nftList) => (
+            {filteredNftListing.map((nftListing) => (
               <Grid
-                key={nftList.id}
+                key={nftListing.id}
                 className="grid"
                 item
                 lg={3}
@@ -80,8 +85,8 @@ const Nfts = () => {
                   <CardMedia
                     component="img"
                     height="auto"
-                    image={nftList.img}
-                    alt={nftList.name}
+                    image={nftListing.img}
+                    alt={nftListing.name}
                   />
                   <CardContent
                     sx={{
@@ -90,10 +95,10 @@ const Nfts = () => {
                       color: "white",
                     }}>
                     <Typography gutterBottom variant="p" component="h3">
-                      {nftList.collectionName}
+                      {nftListing.collectionName}
                     </Typography>
                     <Typography variant="p" component="h3">
-                      {nftList.price}$
+                      {nftListing.price}$
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -105,4 +110,5 @@ const Nfts = () => {
     </div>
   );
 };
+
 export default Nfts;
