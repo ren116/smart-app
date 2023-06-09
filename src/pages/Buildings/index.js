@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -22,6 +22,14 @@ const row = {
 };
 
 const Buildings = () => {
+  const [buildings, setBuildings] = useState([]);
+
+  useEffect(() => {
+    fetch("/buildings.json")
+      .then((response) => response.json())
+      .then((data) => setBuildings(data));
+  }, []);
+
   return (
     <>
       <Box
@@ -92,10 +100,14 @@ const Buildings = () => {
                   </TableCell>
                   <TableCell align="left">
                     <Stack direction="row" spacing={2}>
-                      <Avatar sx={row.alerts.high ? { bgcolor: green[500] } : {}}>
+                      <Avatar
+                        sx={row.alerts.high ? { bgcolor: green[500] } : {}}
+                      >
                         {row.alerts.high}
                       </Avatar>
-                      <Avatar sx={row.alerts.med ? { bgcolor: amber[500] } : {}}>
+                      <Avatar
+                        sx={row.alerts.med ? { bgcolor: amber[500] } : {}}
+                      >
                         {row.alerts.med}
                       </Avatar>
                       <Avatar
