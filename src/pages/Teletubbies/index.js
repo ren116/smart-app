@@ -22,7 +22,7 @@ export const Teletubbies = () => {
 
     setTeletubbies(filteredItems.slice(0, page * 20));
     teletubbiesData = filteredItems;
-    
+
     if (e.target.value == "") {
       teletubbiesData = savedTeletubbiesData;
       setTeletubbies(teletubbiesData.slice(0, 20));
@@ -77,8 +77,8 @@ export const Teletubbies = () => {
                   }
                 }
               >
-                <CardImg teletubby={item} />
-                <CardMain teletubby={item} />
+                <CardImg cardInfo={item} />
+                <CardMain cardInfo={item} />
               </Card>
             );
           })}
