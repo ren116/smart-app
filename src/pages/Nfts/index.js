@@ -47,12 +47,12 @@ const Nfts = () => {
   };
 
   return (
-    <Container>
-      <InfiniteScroll
-        dataLength={saveNfts.length}
-        next={handleNext}
-        hasMore={true}
-      >
+    <InfiniteScroll
+      dataLength={saveNfts.length}
+      next={handleNext}
+      hasMore={true}
+    >
+      <Container>
         <TextField
           label="Search NFTs"
           value={searchQuery}
@@ -60,7 +60,6 @@ const Nfts = () => {
           onChange={handleSearch}
         />
         <Grid
-          sx={{ m: "100px" }}
           container
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 2, sm: 8, md: 12, lg: 16, xl: 20 }}
@@ -76,13 +75,13 @@ const Nfts = () => {
               >
                 <Box
                   sx={{
-                    width: "100%",
-                    height: "100%",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
                     backgroundImage: 'url("./blank.jpg")',
                     backgroundSize: "cover",
                   }}
                 >
-                  <img src={nft.img} width="100%" height="80%" alt="" />
+                  <img src={nft.img} width="100%" height="288px" alt="" />
                   <Box
                     sx={{
                       bgcolor: "primary.main",
@@ -99,8 +98,8 @@ const Nfts = () => {
             </Grid>
           ))}
         </Grid>
-      </InfiniteScroll>
-    </Container>
+      </Container>
+    </InfiniteScroll>
   );
 };
 
