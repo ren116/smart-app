@@ -19,6 +19,21 @@ export const getCurrentWeatherData = async () => {
   }
 };
 
+
+const buildingOptions = {
+  method: "GET",
+  url: "./buildings.json",
+};
+
+export const getBuildingData = async () => {
+  try {
+    const response = await axios.request(buildingOptions);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const teletubbyOptions = {
   method: "GET",
   url: "./teletubbies.json",
