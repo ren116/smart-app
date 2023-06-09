@@ -57,7 +57,7 @@ const Teletubbies = () => {
         <Typography
           variant="h2"
           sx={{
-            border: "3px solid",
+            border: "4px solid",
             borderColor: "primary.main",
             color: "Blue",
             padding: 4,
@@ -111,7 +111,7 @@ const Teletubbies = () => {
               container
               alignItems="center"
               sx={{
-                border: "2px solid",
+                border: "3px solid",
                 borderColor: "success.main",
                 boxShadow: 2,
               }}
