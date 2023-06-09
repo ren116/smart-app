@@ -1,31 +1,31 @@
-import axios from 'axios'
+import axios from "axios";
 
 const weatherOptions = {
-  method: 'GET',
-  url: 'https://weatherapi-com.p.rapidapi.com/current.json',
-  params: { q: '22.3, 114.1' },
+  method: "GET",
+  url: "https://weatherapi-com.p.rapidapi.com/current.json",
+  params: { q: "22.3, 114.1" },
   headers: {
-    'X-RapidAPI-Key': 'cf1d6bd258msh581225dc1a5493fp11399bjsn09a7b76afe60',
-    'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
+    "X-RapidAPI-Key": "cf1d6bd258msh581225dc1a5493fp11399bjsn09a7b76afe60",
+    "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
   },
-}
+};
 
 export const getCurrentWeatherData = async () => {
   try {
-    const response = await axios.request(weatherOptions)
-    return response
+    const response = await axios.request(weatherOptions);
+    return response;
   } catch (error) {
-    throw error
+    throw error;
   }
 };
 
-export const getTeletubbies = async() => {
-  const response = await fetch('teletubbies.json',{
+export const getTeletubbies = async () => {
+  const response = await fetch("teletubbies.json", {
     headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
-  })
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
   const teletubbies = await response.json();
   return teletubbies;
-}
+};
