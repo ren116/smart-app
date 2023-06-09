@@ -198,7 +198,7 @@ const Buildings = () => {
                         ]}
                         key={"cell-" + key * 5 + 3}
                       >
-                        {row.uptime + "%"}
+                        {row.uptime + "h"}
                       </TableCell>
                       <TableCell
                         align="left"
