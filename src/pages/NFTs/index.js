@@ -62,7 +62,7 @@ export default function NFTs() {
         variant="outlined"
         value={searchTerm}
         onChange={handleSearch}
-        sx={{ paddingBottom: 3 }}
+        sx={{ paddingBottom: 3, width: "400px" }}
       />
       <Container maxWidth="lg">
         <Grid container spacing={5}>
