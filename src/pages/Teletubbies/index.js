@@ -67,7 +67,7 @@ const Teletubbies = () => {
         value={searchWord}
         onChange={handleSearch}
         label="Search by name"
-        variant="outlined"
+        sx={{width:'1000px'}}
       />
       <Snackbar
         open={alert}
@@ -86,6 +86,7 @@ const Teletubbies = () => {
             name={item.name}
             description={item.description}
             traits={item.traits}
+            image_url={item.image_url}
           />
         ))}
     </Container>
