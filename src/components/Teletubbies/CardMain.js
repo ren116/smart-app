@@ -11,7 +11,7 @@ export const CardMain = (props) => {
       </Typography>
       <div>
         {props.teletubby.traits.map(tag => (
-          <Chip size="small" key={tag} label={tag} sx={{ mr: 1, mb: 1, mt:1, color: props.teletubby.color, backgroundColor: "transparent", fontWeight: "bold" }} />
+          <Chip size="small" key={tag} label={tag} sx={{ mr: 1, mb: 1, mt:1, color: props.teletubby.color, backgroundColor: "transparent", fontWeight: "bold", fontSize: "14px"}} />
         ))}
       </div>
     </CardContent>
