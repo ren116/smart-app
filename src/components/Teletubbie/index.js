@@ -12,7 +12,8 @@ const Teletubbie = ({ name, description, image_url, traits, way}) => {
             border='2px'
             height='250'
             src={image_url}
-            alt={name} />
+            alt={name}
+          />
         </Box>
       </Box>
       <Box sx={{p: '10px'}}>
