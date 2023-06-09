@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Layout from "pages/Layout";
 import Home from "pages/Home";
 import BuildingList from "pages/Buildings";
@@ -15,11 +14,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="Teletubbies" element={<Teletubbies />} />
+            <Route path="Nfts" element={<Nfts />} />
             <Route path="buildings" element={<BuildingList />} />
             <Route path="*" element={<NoPage />} />
           </Route>
-          <Route path="/Teletubbies" element={<Teletubbies />}/>
-          <Route path="/Nfts" element={<Nfts/>} />
         </Routes>
       </BrowserRouter>
     </div>

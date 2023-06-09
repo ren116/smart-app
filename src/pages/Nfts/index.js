@@ -6,21 +6,18 @@ import {
   CardActionArea,
 } from "@mui/material";
 import { Container, Grid, TextField } from "@mui/material";
-import Header from "components/Header";
-
 const Nfts = () => {
-  const [nftListing, setNftListing] = useState([]);
-  const [filteredNftListing, setFilteredNftListing] = useState([]);
+  const [nftlist, setNftlist] = useState([]);
+  const [filterednftlist, setFilteredNftlist] = useState([]);
   const [offset, setOffset] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-
-  const loadNftListing = async () => {
+  const loadNftlist = async () => {
     const response = await fetch(
       `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
     );
     const data = await response.json();
-    setNftListing([...nftListing, ...data.results]);
-    setFilteredNftListing([...nftListing, ...data.results]);
+    setNftlist([...nftlist, ...data.results]);
+    setFilteredNftlist([...nftlist, ...data.results]);
     setOffset(offset + 20);
     console.log(response);
   };
@@ -28,22 +25,22 @@ const Nfts = () => {
     setSearchTerm(event.target.value.toLowerCase());
   };
   useEffect(() => {
-    loadNftListing();
+    loadNftlist();
   }, []);
   useEffect(() => {
-    setFilteredNftListing(
-      nftListing.filter((nftListing) =>
-        nftListing.collectionName.toLowerCase().includes(searchTerm)
+    setFilteredNftlist(
+      nftlist.filter((nftlist) =>
+        nftlist.collectionName.toLowerCase().includes(searchTerm)
       )
     );
-  }, [nftListing, searchTerm]);
+  }, [nftlist, searchTerm]);
   useEffect(() => {
     const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100
       ) {
-        loadNftListing();
+        loadNftlist();
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -53,13 +50,11 @@ const Nfts = () => {
   }, [offset]);
   return (
     <div>
-      <Header />
       <Typography
         gutterBottom
         variant="h3"
         component="div"
-        sx={{ paddingTop: 5 }}
-      >
+        sx={{ paddingTop: 5 }}>
         NFT Page
       </Typography>
       <TextField
@@ -70,11 +65,11 @@ const Nfts = () => {
         sx={{ padding: 4 }}
       />
       <Container maxWidth="lg">
-        <div id="nftListing">
+        <div id="nftlist">
           <Grid container spacing={3}>
-            {filteredNftListing.map((nftListing) => (
+            {filterednftlist.map((nftlist) => (
               <Grid
-                key={nftListing.id}
+                key={nftlist.id}
                 className="grid"
                 item
                 lg={3}
@@ -85,8 +80,8 @@ const Nfts = () => {
                   <CardMedia
                     component="img"
                     height="auto"
-                    image={nftListing.img}
-                    alt={nftListing.name}
+                    image={nftlist.img}
+                    alt={nftlist.name}
                   />
                   <CardContent
                     sx={{
@@ -95,10 +90,10 @@ const Nfts = () => {
                       color: "white",
                     }}>
                     <Typography gutterBottom variant="p" component="h3">
-                      {nftListing.collectionName}
+                      {nftlist.collectionName}
                     </Typography>
                     <Typography variant="p" component="h3">
-                      {nftListing.price}$
+                      {nftlist.price}$
                     </Typography>
                   </CardContent>
                 </CardActionArea>
