@@ -7,8 +7,12 @@ const Building = (props) => {
   const { Name, Uptime, Power, Savings, Alerts } = props.building;
 
   return (
-    <Container maxWidth="lg" key={props.index}>
-      <Box sx={{ boxShadow: "10px 1px 10px 5px rgba(0,0,1,0.1)" }}>
+    <Container
+      maxWidth="lg"
+      key={props.index}
+      sx={{ boxShadow: "10px 1px 10px 5px rgba(0,0,1,0.1)", mb: 1 }}
+    >
+      <Box>
         <Grid
           container
           justifyContent="space-around"
@@ -30,8 +34,9 @@ const Building = (props) => {
               <ListItem
                 sx={{
                   p: 0,
-                  mb: 1,
-                  width: { xs: "10%", sm: "30%", md: "20%" },
+                  maxWidth: { xs: "30px", sm: "40px" },
+                  minWidth: { xs: "30px", sm: "40px" },
+                  height: { xs: "30px", sm: "40px" },
                   border: "md",
                   borderRadius: "50%",
                   mx: 1,
@@ -47,8 +52,9 @@ const Building = (props) => {
               <ListItem
                 sx={{
                   p: 0,
-                  mb: 1,
-                  width: { xs: "10%", sm: "30%", md: "20%" },
+                  maxWidth: { xs: "30px", sm: "40px" },
+                  minWidth: { xs: "30px", sm: "40px" },
+                  height: { xs: "30px", sm: "40px" },
                   border: "md",
                   borderRadius: "50%",
                   mx: 1,
@@ -64,8 +70,9 @@ const Building = (props) => {
               <ListItem
                 sx={{
                   p: 0,
-                  mb: 1,
-                  width: { xs: "10%", sm: "30%", md: "20%" },
+                  maxWidth: { xs: "30px", sm: "40px" },
+                  minWidth: { xs: "30px", sm: "40px" },
+                  height: { xs: "30px", sm: "40px" },
                   border: "md",
                   borderRadius: "50%",
                   mx: 1,
@@ -83,7 +90,7 @@ const Building = (props) => {
           <Grid
             item
             xs={12}
-            sx={{ mb: 1, display: "flex", justifyContent: "center" }}
+            sx={{ display: "flex", justifyContent: "center" }}
             sm={2}
             md={2}
           >
@@ -114,7 +121,7 @@ const Building = (props) => {
           >
             <Typography
               sx={{
-                p: 0,
+                mt: 1,
                 width: "40%",
                 borderRadius: "10px",
                 bgcolor:
@@ -130,7 +137,7 @@ const Building = (props) => {
               {Uptime}
             </Typography>
           </Grid>
-          <Grid item xs={12} sx={{ mb: 1 }} sm={2} md={2}>
+          <Grid item xs={12} sm={2} md={2}>
             <Typography sx={{ p: 0, color: "green" }}>{Power}</Typography>
           </Grid>
         </Grid>

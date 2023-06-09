@@ -43,10 +43,18 @@ const BuildingList = () => {
   return (
     <Grid
       container
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        mt: 5,
+      }}
     >
-      <Container maxWidth="lg" sx={{ mt: 3 }}>
-        <Grid container item xs={12} sm={12} md={12} sx={{ mt: 5 }}>
+      <Container maxWidth="lg" sx={{ marginTop: "64px" }}>
+        <Typography variant="h2" mb={1} >
+          Buildings Page
+        </Typography>
+        <Grid container item xs={12} sm={12} md={12}>
           <Grid item sm />
           <Grid item md={8} xs={12}>
             <TextField

@@ -60,7 +60,7 @@ const Nfts = () => {
         gutterBottom
         variant="h3"
         component="div"
-        sx={{ paddingTop: 5 }}
+        sx={{ paddingTop: 5, marginTop: "64px" }}
       >
         NFT Page
       </Typography>
