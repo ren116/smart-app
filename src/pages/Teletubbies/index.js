@@ -25,12 +25,12 @@ const Teletubbies = () => {
       })()
     }
     catch(err){
-      setAlert(true);//display alert
+      setAlert(true);
     }
   }, []);
   
   useEffect(() => {
-    const handleScroll = () => { //scroll event
+    const handleScroll = () => { 
         window.innerHeight + window.scrollY >= document.body.offsetHeight &&
           setOffset(offset+20);
     }
@@ -39,7 +39,7 @@ const Teletubbies = () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [offset])
-  //close alert
+  
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -79,8 +79,7 @@ const Teletubbies = () => {
       />
       {teletubbies.slice(0 , 20+offset)
         .filter(list=>list.name.toLowerCase().includes(searchWord))
-        .map((item, key) => {
-          return (
+        .map((item, key) => (
             <Teletubbie
               way={key % 2}
               key={`teletubbie_${key}`}
@@ -89,7 +88,7 @@ const Teletubbies = () => {
               traits={item.traits} 
             />
           )
-        })}
+        )}
     </Container>
   )
 }
