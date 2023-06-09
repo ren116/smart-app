@@ -27,27 +27,28 @@ const Buildings = () => {
   useEffect(() => {
     fetch("/buildings.json")
       .then((response) => response.json())
-      .then((data) => setBuildings(data.buildings));
-  }, []);
-  let newTypeBuildings = [];
-  if (buildings !== undefined) {
-    let len = buildings.length;
-    for (let i = 0; i < len; i++) {
-      let item = buildings[i];
-      newTypeBuildings.push({
-        site: item.Name,
-        alerts: {
-          high:
-            item.Alerts.high.count === undefined ? 0 : item.Alerts.high.count,
-          med: item.Alerts.med.count === undefined ? 0 : item.Alerts.med.count,
-          low: item.Alerts.low.count === undefined ? 0 : item.Alerts.low.count,
-        },
-        savings: Number(item.Savings.slice(0, -1)),
-        uptime: Number(item.Uptime.slice(0, -1)),
-        power: Number(item.Power.slice(0, -2)),
+      .then((data) => {
+        let newTypeBuildings = data.buildings.map((item) => {
+          return {
+            site: item.Name,
+            alerts: {
+              high:
+                item.Alerts.high.count === undefined
+                  ? 0
+                  : item.Alerts.high.count,
+              med:
+                item.Alerts.med.count === undefined ? 0 : item.Alerts.med.count,
+              low:
+                item.Alerts.low.count === undefined ? 0 : item.Alerts.low.count,
+            },
+            savings: Number(item.Savings.slice(0, -1)),
+            uptime: Number(item.Uptime.slice(0, -1)),
+            power: Number(item.Power.slice(0, -2)),
+          };
+        });
+        setBuildings(newTypeBuildings);
       });
-    }
-  }
+  }, []);
 
   return (
     <>
@@ -101,73 +102,77 @@ const Buildings = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    sx={{
-                      fontFamily: "arial",
-                      fontWeight: 900,
-                      fontSize: 20,
-                      color: "inherit",
-                    }}
+              {buildings.map((row, key) => {
+                return (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    {row.site}
-                  </TableCell>
-                  <TableCell align="left">
-                    <Stack direction="row" spacing={2}>
-                      <Avatar
-                        sx={row.alerts.high ? { bgcolor: green[500] } : {}}
-                      >
-                        {row.alerts.high}
-                      </Avatar>
-                      <Avatar
-                        sx={row.alerts.med ? { bgcolor: amber[500] } : {}}
-                      >
-                        {row.alerts.med}
-                      </Avatar>
-                      <Avatar
-                        sx={row.alerts.low ? { bgcolor: deepOrange[500] } : {}}
-                      >
-                        {row.alerts.low}
-                      </Avatar>
-                    </Stack>
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      fontFamily: "arial",
-                      fontSize: 18,
-                      color: "grey",
-                    }}
-                  >
-                    {row.savings + "%"}
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      fontFamily: "arial",
-                      fontSize: 18,
-                      color: "grey",
-                    }}
-                  >
-                    {row.uptime + "%"}
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      fontFamily: "arial",
-                      fontSize: 20,
-                      color: lightGreen[500],
-                    }}
-                  >
-                    {row.power + "KW"}
-                  </TableCell>
-                </TableRow>
-              }
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{
+                        fontFamily: "arial",
+                        fontWeight: 900,
+                        fontSize: 20,
+                        color: "inherit",
+                      }}
+                    >
+                      {row.site}
+                    </TableCell>
+                    <TableCell align="left">
+                      <Stack direction="row" spacing={2}>
+                        <Avatar
+                          sx={row.alerts.high ? { bgcolor: green[500] } : {}}
+                        >
+                          {row.alerts.high}
+                        </Avatar>
+                        <Avatar
+                          sx={row.alerts.med ? { bgcolor: amber[500] } : {}}
+                        >
+                          {row.alerts.med}
+                        </Avatar>
+                        <Avatar
+                          sx={
+                            row.alerts.low ? { bgcolor: deepOrange[500] } : {}
+                          }
+                        >
+                          {row.alerts.low}
+                        </Avatar>
+                      </Stack>
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{
+                        fontFamily: "arial",
+                        fontSize: 18,
+                        color: "grey",
+                      }}
+                    >
+                      {row.savings + "%"}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{
+                        fontFamily: "arial",
+                        fontSize: 18,
+                        color: "grey",
+                      }}
+                    >
+                      {row.uptime + "%"}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{
+                        fontFamily: "arial",
+                        fontSize: 20,
+                        color: lightGreen[500],
+                      }}
+                    >
+                      {row.power + "KW"}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
