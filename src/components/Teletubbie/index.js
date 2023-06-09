@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import Container from '@mui/material/Container'
+import React from 'react'
 import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Unstable_Grid2'
-import { Avatar, Box } from '@mui/material'
+import { Box } from '@mui/material'
 
 const Teletubbie = ({ name, description, image_url, traits, way}) => {
   return (
