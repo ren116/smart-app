@@ -18,13 +18,14 @@ export const Teletubbies = () => {
     display: "flex",
     marginBottom: "20px",
     paddingX: "10px",
+    flexDirection: {sm: "row", xs: "column"},
   }
   const rightPlaceCss = {
     display: "flex",
     marginBottom: "20px",
     paddingX: "10px",
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
+    flexDirection: {sm: "row-reverse", xs: "column"},
+    justifyContent: "space-between !important",
   }
 
   const filterOptions = (e) => {
@@ -37,7 +38,7 @@ export const Teletubbies = () => {
     setTeletubbies(filteredItems.slice(0, page * 20));
     originalTeletubbiesData = filteredItems;
 
-    if (e.target.value == "") {
+    if (e.target.value === "") {
       originalTeletubbiesData = allTeletubbiesData;
       setTeletubbies(originalTeletubbiesData.slice(0, 20));
     }
@@ -73,7 +74,7 @@ export const Teletubbies = () => {
             <Card
               key={index}
               sx={
-                index % 2 ==
+                index % 2 ===
                 0
                 ? 
                 leftPlaceCss
