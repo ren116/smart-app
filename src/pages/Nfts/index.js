@@ -17,7 +17,6 @@ const Nfts = () => {
     const getAllData = async () => {
       const { data } = await getNftItemsData();
       setAllData(data.results);
-      console.log(data.results);
     };
     getAllData();
   }, []);
