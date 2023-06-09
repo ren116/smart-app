@@ -1,6 +1,6 @@
 # Getting Started with Smart App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was Material UI with [Create React App](https://github.com/facebook/create-react-app).
 
 # How to run the project
 
