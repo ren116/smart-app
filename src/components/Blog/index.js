@@ -7,6 +7,30 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Blog = () => {
+  const [blogdata, setblogdata] = useState([])
+  const [filterBlog, setFilterBlog] = useState([])
+  const [offset, setOffset] = useState(0)
+  const getBlog = async () => {
+    const res = await fetch(
+      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=0`
+    )
+    const data = await res.json()
+    setblogdata([...blogdata, ...data.results])
+    setFilterBlog([...blogdata, ...data.results])
+    setOffset(offset + 20)
+  }
+
+  useEffect(() => {
+    getBlog();
+  }, [])
+
+  useEffect(() => {
+    setFilterBlog(
+      blogdata.filter(item =>
+        item.collectionName.toLowerCase().includes(searchStr)
+      )
+    )
+  }, [blogdata, searchStr])
   return (
     <div>
       <Box sx={{ display: "flex", justifyContent: "center", padding: '30px' }}>
