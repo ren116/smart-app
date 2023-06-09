@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grid, TextField, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import InfiniteScroll from "react-infinite-scroll-component";
-
-import Spinner from "components/Spinner";
 import { GetData } from "../../api/buildings";
 import BuildingItem from "components/Buildings/BuildingItem";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Spinner from "components/Spinner";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
