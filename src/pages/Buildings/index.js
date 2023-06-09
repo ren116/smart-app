@@ -20,6 +20,7 @@ function Buildings() {
     };
     fetchData();
   }, []);
+  
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };

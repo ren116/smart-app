@@ -6,6 +6,7 @@ import TableRow from "@mui/material/TableRow";
 import Fab from "@mui/material/Fab";
 
 function BuildingsView(props) {
+
   return (
     <Table sx={{ minWidth: 375 }} aria-label="simple table">
       <TableHead>
