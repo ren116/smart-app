@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { useCallback } from 'react'
+
 import { CardMedia, CardContent, Typography, CardActionArea } from '@mui/material';
 import { Container, Grid, Box } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -6,21 +8,25 @@ import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import { getBlogData } from 'api/nfts';
 
 const Blog = () => {
   const [blogdata, setblogdata] = useState([])
   const [filterBlog, setFilterBlog] = useState([])
   const [offset, setOffset] = useState(0)
   const [searchStr, setSearchStr] = useState('')
-  const getBlog = async () => {
-    const res = await fetch(
-      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears`
-    )
-    const data = await res.json()
+  const getBlog = useCallback(async () => {
+  try {
+    const response = await getBlogData();
+    const data = response.data;
     setblogdata([...blogdata, ...data.results])
     setFilterBlog([...blogdata, ...data.results])
     setOffset(offset + 20)
+  } catch (error) {
+    throw error;
   }
+}, [offset, blogdata]);
+  
   const handleSearch = e => {
     setSearchStr(e.target.value.toLowerCase())
   }
@@ -49,8 +55,7 @@ const Blog = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [offset])
-
+  }, [offset,getBlog])
 
   return (
     <div>
@@ -75,21 +80,21 @@ const Blog = () => {
       <Container maxWidth="xl">
         <div id='blogdata'>
           <Grid container spacing={10}>
-            {(filterBlog.map(item => (
-              <Grid key={blogdata.id} item lg={3} md={4} sm={6} xs={12} >
+            {(filterBlog.map((item,k) => (
+              <Grid key={"grid"+k} item lg={3} md={4} sm={6} xs={12} >
                 <CardActionArea>
-                  <CardMedia
+                  <CardMedia key={"cardmedia"+k}
                     component="img"
                     image={item.img}
                     onError={(e) => { e.target.onerror = null; e.target.src = "error.jpg" }}
                     alt={item.bear}
                   />
                   <CardContent sx={{ display: 'flex', justifyContent: "space-between", backgroundColor: "#80cbc4" }}>
-                    <Typography gutterBottom variant="p">
+                    <Typography gutterBottom variant="p" key={"name"+k*2+0}>
                       {item.collectionName}
                     </Typography>
-                    <Typography variant="p">
-                    ${item.price}
+                    <Typography variant="p" key={"name"+k*2+1}>
+                      ($){item.price}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
