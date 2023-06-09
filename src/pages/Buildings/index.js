@@ -27,8 +27,27 @@ const Buildings = () => {
   useEffect(() => {
     fetch("/buildings.json")
       .then((response) => response.json())
-      .then((data) => setBuildings(data));
+      .then((data) => setBuildings(data.buildings));
   }, []);
+  let newTypeBuildings = [];
+  if (buildings !== undefined) {
+    let len = buildings.length;
+    for (let i = 0; i < len; i++) {
+      let item = buildings[i];
+      newTypeBuildings.push({
+        site: item.Name,
+        alerts: {
+          high:
+            item.Alerts.high.count === undefined ? 0 : item.Alerts.high.count,
+          med: item.Alerts.med.count === undefined ? 0 : item.Alerts.med.count,
+          low: item.Alerts.low.count === undefined ? 0 : item.Alerts.low.count,
+        },
+        savings: Number(item.Savings.slice(0, -1)),
+        uptime: Number(item.Uptime.slice(0, -1)),
+        power: Number(item.Power.slice(0, -2)),
+      });
+    }
+  }
 
   return (
     <>
