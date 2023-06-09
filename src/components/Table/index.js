@@ -100,6 +100,7 @@ export default function BuildTable({ handleSearch }) {
         }
         return a[1] - b[1];
       });
+
       return stabilizedThis.map((el) => el[0]);
     }
     function getComparator(order, orderBy) {
@@ -107,6 +108,7 @@ export default function BuildTable({ handleSearch }) {
         ? (a, b) => descendingComparator(a, b, orderBy)
         : (a, b) => -descendingComparator(a, b, orderBy);
     }
+    
     return stableSort(building, getComparator(order, orderBy)).slice(
       page * rowsPerPage,
       page * rowsPerPage + rowsPerPage
