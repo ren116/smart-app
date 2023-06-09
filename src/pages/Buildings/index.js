@@ -8,7 +8,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
@@ -210,6 +209,27 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("name");
+  const [selected, setSelected] = useState([]);
+  const page = 0;
+  const dense = false;
+  const [rowsPerPage, setRowsPerPage] = useState(20);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 800
+      ) {
+        setRowsPerPage(rowsPerPage + 20);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [rowsPerPage]);
   const [builds, setBuilds] = useState([]);
 
   const getBuilds = async () => {
@@ -224,13 +244,6 @@ export default function EnhancedTable() {
   useEffect(() => {
     getBuilds();
   }, []);
-
-  const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("name");
-  const [selected, setSelected] = useState([]);
-  const [page, setPage] = useState(0);
-  const dense = false;
-  const [rowsPerPage, setRowsPerPage] = useState(20);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -267,15 +280,6 @@ export default function EnhancedTable() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const emptyRows =
@@ -293,14 +297,10 @@ export default function EnhancedTable() {
   return (
     <Container maxWidth="xl" sx={{ mt: "80px" }}>
       <Box sx={{ width: "100%" }}>
-        <Paper sx={{ width: "70%", mb: 2, m: "auto" }}>
+        <Paper sx={{ width: "70%", m: "auto" }}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
-            <Table
-              sx={{ minWidth: 750 }}
-              aria-labelledby="tableTitle"
-              size={dense ? "small" : "medium"}
-            >
+            <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
               <EnhancedTableHead
                 numSelected={selected.length}
                 order={order}
@@ -343,7 +343,7 @@ export default function EnhancedTable() {
                         scope="row"
                         padding="none"
                       >
-                        {index+1}
+                        {index + 1}
                       </TableCell>
                       <TableCell align="left" sx={{ fontWeight: "bold" }}>
                         {row.Name}
@@ -427,15 +427,6 @@ export default function EnhancedTable() {
               </TableBody>
             </Table>
           </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 20]}
-            component="div"
-            count={builds.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
         </Paper>
       </Box>
     </Container>
