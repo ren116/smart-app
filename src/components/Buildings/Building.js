@@ -1,42 +1,142 @@
-import { List, ListItem, ListItemText } from '@mui/material';
-import { Container, Grid, Typography } from '@mui/material';
-import Box from '@mui/material/Box';
-import React from 'react';
+import React from "react";
+import { List, ListItem, ListItemText } from "@mui/material";
+import { Container, Grid, Typography, Button } from "@mui/material";
+import Box from "@mui/material/Box";
 
 const Building = (props) => {
+  const { Name, Uptime, Power, Savings, Alerts } = props.building;
+
   return (
-    <Container maxWidth="xl" border shadow>
-      <Box sx={{ boxShadow: '3px 0px 3px 0px rgba(0,0,0,0.2)' }}>
-        <Grid container justifyContent="space-around" spacing={2}>
-          <Grid item xs={12} sm={4} md={2}>
-            <Typography variant="h6">{props.building.Name}</Typography>
+    <Container maxWidth="lg" key={props.index}>
+      <Box sx={{ boxShadow: "10px 1px 10px 5px rgba(0,0,1,0.1)" }}>
+        <Grid
+          container
+          justifyContent="space-around"
+          alignItems={"center"}
+          spacing={1}
+        >
+          <Grid item xs={12} sm={2} md={2}>
+            <Typography variant="h6">{Name}</Typography>
           </Grid>
-          <Grid item xs={12} sm={4} md={3}>
-            <List sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row', md: 'row' }, justifyContent: 'center', gap: 2 }}>
-              <ListItem sx={{ p: 1, border: 'md', borderRadius: 'full', mx: 0, bgcolor: props.building.Alerts.high.count ? 'lime.500' : 'gray.300', color: props.building.Alerts.high.count ? 'white' : 'text.primary' }}>
-                <ListItemText primary={props.building.Alerts.high.count ? props.building.Alerts.high.count : 0} sx={{ textAlign: 'center' }} />
+          <Grid item xs={12} sm={2} md={2}>
+            <List
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "row" },
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ListItem
+                sx={{
+                  p: 0,
+                  mb: 1,
+                  width: { xs: "10%", sm: "30%", md: "20%" },
+                  border: "md",
+                  borderRadius: "50%",
+                  mx: 1,
+                  bgcolor: Alerts.high.count ? "lime" : "#e0e0e0",
+                  color: Alerts.high.count ? "white" : "primary",
+                }}
+              >
+                <ListItemText
+                  primary={Alerts.high.count ? Alerts.high.count : "0"}
+                  sx={{ textAlign: "center" }}
+                />
               </ListItem>
-              <ListItem sx={{ p: 1, border: 'md', borderRadius: 'full', mx: 0, bgcolor: props.building.Alerts.med.count ? 'orange.500' : 'gray.300', color: props.building.Alerts.med.count ? 'white' : 'text.primary' }}>
-                <ListItemText primary={props.building.Alerts.med.count ? props.building.Alerts.med.count : 0} sx={{ textAlign: 'center' }} />
+              <ListItem
+                sx={{
+                  p: 0,
+                  mb: 1,
+                  width: { xs: "10%", sm: "30%", md: "20%" },
+                  border: "md",
+                  borderRadius: "50%",
+                  mx: 1,
+                  bgcolor: Alerts.med.count ? "orange" : "#e0e0e0",
+                  color: Alerts.med.count ? "white" : "primary",
+                }}
+              >
+                <ListItemText
+                  primary={Alerts.med.count ? Alerts.med.count : "0"}
+                  sx={{ textAlign: "center" }}
+                />
               </ListItem>
-              <ListItem sx={{ p: 1, border: 'md', borderRadius: 'full', mx: 0, bgcolor: props.building.Alerts.low.count ? 'red.600' : 'gray.300', color: props.building.Alerts.low.count ? 'white' : 'text.primary' }}>
-                <ListItemText primary={props.building.Alerts.low.count ? props.building.Alerts.low.count : 0} sx={{ textAlign: 'center' }} />
+              <ListItem
+                sx={{
+                  p: 0,
+                  mb: 1,
+                  width: { xs: "10%", sm: "30%", md: "20%" },
+                  border: "md",
+                  borderRadius: "50%",
+                  mx: 1,
+                  bgcolor: Alerts.low.count ? "red" : "#e0e0e0",
+                  color: Alerts.low.count ? "white" : "primary",
+                }}
+              >
+                <ListItemText
+                  primary={Alerts.low.count ? Alerts.low.count.toString() : "0"}
+                  sx={{ textAlign: "center" }}
+                />
               </ListItem>
             </List>
           </Grid>
-          <Grid item xs={12} sm={4} md={2}>
-            <Typography sx={{ p: 1, borderRadius: 'xl', bgcolor: Number(props.building.Savings.slice(0, props.building.Savings.length - 1)) < 100 ? 'red.200' : 'background.paper', color: Number(props.building.Savings.slice(0, props.building.Savings.length - 1)) < 100 ? 'red.600' : 'text.primary' }}>{props.building.Savings}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={4} md={2}>
-              <Typography sx={{ p: 1, borderRadius: 'xl', bgcolor: Number(props.building.Uptime.slice(0, props.building.Uptime.length - 1)) < 100 ? 'red.200' : 'background.paper', color: Number(props.building.Uptime.slice(0, props.building.Uptime.length - 1)) < 100 ? 'red.600' : 'text.primary' }}>{props.building.Uptime}</Typography>
-            </Grid>
-            <Grid item xs={12} sm={4} md={2}>
-              <Typography sx={{ p: 1, color: 'green.500' }}>{props.building.Power}</Typography>
-            </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{ mb: 1, display: "flex", justifyContent: "center" }}
+            sm={2}
+            md={2}
+          >
+            <Typography
+              sx={{
+                p: 0,
+                width: "40%",
+                borderRadius: "10px",
+                bgcolor:
+                  Number(Savings.slice(0, Savings.length - 1)) < 100
+                    ? "#ffebee"
+                    : "white",
+                color:
+                  Number(Savings.slice(0, Savings.length - 1)) < 100
+                    ? "red"
+                    : "black",
+              }}
+            >
+              {Savings}
+            </Typography>
           </Grid>
-        </Box>
-      </Container>
-    )
-}
+          <Grid
+            item
+            xs={12}
+            sx={{ mb: 1, display: "flex", justifyContent: "center" }}
+            sm={2}
+            md={2}
+          >
+            <Typography
+              sx={{
+                p: 0,
+                width: "40%",
+                borderRadius: "10px",
+                bgcolor:
+                  Number(Uptime.slice(0, Uptime.length - 1)) < 100
+                    ? "#ffebee"
+                    : "white",
+                color:
+                  Number(Uptime.slice(0, Uptime.length - 1)) < 100
+                    ? "red"
+                    : "black",
+              }}
+            >
+              {Uptime}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sx={{ mb: 1 }} sm={2} md={2}>
+            <Typography sx={{ p: 0, color: "green" }}>{Power}</Typography>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
+  );
+};
 
 export default Building;
