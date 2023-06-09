@@ -44,6 +44,11 @@ const Teletubbies = () => {
   });
 
 
+  const filteredTeletubbies = dataList.filter((teletubby) =>
+  teletubby.name.toLowerCase().includes(searchKey.toLowerCase())
+);
+
+
   const Img = styled("img")({
     margin: "auto",
     display: "block",
@@ -89,9 +94,9 @@ const Teletubbies = () => {
     <>
       <Header />
       <Typography variant="h2">Teletubbies</Typography>
-      <TextField label="Search" variant="standard" />
+      <TextField label="Search" variant="standard" value={searchKey} onChange={(e) => setSearchKey(e.target.value)}/>
 
-      {dataList.map((data, key) => (
+      {filteredTeletubbies.map((data, key) => (
         <Paper
           sx={{
             p: 5,
