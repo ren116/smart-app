@@ -8,8 +8,9 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
+import { amber, deepOrange, green } from "@mui/material/colors";
 import { Margin } from "@mui/icons-material";
 
 const row = {
@@ -72,9 +73,15 @@ const Buildings = () => {
                   </TableCell>
                   <TableCell align="left">
                     <Stack direction="row" spacing={2}>
-                      <Avatar>{row.alerts.high}</Avatar>
-                      <Avatar>{row.alerts.med}</Avatar>
-                      <Avatar>{row.alerts.low}</Avatar>
+                      <Avatar sx={row.alerts.high && { bgcolor: green[500] }}>
+                          {row.alerts.high}
+                        </Avatar>
+                      <Avatar sx={row.alerts.med && { bgcolor: amber[500] }}>
+                        {row.alerts.med}
+                      </Avatar>
+                      <Avatar sx={row.alerts.low && { bgcolor: deepOrange[500] }}>
+                        {row.alerts.low}
+                      </Avatar>
                     </Stack>
                   </TableCell>
                   <TableCell align="left">{row.savings + "%"}</TableCell>
