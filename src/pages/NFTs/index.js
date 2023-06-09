@@ -54,7 +54,7 @@ export default function NFTs() {
   }, [offset, loadNftListing])
 
   return (
-    <Typography>
+    <Typography component="div" >
       <Typography gutterBottom variant="h3" component="div" sx={{ paddingTop: 5 }}>
         NFT Marketplace
       </Typography>
@@ -63,7 +63,7 @@ export default function NFTs() {
         variant="outlined"
         value={searchTerm}
         onChange={handleSearch}
-        sx={{ paddingBottom: 3, width: "400px" }}
+        sx={{ paddingBottom: 3, width: "25%" }}
       />
       <Container maxWidth="lg">
         <Grid container spacing={5}>
