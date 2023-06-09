@@ -7,7 +7,7 @@ export const CardImg = (props) => {
       alt={props.teletubby.name}
       image={props.teletubby.image_url}
       title={props.teletubby.name}
-      sx={{ minWidth: "100px", width: "100px", height: "100px" }}
+      sx={{ minWidth: "100px", width: {sm: "100px", xs: "60%"}, height: {sm: "100px", xs: "auto"}, m: {xs: "auto", sm: 0} }}
     />
   );
 };

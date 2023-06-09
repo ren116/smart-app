@@ -35,14 +35,14 @@ export const Teletubbies = () => {
   return (
     <Container maxWidth="lg">
       <Title />
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 5 }}>
+      <Box sx={{ display: "flex", mb: {sm: 0, xs: 5}, mt: {sm:-2, xs: 5}, justifyContent: {xs: "center", sm: "flex-end"} }}>
         <TextField
           id="outlined-Password"
           label="search..."
           variant="outlined"
           size="small"
           onChange={filterOptions}
-          value={searchTerm}
+          value={searchTerm}  
         />
       </Box>
       <Box>
@@ -61,13 +61,14 @@ export const Teletubbies = () => {
                         display: "flex",
                         marginBottom: "20px",
                         paddingX: "10px",
+                        flexDirection: {sm: "row", xs: "column"},
                       }
                     : {
                         display: "flex",
                         marginBottom: "20px",
                         paddingX: "10px",
-                        flexDirection: "row-reverse",
-                        justifyContent: "space-between",
+                        flexDirection: {sm: "row-reverse", xs: "column"},
+                        justifyContent: "space-between !important"
                       }
                 }
               >
