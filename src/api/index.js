@@ -28,7 +28,32 @@ export const getNTFsData = async () => {
   try {
     const response = await axios.request(NTFsOptions);
     return response;
+}catch(error){
+  throw error;
+}
+}
+
+export const getBuildingsData = async () => {
+  try {
+    const response = await axios.request(buildingsOptions);
+    return response.data.buildings;
   } catch (error) {
     throw error;
   }
 };
+
+export const getData = () => {
+  return new Promise((resolve, reject) => {
+    fetch('teletubbies.json'
+      , {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then(function (myJson) {
+        resolve(myJson.json());
+      });
+  })
+}
+
