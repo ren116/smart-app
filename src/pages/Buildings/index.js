@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import BuildingsView from "components/Buildings";
+import { BUILDINGS_SIZE } from "utils/constants";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
 import { Container } from "@mui/material";
@@ -9,12 +10,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 function Buildings() {
   const [data, setData] = useState([]);
-  const [pageLength, setPageLength] = useState(20);
+  const [pageLength, setPageLength] = useState(BUILDINGS_SIZE);
   const [searchText, setSearchText] = useState("");
-
-  const handleChange = (e) => {
-    setSearchText(e.target.value);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,6 +20,18 @@ function Buildings() {
     };
     fetchData();
   }, []);
+  
+  const handleChange = (e) => {
+    setSearchText(e.target.value);
+  };
+  
+  const filteredItems = useMemo(() => {
+    return (
+      data?.filter(
+        (item) => item.Name.toLowerCase().indexOf(searchText) >= 0
+      ) || []
+    );
+  }, [searchText, data]);
 
   const filteredItems = useMemo(() => {
     return (
@@ -37,8 +46,10 @@ function Buildings() {
   }, [filteredItems, pageLength]);
 
   const paginate = () => {
-    setPageLength((pageLength) => pageLength + 20);
+    setPageLength((pageLength) => pageLength + BUILDINGS_SIZE);
   };
+
+ 
 
   return (
     <div className="container">
@@ -51,6 +62,7 @@ function Buildings() {
           name="searchText"
           value={searchText}
           onChange={handleChange}
+          sx={{ mb: 5 }}
         />
         <TableContainer component={Paper}>
           <InfiniteScroll

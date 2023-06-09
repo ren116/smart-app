@@ -49,15 +49,13 @@ export const getBuildingsData = async () => {
 
 export const getData = () => {
   return new Promise((resolve, reject) => {
-    fetch('teletubbies.json'
-      , {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-      .then(function (myJson) {
-        resolve(myJson.json());
-      });
-  })
-}
+    fetch("teletubbies.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    }).then(function (myJson) {
+      resolve(myJson.json());
+    });
+  });
+};
