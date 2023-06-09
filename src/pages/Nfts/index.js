@@ -7,6 +7,8 @@ const Nfts = () => {
     const [nftListing, setNftListing] = useState([])
     const [filteredNftListing, setFilteredNftListing] = useState([])
     const [offset, setOffset] = useState(0)
+    const [searchTerm, setSearchTerm] = useState('')
+
     const loadNftListing = async () => {
         const response = await fetch(
             `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
@@ -20,7 +22,21 @@ const Nfts = () => {
     useEffect(() => {
         loadNftListing()
     }, [])
-    
+    useEffect(() => {
+        const handleScroll = () => {
+            if (
+                window.innerHeight + window.scrollY >=
+                document.body.offsetHeight - 100
+            ) {
+                loadNftListing()
+            }
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [offset])
+
     return (
         <div>
             <Header/>
