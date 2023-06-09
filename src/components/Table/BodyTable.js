@@ -31,7 +31,6 @@ export default function BodyTable({
               selected={isItemSelected}
               sx={{
                 cursor: "pointer",
-                border: `${isItemSelected ? "blue 3px solid" : ""}`,
               }}
             >
               <TableCell padding="checkbox">
