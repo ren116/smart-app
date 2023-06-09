@@ -2,6 +2,7 @@ import React from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { Container, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
+import { listItemElementWidthStyle } from "./style";
 
 const Building = (props) => {
   const { Name, Uptime, Power, Savings, Alerts } = props.building;
@@ -20,7 +21,7 @@ const Building = (props) => {
           spacing={1}
         >
           <Grid item xs={12} sm={2} md={2}>
-            <Typography variant="h6" sx={{ pt: {xs: "10px", md: 0} }}>
+            <Typography variant="h6" sx={{ pt: { xs: "10px", md: 0 } }}>
               {Name}
             </Typography>
           </Grid>
@@ -36,12 +37,7 @@ const Building = (props) => {
               <ListItem
                 sx={{
                   p: 0,
-                  maxWidth: { xs: "30px", sm: "40px" },
-                  minWidth: { xs: "30px", sm: "40px" },
-                  height: { xs: "30px", sm: "40px" },
-                  border: "md",
-                  borderRadius: "50%",
-                  mx: 1,
+                  ...listItemElementWidthStyle,
                   bgcolor: Alerts.high.count ? "lime" : "#e0e0e0",
                   color: Alerts.high.count ? "white" : "primary",
                 }}
@@ -54,12 +50,7 @@ const Building = (props) => {
               <ListItem
                 sx={{
                   p: 0,
-                  maxWidth: { xs: "30px", sm: "40px" },
-                  minWidth: { xs: "30px", sm: "40px" },
-                  height: { xs: "30px", sm: "40px" },
-                  border: "md",
-                  borderRadius: "50%",
-                  mx: 1,
+                  ...listItemElementWidthStyle,
                   bgcolor: Alerts.med.count ? "orange" : "#e0e0e0",
                   color: Alerts.med.count ? "white" : "primary",
                 }}
@@ -72,12 +63,7 @@ const Building = (props) => {
               <ListItem
                 sx={{
                   p: 0,
-                  maxWidth: { xs: "30px", sm: "40px" },
-                  minWidth: { xs: "30px", sm: "40px" },
-                  height: { xs: "30px", sm: "40px" },
-                  border: "md",
-                  borderRadius: "50%",
-                  mx: 1,
+                  ...listItemElementWidthStyle,
                   bgcolor: Alerts.low.count ? "red" : "#e0e0e0",
                   color: Alerts.low.count ? "white" : "primary",
                 }}
@@ -140,7 +126,11 @@ const Building = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={2} md={2}>
-            <Typography sx={{ p: 0, color: "green", pb: {xs: "10px", md: 0} }}>{Power}</Typography>
+            <Typography
+              sx={{ p: 0, color: "green", pb: { xs: "10px", md: 0 } }}
+            >
+              {Power}
+            </Typography>
           </Grid>
         </Grid>
       </Box>

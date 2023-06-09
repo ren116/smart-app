@@ -4,6 +4,11 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import { Grid, TextField, Typography, Box } from "@mui/material";
 import Building from "../../components/Buildings/Building";
 import buildingsData from "./buildings.json";
+import {
+  keyboardArrowDownFontSizeStyle,
+  keyboardArrowDownStyle,
+  gridItemElementStyle,
+} from "./style";
 
 var PAGE_SIZE = 20;
 
@@ -74,7 +79,7 @@ const BuildingList = () => {
             item
             justifyContent="space-around"
             spacing={1}
-            sx={{ display: "flex", flexDirection: "row" }}
+            sx={gridItemElementStyle}
           >
             <Box
               xs={12}
@@ -87,64 +92,30 @@ const BuildingList = () => {
                 alignItems: "center",
               }}
             >
-              <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                Site
-              </Typography>
-              <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
-              />
+              <Typography sx={keyboardArrowDownFontSizeStyle}>Site</Typography>
+              <KeyboardArrowDown sx={keyboardArrowDownStyle} />
             </Box>
-            <Box
-              xs={12}
-              sm={4}
-              md={4}
-              sx={{ display: "flex", flexDirection: "row" }}
-            >
-              <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+            <Box xs={12} sm={4} md={4} sx={gridItemElementStyle}>
+              <Typography sx={keyboardArrowDownFontSizeStyle}>
                 Alerts
               </Typography>
-              <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
-              />
+              <KeyboardArrowDown sx={keyboardArrowDownStyle} />
             </Box>
-            <Box
-              xs={12}
-              sm={2}
-              md={2}
-              sx={{ display: "flex", flexDirection: "row" }}
-            >
-              <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+            <Box xs={12} sm={2} md={2} sx={gridItemElementStyle}>
+              <Typography sx={keyboardArrowDownFontSizeStyle}>
                 Savings
               </Typography>
-              <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
-              />
+              <KeyboardArrowDown sx={keyboardArrowDownStyle} />
             </Box>
-            <Box
-              xs={12}
-              sm={2}
-              md={2}
-              sx={{ display: "flex", flexDirection: "row" }}
-            >
-              <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
+            <Box xs={12} sm={2} md={2} sx={gridItemElementStyle}>
+              <Typography sx={keyboardArrowDownFontSizeStyle}>
                 Uptime
               </Typography>
-              <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
-              />
+              <KeyboardArrowDown sx={keyboardArrowDownStyle} />
             </Box>
-            <Box
-              xs={12}
-              sm={2}
-              md={2}
-              sx={{ display: "flex", flexDirection: "row" }}
-            >
-              <Typography sx={{ fontSize: { xs: "14px", md: "16px" } }}>
-                Power
-              </Typography>
-              <KeyboardArrowDown
-                sx={{ fontSize: { xs: "14px", md: "16px" }, pt: "3px" }}
-              />
+            <Box xs={12} sm={2} md={2} sx={gridItemElementStyle}>
+              <Typography sx={keyboardArrowDownFontSizeStyle}>Power</Typography>
+              <KeyboardArrowDown sx={keyboardArrowDownStyle} />
             </Box>
           </Grid>
           <Grid item sm xs />
