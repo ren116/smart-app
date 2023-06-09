@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -13,15 +13,48 @@ import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import { amber, deepOrange, green, lightGreen } from "@mui/material/colors";
 
-const row = {
-  site: "Barley",
-  alerts: { high: 0, med: 3, low: 1 },
-  savings: 89,
-  uptime: 104,
-  power: 1165,
-};
-
 const Buildings = () => {
+  const [buildings, setBuildings] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [searchWord, setSearchWord] = useState("");
+
+  useEffect(() => {
+    fetch("/buildings.json")
+      .then((response) => response.json())
+      .then((data) => {
+        let newTypeBuildings = data.buildings.map((item) => {
+          return {
+            site: item.Name,
+            alerts: {
+              high: item.Alerts.high.count ?? 0,
+              med: item.Alerts.med.count ?? 0,
+              low: item.Alerts.low.count ?? 0,
+            },
+            savings: Number(item.Savings.slice(0, -1)),
+            uptime: Number(item.Uptime.slice(0, -1)),
+            power: Number(item.Power.slice(0, -2)),
+          };
+        });
+        setBuildings(newTypeBuildings);
+      });
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        setOffset(offset + 20);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [offset]);
+
+  const onchange = (event) => {
+    setSearchWord(event.target.value.toLowerCase());
+  };
+
   return (
     <>
       <Box
@@ -66,6 +99,7 @@ const Buildings = () => {
           label="Search field"
           type="search"
           sx={{ width: 1000 }}
+          onChange={onchange}
         />
       </Box>
 
@@ -92,73 +126,94 @@ const Buildings = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    sx={{
-                      fontFamily: "arial",
-                      fontWeight: 900,
-                      fontSize: 20,
-                      color: "inherit",
-                    }}
-                  >
-                    {row.site}
-                  </TableCell>
-                  <TableCell align="left">
-                    <Stack direction="row" spacing={2}>
-                      <Avatar
-                        sx={row.alerts.high ? { bgcolor: green[500] } : {}}
+              {buildings
+                .filter((list) => list.site.toLowerCase().includes(searchWord))
+                .slice(0, 20 + offset)
+                .map((row, key) => {
+                  return (
+                    <TableRow
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                      key={"row-" + key}
+                    >
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        sx={{
+                          fontFamily: "arial",
+                          fontWeight: 900,
+                          fontSize: 20,
+                          color: "inherit",
+                        }}
+                        key={"cell-" + key * 5 + 0}
                       >
-                        {row.alerts.high}
-                      </Avatar>
-                      <Avatar
-                        sx={row.alerts.med ? { bgcolor: amber[500] } : {}}
+                        {row.site}
+                      </TableCell>
+                      <TableCell align="left" key={"cell-" + key * 5 + 1}>
+                        <Stack direction="row" spacing={2} key={"stack-" + key}>
+                          <Avatar
+                            sx={row.alerts.high ? { bgcolor: green[500] } : {}}
+                            key={"avatar-" + key * 3 + 0}
+                          >
+                            {row.alerts.high}
+                          </Avatar>
+                          <Avatar
+                            sx={row.alerts.med ? { bgcolor: amber[500] } : {}}
+                            key={"avatar-" + key * 3 + 1}
+                          >
+                            {row.alerts.med}
+                          </Avatar>
+                          <Avatar
+                            sx={
+                              row.alerts.low ? { bgcolor: deepOrange[500] } : {}
+                            }
+                            key={"avatar-" + key * 3 + 2}
+                          >
+                            {row.alerts.low}
+                          </Avatar>
+                        </Stack>
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        sx={[
+                          {
+                            fontFamily: "arial",
+                            fontSize: 18,
+                            color: "grey",
+                          },
+                          row.savings < 100 && { color: "red" },
+                        ]}
+                        key={"cell-" + key * 5 + 2}
                       >
-                        {row.alerts.med}
-                      </Avatar>
-                      <Avatar
-                        sx={row.alerts.low ? { bgcolor: deepOrange[500] } : {}}
+                        {row.savings + "%"}
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        sx={[
+                          {
+                            fontFamily: "arial",
+                            fontSize: 18,
+                            color: "grey",
+                          },
+                          row.uptime < 100 && { color: "red" },
+                        ]}
+                        key={"cell-" + key * 5 + 3}
                       >
-                        {row.alerts.low}
-                      </Avatar>
-                    </Stack>
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      fontFamily: "arial",
-                      fontSize: 18,
-                      color: "grey",
-                    }}
-                  >
-                    {row.savings + "%"}
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      fontFamily: "arial",
-                      fontSize: 18,
-                      color: "grey",
-                    }}
-                  >
-                    {row.uptime + "%"}
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{
-                      fontFamily: "arial",
-                      fontSize: 20,
-                      color: lightGreen[500],
-                    }}
-                  >
-                    {row.power + "KW"}
-                  </TableCell>
-                </TableRow>
-              }
+                        {row.uptime + "%"}
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        sx={{
+                          fontFamily: "arial",
+                          fontSize: 20,
+                          color: lightGreen[500],
+                        }}
+                        key={"cell-" + key * 5 + 4}
+                      >
+                        {row.power + "KW"}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
