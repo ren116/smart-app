@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import TextField from "@mui/material/TextField";
 import Data from "../../teletubbies.json";
 import { styled } from "@mui/material/styles";
-import { buttonstyle } from "../../style.js";
+import { buttonstyle } from "./style.js";
 
 const Teletubbies = () => {
   const [dataList, setDataList] = useState([]);
@@ -65,16 +66,16 @@ const Teletubbies = () => {
     textAlign: "start",
   });
 
-  const Section = styled("Section")({
+  const Section = styled("section")({
     height: "25px",
     display: "line-block",
     textAlign: "center",
     border: "1px grey solid",
     backgroundColor: "white",
     borderRadius: "3px",
-    fontSize: "20px",
+    fontSize: "16px",
     padding: "0 10px 0 10px",
-    marginRight: "20px",
+    marginRight: "2%",
   });
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -100,69 +101,143 @@ const Teletubbies = () => {
       />
 
       {filteredTeletubbies.map((data, key) => (
-        <Paper
-          sx={{
-            p: 5,
-            margin: "auto",
-            maxWidth: "lg",
-            backgroundColor: "#fff",
-            marginTop: "30px",
-          }}
-        >
-          <Grid container spacing={2}>
-            {key % 2 ? (
-              <>
-                <Div item sm="auto" container>
-                  <Grid item xs container direction="row" spacing={2}>
-                    <Grid item xs>
-                      <Typography gutterBottom variant="h4" component="div">
-                        {data.name}
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        {data.description}
-                      </Typography>
+        <Container key={key} sx={{ px: { xs: "50px", md: "100px" } }}>
+          <Paper
+            sx={{
+              p: 5,
+              margin: "auto",
+              maxWidth: "lg",
+              backgroundColor: "#fff",
+              marginTop: "30px",
+            }}
+          >
+            <Grid container>
+              {key % 2 ? (
+                <Grid
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    flexDirection: { xs: "column-reverse", md: "row" },
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Div item sm="auto" container>
+                    <Grid item xs container direction="row" spacing={2}>
+                      <Grid item xs>
+                        <Typography
+                          sx={{
+                            textAlign: { xs: "center", md: "left" },
+                            pt: 2,
+                          }}
+                          gutterBottom
+                          variant="h4"
+                          component="div"
+                        >
+                          {data.name}
+                        </Typography>
+                        <Typography variant="body2" gutterBottom>
+                          {data.description}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                  <div style={{ display: "flex" }}>
-                    {data.traits.map((name, key) => (
-                      <Section key={key}>{data.traits[key]}</Section>
-                    ))}
-                  </div>
-                </Div>
-                <Grid item>
-                  <ButtonBase sx={buttonstyle}>
-                    <Img alt="complex" src={data.image_url} />
-                  </ButtonBase>
-                </Grid>
-              </>
-            ) : (
-              <>
-                <Grid item>
-                  <ButtonBase sx={buttonstyle}>
-                    <Img alt="complex" src={data.image_url} />
-                  </ButtonBase>
-                </Grid>
-                <Div item sm="auto" container>
-                  <Grid item xs container direction="row" spacing={2}>
-                    <Grid item xs>
-                      <Typography gutterBottom variant="h4" component="div">
-                        {data.name}
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        {data.description}
-                      </Typography>
+                    <Grid
+                      sx={{
+                        display: "flex",
+                        flexDirection: { xs: "column", sm: "row" },
+                        justifyContent: "start",
+                      }}
+                    >
+                      {data.traits.map((name, index) => (
+                        <Section
+                          key={index}
+                          sx={{
+                            marginTop: {
+                              xs: "5px",
+                              sm: "0px",
+                              display: "flex",
+                              justifyContent: "center",
+                              fontFamily: "monospace",
+                              alignItems: "center",
+                            },
+                          }}
+                        >
+                          {name}
+                        </Section>
+                      ))}
                     </Grid>
+                  </Div>
+                  <Grid item>
+                    <ButtonBase sx={buttonstyle}>
+                      <Img alt="complex" src={data.image_url} />
+                    </ButtonBase>
                   </Grid>
-                  <div style={{ display: "flex", flexWarp: "wrap" }}>
-                    {data.traits.map((name, key) => (
-                      <Section>{data.traits[key]}</Section>
-                    ))}
-                  </div>
-                </Div>
-              </>
-            )}
-          </Grid>
-        </Paper>
+                </Grid>
+              ) : (
+                <Grid
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    flexDirection: { xs: "column", md: "row" },
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Grid item>
+                    <ButtonBase sx={buttonstyle}>
+                      <Img alt="complex" src={data.image_url} />
+                    </ButtonBase>
+                  </Grid>
+                  <Div item sm="auto" container>
+                    <Grid item xs container direction="row" spacing={2}>
+                      <Grid item xs>
+                        <Typography
+                          sx={{
+                            textAlign: { xs: "center", md: "left" },
+                            pt: 2,
+                          }}
+                          gutterBottom
+                          variant="h4"
+                          component="div"
+                        >
+                          {data.name}
+                        </Typography>
+                        <Typography variant="body2" gutterBottom>
+                          {data.description}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      sx={{
+                        display: "flex",
+                        flexDirection: { xs: "column", sm: "row" },
+                        justifyContent: "start",
+                      }}
+                    >
+                      {data.traits.map((name, index) => (
+                        <Section
+                          key={index}
+                          sx={{
+                            marginTop: {
+                              xs: "5px",
+                              sm: "0px",
+                              display: "flex",
+                              justifyContent: "center",
+                              fontFamily: "monospace",
+                              alignItems: "center",
+                            },
+                          }}
+                        >
+                          {name}
+                        </Section>
+                      ))}
+                    </Grid>
+                  </Div>
+                </Grid>
+              )}
+            </Grid>
+          </Paper>
+        </Container>
       ))}
     </>
   );
