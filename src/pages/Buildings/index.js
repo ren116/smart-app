@@ -92,14 +92,14 @@ const Buildings = () => {
                   </TableCell>
                   <TableCell align="left">
                     <Stack direction="row" spacing={2}>
-                      <Avatar sx={row.alerts.high && { bgcolor: green[500] }}>
+                      <Avatar sx={row.alerts.high ? { bgcolor: green[500] } : {}}>
                         {row.alerts.high}
                       </Avatar>
-                      <Avatar sx={row.alerts.med && { bgcolor: amber[500] }}>
+                      <Avatar sx={row.alerts.med ? { bgcolor: amber[500] } : {}}>
                         {row.alerts.med}
                       </Avatar>
                       <Avatar
-                        sx={row.alerts.low && { bgcolor: deepOrange[500] }}
+                        sx={row.alerts.low ? { bgcolor: deepOrange[500] } : {}}
                       >
                         {row.alerts.low}
                       </Avatar>
