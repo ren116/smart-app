@@ -1,22 +1,28 @@
-import { Typography, Grid, Fab } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
+import TypoItem from "./TypoItem";
+import FabItem from "./FabItem";
 
 const BuildingItem = ({ num, name, alerts, saving, uptime, power }) => {
   return (
     <Grid
       container
       mt={2}
+      py={2}
       sx={{
         boxShadow: 1,
-        border: 1,
+        border: 2,
         borderColor: "primary.light",
+        "&:hover": { border: 2, borderColor: "#6600ff", boxShadow: 3 },
         borderRadius: 3,
         backgroundColor: "white",
+        display: "flex",
+        alignItems: "center",
       }}
     >
-      <Grid item xs={1} pt={2.5}>
+      <Grid item xs={1}>
         <Typography>{num}</Typography>
       </Grid>
-      <Grid item xs={2} pt={2.5}>
+      <Grid item xs={2}>
         <Typography
           sx={{
             fontSize: 18,
@@ -28,28 +34,40 @@ const BuildingItem = ({ num, name, alerts, saving, uptime, power }) => {
           {name}
         </Typography>
       </Grid>
-      <Grid item xs={3} pt={2} pb={2}>
-        <Fab color="primary" size="small" aria-label="high">
-          <Typography>
-            {alerts.high.count >= 0 ? alerts.high.count : alerts.high}
-          </Typography>
-        </Fab>
-        <Fab sx={{ backgroundColor: "#f69e3d" }} size="small" aria-label="mid">
-          <Typography>{alerts.med.count}</Typography>
-        </Fab>
-        <Fab sx={{ backgroundColor: "#ff4850" }} size="small" aria-label="low">
-          <Typography>{alerts.low.count}</Typography>
-        </Fab>
+      <Grid
+        item
+        xs={3}
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", md: "space-evenly" },
+        }}
+      >
+        {alerts.high.count === 0 || alerts.high === 0 ? (
+          <FabItem
+            count={alerts.high.count >= 0 ? alerts.high.count : alerts.high}
+            bgColor={
+              alerts.high.count > 0 || alerts.high > 0 ? "#3385ff" : "#e6e6e6"
+            }
+          />
+        ) : (
+          <FabItem
+            count={alerts.high.count >= 0 ? alerts.high.count : alerts.high}
+            bgColor={alerts.high.count >= 0 ? "#3385ff" : "#e6e6e6"}
+          />
+        )}
+        <FabItem
+          count={alerts.med.count}
+          bgColor={alerts.med.count === 0 ? "#e6e6e6" : "#ff9900"}
+        />
+        <FabItem
+          count={alerts.med.count}
+          bgColor={alerts.med.count === 0 ? "#e6e6e6" : "#ff4850"}
+        />
       </Grid>
-      <Grid item xs={2} pt={2.5}>
-        <Typography sx={{ color: "#cdc9c9" }}>{saving}</Typography>
-      </Grid>
-      <Grid item xs={2} pt={2.5}>
-        <Typography sx={{ color: "#cdc9c9" }}>{uptime}</Typography>
-      </Grid>
-      <Grid item xs={2} pt={2.5}>
-        <Typography sx={{ color: "#9dcf7a", fontSize: 14 }}>{power}</Typography>
-      </Grid>
+      <TypoItem color="#b5b0b0" value={saving} />
+      <TypoItem color="#b5b0b0" value={uptime} />
+      <TypoItem color="#00e600" value={power} />
     </Grid>
   );
 };
