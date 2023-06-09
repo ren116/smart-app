@@ -9,10 +9,40 @@ import TextField from "@mui/material/TextField";
 import Data from "../../teletubbies.json";
 
 const Teletubbies = () => {
-  const [dataList, setDataList] = useState("");
+
+  const [dataList, setDataList] = useState([]);
+  const [searchKey,setSearchKey] = useState("")
+
   useEffect(() => {
-    setDataList(Data);
-  }, []);
+    setDataList(Data.slice(0,20));
+  }, [])
+
+
+  function handleScroll() {
+    if (
+      window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+      searchKey === ""
+    ) {
+      // Load the next 20 Teletubbies if search term is empty
+      const startIndex = dataList.length;
+      const endIndex = startIndex + 20;
+      setDataList([
+        ...dataList,
+        ...Data.slice(startIndex, endIndex),
+      ]);
+    }
+  }
+
+
+  useEffect(() => {
+    // Add scroll listener on mount
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+    // Remove scroll listener on unmount
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
 
   const Img = styled("img")({
     margin: "auto",
@@ -22,12 +52,14 @@ const Teletubbies = () => {
     borderRadius:"5px"
   });
 
+
   const Div = styled("div")({
     width: "80%",
     heigth: "100px",
     display: "line-block",
     textAlign: "start",
   });
+
 
   const Section = styled("Section")({
     height: "25px",
@@ -42,6 +74,7 @@ const Teletubbies = () => {
     
   });
 
+
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -51,19 +84,20 @@ const Teletubbies = () => {
     justifyContent: "start",
   }));
 
+
   return (
     <>
       <Header />
       <Typography variant="h2">Teletubbies</Typography>
       <TextField label="Search" variant="standard" />
 
-      {Data.map((data, key) => (
+      {dataList.map((data, key) => (
         <Paper
           sx={{
             p: 5,
             margin: "auto",
             maxWidth: "lg",
-            backgroundColor: "#ffeddd",
+            backgroundColor: "#fff",
             marginTop: "30px",
           }}
         >
@@ -120,7 +154,7 @@ const Teletubbies = () => {
                       </Typography>
                     </Grid>
                   </Grid>
-                  <div style={{display:"flex"}}>
+                  <div style={{display:"flex",flexWarp:"wrap"}}>
                     <Section >
                       {data.traits[0]}
                     </Section>
