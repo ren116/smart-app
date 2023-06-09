@@ -1,7 +1,7 @@
 import { Checkbox, TableBody, TableCell, TableRow } from "@mui/material";
 import { Avatar, Chip } from "@mui/material";
 
-export default function BodyTable({
+export default function TableBodyWrapper({
   visibleRows,
   handleSearch,
   isSelected,

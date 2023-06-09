@@ -7,7 +7,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import PropTypes from "prop-types";
 import { visuallyHidden } from "@mui/utils";
 
-export default function HeaderTable(props) {
+export default function TableHeadWrapper(props) {
   const headCells = [
     {
       id: "id",
@@ -99,7 +99,7 @@ export default function HeaderTable(props) {
   );
 }
 
-HeaderTable.propTypes = {
+TableHeadWrapper.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,

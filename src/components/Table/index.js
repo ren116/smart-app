@@ -3,9 +3,9 @@ import { useState, useMemo, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableContainer from "@mui/material/TableContainer";
 import Paper from "@mui/material/Paper";
-import HeaderTable from "./HeaderTable";
-import ToolbarTable from "./ToolbarTable";
-import BodyTable from "./BodyTable";
+import TableHeadWrapper from "./TableHeadWrapper";
+import TableToolbar from "./TableToolbar";
+import TableBodyWrapper from "./TableBodyWrapper";
 
 export default function BuildTable({ handleSearch }) {
   const [order, setOrder] = useState("asc");
@@ -115,10 +115,10 @@ export default function BuildTable({ handleSearch }) {
 
   return (
     <Paper sx={{ width: "100%" }}>
-      <ToolbarTable numSelected={selected.length} />
+      <TableToolbar numSelected={selected.length} />
       <TableContainer>
         <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
-          <HeaderTable
+          <TableHeadWrapper
             numSelected={selected.length}
             order={order}
             orderBy={orderBy}
@@ -126,7 +126,7 @@ export default function BuildTable({ handleSearch }) {
             onRequestSort={handleRequestSort}
             rowCount={building.length}
           />
-          <BodyTable
+          <TableBodyWrapper
             visibleRows={visibleRows}
             handleSearch={handleSearch}
             isSelected={isSelected}

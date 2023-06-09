@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
-export default function ToolbarTable(props) {
+export default function TableToolbar(props) {
   const { numSelected } = props;
 
   return (
@@ -61,6 +61,6 @@ export default function ToolbarTable(props) {
   );
 }
 
-ToolbarTable.propTypes = {
+TableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
