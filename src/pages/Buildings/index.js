@@ -14,6 +14,7 @@ import { amber, deepOrange, green, lightGreen } from "@mui/material/colors";
 
 const Buildings = () => {
   const [buildings, setBuildings] = useState([]);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     fetch("/buildings.json")
@@ -40,6 +41,18 @@ const Buildings = () => {
         setBuildings(newTypeBuildings);
       });
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        setOffset(offset + 20);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [offset]);
 
   return (
     <>
@@ -93,7 +106,7 @@ const Buildings = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {buildings.map((row, key) => {
+              {buildings.slice(0, 20 + offset).map((row, key) => {
                 return (
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
