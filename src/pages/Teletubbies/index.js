@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Header from "../../components/Header";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -89,15 +88,7 @@ const Teletubbies = () => {
 
   return (
     <>
-      <Header />
       <Typography variant="h2">Teletubbies</Typography>
-
-      <TextField
-        label="Search"
-        variant="standard"
-        value={searchKey}
-        onChange={(e) => setSearchKey(e.target.value)}
-      />
 
       <TextField
         label="Search"
