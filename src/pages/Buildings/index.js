@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
-import { amber, deepOrange, green } from "@mui/material/colors";
+import { amber, deepOrange, green, lightGreen } from "@mui/material/colors";
 import { Margin } from "@mui/icons-material";
 
 const row = {
@@ -56,11 +56,21 @@ const Buildings = () => {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Site ˅</TableCell>
-                <TableCell align="left">Alerts ˅</TableCell>
-                <TableCell align="left">Savings ˅</TableCell>
-                <TableCell align="left">Uptime ˅</TableCell>
-                <TableCell align="left">Power ˅</TableCell>
+                <TableCell sx={{ fontSize: 18, color: "grey" }}>
+                  Site ˅
+                </TableCell>
+                <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
+                  Alerts ˅
+                </TableCell>
+                <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
+                  Savings ˅
+                </TableCell>
+                <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
+                  Uptime ˅
+                </TableCell>
+                <TableCell align="left" sx={{ fontSize: 18, color: "grey" }}>
+                  Power ˅
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -68,25 +78,63 @@ const Buildings = () => {
                 <TableRow
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{
+                      fontFamily: "arial",
+                      fontWeight: 900,
+                      fontSize: 20,
+                      color: "inherit",
+                    }}
+                  >
                     {row.site}
                   </TableCell>
                   <TableCell align="left">
                     <Stack direction="row" spacing={2}>
                       <Avatar sx={row.alerts.high && { bgcolor: green[500] }}>
-                          {row.alerts.high}
-                        </Avatar>
+                        {row.alerts.high}
+                      </Avatar>
                       <Avatar sx={row.alerts.med && { bgcolor: amber[500] }}>
                         {row.alerts.med}
                       </Avatar>
-                      <Avatar sx={row.alerts.low && { bgcolor: deepOrange[500] }}>
+                      <Avatar
+                        sx={row.alerts.low && { bgcolor: deepOrange[500] }}
+                      >
                         {row.alerts.low}
                       </Avatar>
                     </Stack>
                   </TableCell>
-                  <TableCell align="left">{row.savings + "%"}</TableCell>
-                  <TableCell align="left">{row.uptime + "%"}</TableCell>
-                  <TableCell align="left">{row.power + "KW"}</TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{
+                      fontFamily: "arial",
+                      fontSize: 18,
+                      color: "grey",
+                    }}
+                  >
+                    {row.savings + "%"}
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{
+                      fontFamily: "arial",
+                      fontSize: 18,
+                      color: "grey",
+                    }}
+                  >
+                    {row.uptime + "%"}
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{
+                      fontFamily: "arial",
+                      fontSize: 20,
+                      color: lightGreen[500],
+                    }}
+                  >
+                    {row.power + "KW"}
+                  </TableCell>
                 </TableRow>
               }
             </TableBody>
