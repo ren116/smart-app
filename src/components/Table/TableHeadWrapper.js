@@ -55,6 +55,7 @@ export default function TableHeadWrapper(props) {
     rowCount,
     onRequestSort,
   } = props;
+  
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -73,6 +74,7 @@ export default function TableHeadWrapper(props) {
             }}
           />
         </TableCell>
+
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -86,6 +88,7 @@ export default function TableHeadWrapper(props) {
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
+
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === "desc" ? "sorted descending" : "sorted ascending"}
