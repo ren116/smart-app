@@ -71,8 +71,9 @@ const Teletubbies = () => {
         value={searchWord}
         onChange={handleSearch}
         label='Search by name'
-        variant='outlined' />
-        <Snackbar
+        variant='outlined'
+      />
+      <Snackbar
         open={alert}
         autoHideDuration={6000}
         onClose={handleClose}
