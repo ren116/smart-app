@@ -62,9 +62,10 @@ const Buildings = () => {
 
   return (
     <Container maxWidth='md' sx={{ mt: 15 }}>
+      <h1>Buildings</h1>
       <TextField
         fullWidth
-        label={'search'}
+        label={'Search buildings'}
         id='margin-dense'
         margin='dense'
         mx={10}
