@@ -10,8 +10,11 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
 import { amber, deepOrange, green, lightGreen } from "@mui/material/colors";
 import { Margin } from "@mui/icons-material";
+
+const ariaLabel = { "aria-label": "description" };
 
 const row = {
   site: "Barley",
@@ -51,6 +54,24 @@ const Buildings = () => {
           BUILDINGS
         </Typography>
       </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          mt: 5,
+          mb: 1,
+        }}
+      >
+        <TextField
+          id="outlined-search"
+          label="Search field"
+          type="search"
+          sx={{ width: 1000 }}
+        />
+      </Box>
+
       <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
         <TableContainer component={Paper} sx={{ maxWidth: 1000 }}>
           <Table aria-label="simple table">
@@ -92,10 +113,14 @@ const Buildings = () => {
                   </TableCell>
                   <TableCell align="left">
                     <Stack direction="row" spacing={2}>
-                      <Avatar sx={row.alerts.high ? { bgcolor: green[500] } : {}}>
+                      <Avatar
+                        sx={row.alerts.high ? { bgcolor: green[500] } : {}}
+                      >
                         {row.alerts.high}
                       </Avatar>
-                      <Avatar sx={row.alerts.med ? { bgcolor: amber[500] } : {}}>
+                      <Avatar
+                        sx={row.alerts.med ? { bgcolor: amber[500] } : {}}
+                      >
                         {row.alerts.med}
                       </Avatar>
                       <Avatar
