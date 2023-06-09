@@ -32,6 +32,7 @@ export const Teletubbies = () => {
       setPage(page + 1);
     }
   };
+  
   return (
     <Container maxWidth="lg">
       <Title />
@@ -46,7 +47,6 @@ export const Teletubbies = () => {
         />
       </Box>
       <Box>
-<<<<<<< HEAD
         <InfiniteScroll
           dataLength={page * 20}
           next={loadMoreTeletubbies}
@@ -82,25 +82,3 @@ export const Teletubbies = () => {
     </Container>
   );
 };
-=======
-        {teletubbiesData.map((item, index) => {
-          return <Card key = {index} sx={{display: "flex", marginBottom: "20px", paddingX: "10px"}}>
-            {
-              index % 2 == 0 ? 
-              <>
-                <CardImg teletubby = {item}/>
-                <CardMain teletubby = {item}/>
-              </>
-              : 
-              <>
-                <CardMain teletubby = {item}/>
-                <CardImg teletubby = {item}/>
-              </>
-            }
-          </Card>
-        })}
-      </Box>
-    </Container>
-  )
-}
->>>>>>> 678751ed53229dbc65162c47e77646eae8590dc8
