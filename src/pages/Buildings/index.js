@@ -106,6 +106,7 @@ const Buildings = () => {
                 return (
                   <TableRow
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    key={"row-" + key}
                   >
                     <TableCell
                       component="th"
@@ -116,18 +117,21 @@ const Buildings = () => {
                         fontSize: 20,
                         color: "inherit",
                       }}
+                      key={"cell-" + key * 5 + 0}
                     >
                       {row.site}
                     </TableCell>
-                    <TableCell align="left">
-                      <Stack direction="row" spacing={2}>
+                    <TableCell align="left" key={"cell-" + key * 5 + 1}>
+                      <Stack direction="row" spacing={2} key={"stack-" + key}>
                         <Avatar
                           sx={row.alerts.high ? { bgcolor: green[500] } : {}}
+                          key={"avatar-" + key * 3 + 0}
                         >
                           {row.alerts.high}
                         </Avatar>
                         <Avatar
                           sx={row.alerts.med ? { bgcolor: amber[500] } : {}}
+                          key={"avatar-" + key * 3 + 1}
                         >
                           {row.alerts.med}
                         </Avatar>
@@ -135,6 +139,7 @@ const Buildings = () => {
                           sx={
                             row.alerts.low ? { bgcolor: deepOrange[500] } : {}
                           }
+                          key={"avatar-" + key * 3 + 2}
                         >
                           {row.alerts.low}
                         </Avatar>
@@ -147,6 +152,7 @@ const Buildings = () => {
                         fontSize: 18,
                         color: "grey",
                       }}
+                      key={"cell-" + key * 5 + 2}
                     >
                       {row.savings + "%"}
                     </TableCell>
@@ -157,6 +163,7 @@ const Buildings = () => {
                         fontSize: 18,
                         color: "grey",
                       }}
+                      key={"cell-" + key * 5 + 3}
                     >
                       {row.uptime + "%"}
                     </TableCell>
@@ -167,6 +174,7 @@ const Buildings = () => {
                         fontSize: 20,
                         color: lightGreen[500],
                       }}
+                      key={"cell-" + key * 5 + 4}
                     >
                       {row.power + "KW"}
                     </TableCell>
