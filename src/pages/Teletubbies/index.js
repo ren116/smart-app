@@ -12,18 +12,18 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const Teletubbies = () => {
   const [teletubbies, setTeletubbies] = useState([]);
-  const [page, setPage] = useState(1); // keep track of current page number
-  const [searchQuery, setSearchQuery] = useState(""); // keep track of search query
+  const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getTeletubbies = async () => {
     try {
       const response = await getCurrenTeletubbyData();
-      const newTeletubbies = response.data.slice((page - 1) * 20, page * 20); // fetch only 20 teletubbies per page
+      const newTeletubbies = response.data.slice((page - 1) * 20, page * 20);
       setTeletubbies((prevTeletubbies) => [
         ...prevTeletubbies,
         ...newTeletubbies,
-      ]); // concatenate the new teletubbies with the existing ones
-      setPage((prevPage) => prevPage + 1); // increment the page number
+      ]);
+      setPage((prevPage) => prevPage + 1);
     } catch (error) {
       console.error(error);
     }
@@ -31,17 +31,17 @@ const Teletubbies = () => {
 
   useEffect(() => {
     getTeletubbies();
-  }, []); // fetch the first set of teletubbies on mount
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        getTeletubbies(); // fetch more teletubbies when scroll position reaches the end
+        getTeletubbies(); 
       }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [teletubbies]); // add a scroll event listener and remove it on cleanup, while also watching for changes in the teletubbies array
+  }, [teletubbies]);
 
   const handleSearchQueryChange = (event) => {
     setSearchQuery(event.target.value);
