@@ -26,14 +26,9 @@ const Buildings = () => {
           return {
             site: item.Name,
             alerts: {
-              high:
-                item.Alerts.high.count === undefined
-                  ? 0
-                  : item.Alerts.high.count,
-              med:
-                item.Alerts.med.count === undefined ? 0 : item.Alerts.med.count,
-              low:
-                item.Alerts.low.count === undefined ? 0 : item.Alerts.low.count,
+              high: item.Alerts.high.count ?? 0,
+              med: item.Alerts.med.count ?? 0,
+              low: item.Alerts.low.count ?? 0,
             },
             savings: Number(item.Savings.slice(0, -1)),
             uptime: Number(item.Uptime.slice(0, -1)),
