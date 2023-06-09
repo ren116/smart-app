@@ -8,7 +8,7 @@ export default function NFTs() {
   const [filteredNftListing, setFilteredNftListing] = useState([])
   const [offset, setOffset] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
-  const loadNftListing = async () => {
+  const loadNftListing = useCallback( async () => {
     const response = await fetch(
       `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
     )
@@ -17,7 +17,7 @@ export default function NFTs() {
     setFilteredNftListing([...nftListing, ...data.results])
     setOffset(offset + 20)
 
-  }
+  },[])
 
   const handleSearch = event => {
     setSearchTerm(event.target.value.toLowerCase())
