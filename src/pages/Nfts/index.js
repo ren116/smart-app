@@ -2,7 +2,6 @@ giimport React, { useState, useEffect } from 'react'
 import { CardMedia, CardContent, Typography, CardActionArea } from '@mui/material';
 import { Container, Grid, TextField } from '@mui/material';
 import Header from 'components/Header';
-
 const Nfts = () => {
     const [nftListing, setNftListing] = useState([])
     const [filteredNftListing, setFilteredNftListing] = useState([])
@@ -19,9 +18,23 @@ const Nfts = () => {
         setOffset(offset + 20)
         console.log(response)
     }
+
+    const handleSearch = event => {
+        setSearchTerm(event.target.value.toLowerCase())
+    }
+
     useEffect(() => {
         loadNftListing()
     }, [])
+
+    useEffect(() => {
+        setFilteredNftListing(
+            nftListing.filter(nftListing =>
+                nftListing.collectionName.toLowerCase().includes(searchTerm)
+            )
+        )
+    }, [nftListing, searchTerm])
+
     useEffect(() => {
         const handleScroll = () => {
             if (
@@ -46,6 +59,8 @@ const Nfts = () => {
             <TextField
                 placeholder="Search nft name"
                 variant="outlined"
+                value={searchTerm}
+                onChange={handleSearch}
                 sx={{padding:4}}
             />
             <Container maxWidth="lg">
