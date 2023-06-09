@@ -41,6 +41,14 @@ function Buildings() {
     setPageLength((pageLength) => pageLength + BUILDINGS_SIZE);
   };
 
+  const buildings = useMemo(() => {
+    return data.slice(0, pageLength);
+  }, [data, pageLength]);
+
+  const paginate = () => {
+    setPageLength((pageLength) => pageLength + 20);
+  };
+
   return (
     <div className="container">
       <Container sx={{ mt: 15 }}>
