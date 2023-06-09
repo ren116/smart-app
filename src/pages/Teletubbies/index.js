@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Container, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import Teletubbie from 'components/Teletubbie'
-import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import Snackbar from '@mui/material/Snackbar'
+import IconButton from '@mui/material/IconButton'
+import CloseIcon from '@mui/icons-material/Close'
 import { getTeletubbies } from 'api'
 
 const Teletubbies = () => {
@@ -25,24 +25,21 @@ const Teletubbies = () => {
       })()
     }
     catch(err){
-      setAlert(true);
+      setAlert(true);//display alert
     }
   }, []);
   
   useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight 
-      ) {
-        setOffset(offset+20);
-      }
+    const handleScroll = () => { //scroll event
+        window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+          setOffset(offset+20);
     }
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [offset])
-
+  //close alert
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -89,7 +86,8 @@ const Teletubbies = () => {
               key={`teletubbie_${key}`}
               name={item.name}
               description={item.description}
-              traits={item.traits} />
+              traits={item.traits} 
+            />
           )
         })}
     </Container>

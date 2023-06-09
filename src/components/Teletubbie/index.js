@@ -24,13 +24,11 @@ const Teletubbie = ({ name, description, image_url, traits, way}) => {
         </Typography>
         <Typography marginTop={2} align='left'>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px'}}>
-            {traits.map((item, key) => {
-               return (
-                 <Box key={`trait_${key}`} sx={{p: '5px', border: 'solid 2px gray', px: '15px'}}>
-                   {item}
-                 </Box>
-               )
-             })}
+            {traits.map((item, key) =>( 
+              <Box key={`trait_${key}`} sx={{p: '5px', border: 'solid 2px gray', px: '15px'}}>
+                {item}
+              </Box>
+             ))}
           </Box>
         </Typography>
       </Box>
