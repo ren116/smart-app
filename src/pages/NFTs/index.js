@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CardMedia, CardContent, Typography, CardActionArea } from '@mui/material'
 import { Container, Grid, TextField } from '@mui/material'
 import { useCallback } from 'react'
+import { getNFTsData } from 'api'
 
 export default function NFTs() {
   const [nftListing, setNftListing] = useState([])
@@ -9,15 +10,16 @@ export default function NFTs() {
   const [offset, setOffset] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
   const loadNftListing = useCallback(async () => {
-    const response = await fetch(
-      `https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=20&offset=${offset}`
-    )
-    const data = await response.json()
-    setNftListing([...nftListing, ...data.results])
-    setFilteredNftListing([...nftListing, ...data.results])
-    setOffset(offset + 20)
-
-  }, [offset, nftListing])
+    try {
+      const response = await getNFTsData();
+      const data = response.data;
+      setNftListing([...nftListing, ...data.results]);
+      setFilteredNftListing([...nftListing, ...data.results]);
+      setOffset(offset + 20);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [offset, nftListing]);
 
   const handleSearch = event => {
     setSearchTerm(event.target.value.toLowerCase())
@@ -54,7 +56,7 @@ export default function NFTs() {
   }, [offset, loadNftListing])
 
   return (
-    <Typography>
+    <Typography component="div" >
       <Typography gutterBottom variant="h3" component="div" sx={{ paddingTop: 5 }}>
         NFT Marketplace
       </Typography>
@@ -63,12 +65,12 @@ export default function NFTs() {
         variant="outlined"
         value={searchTerm}
         onChange={handleSearch}
-        sx={{ paddingBottom: 3, width: "400px" }}
+        sx={{ paddingBottom: 3, width: "25%" }}
       />
       <Container maxWidth="lg">
         <Grid container spacing={5}>
-          {filteredNftListing.map(nftListing => (
-            <Grid key={nftListing.id} className="grid" item lg={3} md={4} sm={6} xs={12} sx={{ my: '25px' }}>
+          {filteredNftListing.map((nftListing, index) => (
+            <Grid key={index} className="grid" item lg={3} md={4} sm={6} xs={12} sx={{ my: '25px' }}>
               <CardActionArea sx={{ height: { sm: "100%", md: "230px" } }}>
                 <CardMedia
                   sx={{ height: "100%" }}
