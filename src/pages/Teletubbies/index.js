@@ -15,11 +15,14 @@ export const Teletubbies = () => {
 
   const filterOptions = (e) => {
     setSearchTerm(e.target.value);
+
     const filteredItems = teletubbiesData.filter((teletubby) =>
       teletubby.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
+
     setTeletubbies(filteredItems.slice(0, page * 20));
     teletubbiesData = filteredItems;
+    
     if (e.target.value == "") {
       teletubbiesData = savedTeletubbiesData;
       setTeletubbies(teletubbiesData.slice(0, 20));
