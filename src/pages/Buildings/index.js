@@ -8,7 +8,7 @@ export default function NFTS() {
 
   return (
     <Container maxWidth="xl" sx={{ mt: "80px" }}>
-      <Box sx={{ width: { sm: "100%", md: "85%", lg: "70%" }, m: "auto" }}>
+      <Box sx={{ width: { sm: "100%", lg: "1138px" }, m: "auto" }}>
         <TextField
           fullWidth
           label="Search"
