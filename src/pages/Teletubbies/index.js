@@ -53,14 +53,14 @@ export const Teletubbies = () => {
   return (
     <Container maxWidth="lg">
       <Title />
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 5 }}>
+      <Box sx={{ display: "flex", mb: {sm: 0, xs: 5}, mt: {sm:-2, xs: 5}, justifyContent: {xs: "center", sm: "flex-end"} }}>
         <TextField
           id="outlined-Password"
           label="search..."
           variant="outlined"
           size="small"
           onChange={filterOptions}
-          value={searchTerm}
+          value={searchTerm}  
         />
       </Box>
       <Box>

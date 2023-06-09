@@ -8,7 +8,7 @@ export const Title = () => {
           alt="Logo"
           src="./teletubbies_logo.png"
           variant="square"
-          sx={{ width: "auto", height: 180 }}
+          sx={{ width: "auto", height: 180, mt: 2 }}
         />
       </Box>
   );
