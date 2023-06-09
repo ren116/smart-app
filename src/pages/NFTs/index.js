@@ -7,8 +7,8 @@ import { getNFTsData } from 'api'
 export default function NFTs() {
   const [nftListing, setNftListing] = useState([])
   const [filteredNftListing, setFilteredNftListing] = useState([])
-  const [searchTerm, setSearchTerm] = useState('')
   const [offset, setOffset] = useState(0)
+  const [searchTerm, setSearchTerm] = useState('')
   const loadNftListing = useCallback(async () => {
     try {
       const response = await getNFTsData();
