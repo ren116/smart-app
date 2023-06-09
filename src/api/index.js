@@ -33,3 +33,17 @@ export const getBuildingData = async () => {
     throw error;
   }
 };
+
+const teletubbyOptions = {
+  method: "GET",
+  url: "./teletubbies.json",
+};
+
+export const getCurrenTeletubbyData = async () => {
+  try {
+    const response = await axios.request(teletubbyOptions);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

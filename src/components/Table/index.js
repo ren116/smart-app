@@ -53,18 +53,6 @@ export default function BuildTable({ handleSearch }) {
     return 0;
   }
 
-  function stableSort(array, comparator) {
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) {
-        return order;
-      }
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el) => el[0]);
-  }
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -103,16 +91,28 @@ export default function BuildTable({ handleSearch }) {
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   const visibleRows = useMemo(() => {
+    function stableSort(array, comparator) {
+      const stabilizedThis = array.map((el, index) => [el, index]);
+      stabilizedThis.sort((a, b) => {
+        const order = comparator(a[0], b[0]);
+        if (order !== 0) {
+          return order;
+        }
+        return a[1] - b[1];
+      });
+      return stabilizedThis.map((el) => el[0]);
+    }
     function getComparator(order, orderBy) {
       return order === "desc"
         ? (a, b) => descendingComparator(a, b, orderBy)
         : (a, b) => -descendingComparator(a, b, orderBy);
     }
-    stableSort(building, getComparator(order, orderBy)).slice(
+    return stableSort(building, getComparator(order, orderBy)).slice(
       page * rowsPerPage,
       page * rowsPerPage + rowsPerPage
     );
   }, [order, orderBy, page, rowsPerPage, building]);
+
   return (
     <Paper sx={{ width: "100%" }}>
       <ToolbarTable numSelected={selected.length} />
