@@ -179,22 +179,28 @@ const Buildings = () => {
                       </TableCell>
                       <TableCell
                         align="left"
-                        sx={{
-                          fontFamily: "arial",
-                          fontSize: 18,
-                          color: "grey",
-                        }}
+                        sx={[
+                          {
+                            fontFamily: "arial",
+                            fontSize: 18,
+                            color: "grey",
+                          },
+                          row.savings < 100 && { color: "red" },
+                        ]}
                         key={"cell-" + key * 5 + 2}
                       >
                         {row.savings + "%"}
                       </TableCell>
                       <TableCell
                         align="left"
-                        sx={{
-                          fontFamily: "arial",
-                          fontSize: 18,
-                          color: "grey",
-                        }}
+                        sx={[
+                          {
+                            fontFamily: "arial",
+                            fontSize: 18,
+                            color: "grey",
+                          },
+                          row.uptime < 100 && { color: "red" },
+                        ]}
                         key={"cell-" + key * 5 + 3}
                       >
                         {row.uptime + "%"}
