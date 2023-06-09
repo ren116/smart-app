@@ -46,3 +46,27 @@ export const getCurrenTeletubbyData = async () => {
     throw error;
   }
 };
+
+const nftsOptions = {
+  method: "GET",
+  url: "https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol",
+  params: {
+    collectionSymbol: 'okay_bears',
+    limit: 20,
+  }
+};
+
+export const getNFTsData = async (offset) => {
+  try {
+    const response = await axios.request({
+      ...nftsOptions,
+      params: {
+        ...nftsOptions.params,
+        offset,
+      }
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

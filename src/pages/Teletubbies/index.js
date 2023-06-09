@@ -31,16 +31,20 @@ const Teletubbies = () => {
 
   useEffect(() => {
     getTeletubbies();
+
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        getTeletubbies(); 
+        getTeletubbies();
       }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+
+    // eslint-disable-next-line
   }, [teletubbies]);
 
   const handleSearchQueryChange = (event) => {
