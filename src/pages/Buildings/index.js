@@ -12,9 +12,6 @@ import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import { amber, deepOrange, green, lightGreen } from "@mui/material/colors";
-import { Margin } from "@mui/icons-material";
-
-const ariaLabel = { "aria-label": "description" };
 
 const row = {
   site: "Barley",
