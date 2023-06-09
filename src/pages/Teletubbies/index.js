@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
 import TextField from "@mui/material/TextField";
 import Data from "../../teletubbies.json";
-import Style from "../../style.json";
+import {style} from "../../style.js";
 
 const Teletubbies = () => {
   const [dataList, setDataList] = useState([]);
@@ -129,7 +129,7 @@ const Teletubbies = () => {
                   </div>
                 </Div>
                 <Grid item>
-                  <ButtonBase sx={Style}>
+                  <ButtonBase sx={style}>
                     <Img alt="complex" src={data.image_url} />
                   </ButtonBase>
                 </Grid>
@@ -137,7 +137,7 @@ const Teletubbies = () => {
             ) : (
               <>
                 <Grid item>
-                  <ButtonBase sx={Style}>
+                  <ButtonBase sx={style}>
                     <Img alt="complex" src={data.image_url} />
                   </ButtonBase>
                 </Grid>
