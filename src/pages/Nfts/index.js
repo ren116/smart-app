@@ -67,14 +67,34 @@ const Nfts = () => {
         >
           {filteredNfts.map((nft, id) => (
             <Grid item key={id} xs={2} sm={4} md={4} lg={4} xl={5}>
-              <Box sx={{ bgcolor: "primary.main", py: "10" }}>
-                <div width="100%" height="100%">
+              <Box
+                sx={{
+                  py: "10",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    backgroundImage: 'url("./blank.jpg")',
+                    backgroundSize: "cover",
+                  }}
+                >
                   <img src={nft.img} width="100%" height="80%" alt="" />
-                  <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                  <Box
+                    sx={{
+                      bgcolor: "primary.main",
+                      display: "flex",
+                      justifyContent: "space-around",
+                      height: "20%",
+                    }}
+                  >
                     <h4>{nft.collectionTitle}</h4>
                     <p>{nft.price}</p>
                   </Box>
-                </div>
+                </Box>
               </Box>
             </Grid>
           ))}

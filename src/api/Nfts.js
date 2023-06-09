@@ -2,7 +2,7 @@ import axios from "axios";
 
 const nftsOptions = {
   method: "GET",
-  url: "https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=150&offset=0"
+  url: "https://api-mainnet.magiceden.io/idxv2/getListedNftsByCollectionSymbol?collectionSymbol=okay_bears&limit=300&offset=0"
 };
 
 export const getNftItemsData = async () => {

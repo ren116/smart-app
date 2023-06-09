@@ -19,6 +19,7 @@ function App() {
             <Route path="/teletubbies" element={<Teletubbies />} />
             <Route path="/NFTs" element={<Nfts />} />
             <Route path="/buildings" element={<Buildings />} />
+            <Route path="/teletubbies" element={<Teletubbies />} />
           </Route>
         </Routes>
       </BrowserRouter>
