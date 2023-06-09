@@ -10,7 +10,13 @@ export default function BodyTable({
   return (
     <TableBody>
       {visibleRows
-        .filter((rows) => rows.Name.toLowerCase().includes(handleSearch))
+        .filter(
+          (rows) =>
+            String(rows.Uptime).toLowerCase().includes(handleSearch) ||
+            String(rows.Savings).toLowerCase().includes(handleSearch) ||
+            String(rows.Power).toLowerCase().includes(handleSearch) ||
+            rows.Name.toLowerCase().includes(handleSearch)
+        )
         .map((row, index) => {
           const isItemSelected = isSelected(index);
           const labelId = `enhanced-table-checkbox-${index}`;
