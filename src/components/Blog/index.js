@@ -29,7 +29,7 @@ const Blog = () => {
         <div id='blogdata'>
           <Grid container spacing={10}>
             {filterBlog.map(item => (
-              <Grid item lg={3} md={4} sm={6} xs={12} >
+              <Grid item key={blogdata.id} lg={3} md={4} sm={6} xs={12} >
                 <CardActionArea>
                   <CardMedia
                     component="img"
@@ -41,7 +41,7 @@ const Blog = () => {
                       {item.collectionName}
                     </Typography>
                     <Typography variant="p">
-                      {item.price}$
+                    ${item.price}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -54,4 +54,4 @@ const Blog = () => {
   )
 }
 
-export default Blog
+export default Blog;
