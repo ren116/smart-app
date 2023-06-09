@@ -8,7 +8,6 @@ export const Title = () => {
         <Avatar alt="Logo" src="./teletubbies_logo.png" variant="square" 
           sx={{ width: "auto", height: 140 , }}/>
       </Box>
-    </>
-    
+    </>    
   )
 } 
