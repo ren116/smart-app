@@ -4,6 +4,8 @@ import { getCurrenTeletubbyData } from "api";
 
 const Teletubbies = () => {
   const [teletubbies, setTeletubbies] = useState([]);
+  const [visibleTeletubbies, setVisibleTeletubbies] = useState(20);
+
   const getTeletubbies = async () => {
     try {
       const response = await getCurrenTeletubbyData();
@@ -16,6 +18,23 @@ const Teletubbies = () => {
   useEffect(() => {
     getTeletubbies();
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight
+      ) {
+        setVisibleTeletubbies(visibleTeletubbies + 20);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [visibleTeletubbies]);
 
   return (
     <Container>
@@ -35,7 +54,7 @@ const Teletubbies = () => {
           Teletubbies
         </Typography>
       </Grid>
-      {teletubbies.map((teletubby, index) => (
+      {teletubbies.slice(0, visibleTeletubbies).map((teletubby, index) => (
         <Grid key={index}>
           <>
             <Grid
