@@ -1,7 +1,6 @@
 import { CardMedia } from '@mui/material';
 
-export const CardImg = (props) => {
-  return (
+export const CardImg = (props) => (
     <CardMedia
       component="img"
       alt={props.cardInfo.name}
@@ -10,5 +9,4 @@ export const CardImg = (props) => {
       sx={{ minWidth: "100px", width: {sm: "100px", xs: "50%"}, height: 
         {sm: "100px", xs: "auto"}, m: {xs: "auto", sm: 0} }}
     />
-  );
-};
+  )
