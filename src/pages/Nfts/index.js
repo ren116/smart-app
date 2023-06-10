@@ -43,13 +43,13 @@ const Nfts = () => {
       ) || []
     );
   }, [searchvalue, data]);
-  const paginate = () => {
-    setPageLength((pageLength) => pageLength + Nftplus);
-  };
-  const buildings = useMemo(() => {
-    return filteredItems.slice(0, pageLength);
-  }, [filteredItems, pageLength]);
-  console.log(buildings);
+  const paginate = () =>{
+    setPageLength((pageLength)=>pageLength + 20)
+  }
+  const buildings = useMemo(()=>{
+    return filteredItems.slice(0, pageLength)
+  }, [pageLength, filteredItems])
+
   return (
     <Box sx={{ m: 12, flexGrow: 1 }}>
       <Grid mb={8}>
@@ -85,7 +85,7 @@ const Nfts = () => {
           columns={{ xs: 2, sm: 8, md: 12, xl: 20 }}
           mt={3}
         >
-          {buildings.map((item, key) => (
+          {buildings?.map((item, key) => (
             <Grid xs={2} sm={4} md={4} xl={4} key={key}>
               <Item>
                 <ImgComponent
