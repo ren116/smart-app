@@ -38,7 +38,7 @@ export const Teletubbies = () => {
     setTeletubbies(filteredItems.slice(0, page * 20));
     originalTeletubbiesData = filteredItems;
 
-    if (e.target.value == "") {
+    if (e.target.value === "") {
       originalTeletubbiesData = allTeletubbiesData;
       setTeletubbies(originalTeletubbiesData.slice(0, 20));
     }
@@ -74,7 +74,7 @@ export const Teletubbies = () => {
             <Card
               key={index}
               sx={
-                index % 2 ==
+                index % 2 ===
                 0
                 ? 
                 leftPlaceCss
