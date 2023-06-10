@@ -4,6 +4,7 @@ import Layout from "pages/Layout";
 import Home from "pages/Home";
 import Nfts from "pages/Nfts";
 import NoPage from "pages/NoPage";
+import Buildings from "pages/Buildings/Buildings";
 import { Teletubbies } from "pages/Teletubbies";
 import "./App.css";
 
