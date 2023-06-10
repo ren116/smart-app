@@ -18,13 +18,14 @@ export const Teletubbies = () => {
     display: "flex",
     marginBottom: "20px",
     paddingX: "10px",
+    flexDirection: {sm: "row", xs: "column"},
   }
   const rightPlaceCss = {
     display: "flex",
     marginBottom: "20px",
     paddingX: "10px",
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
+    flexDirection: {sm: "row-reverse", xs: "column"},
+    justifyContent: "space-between !important",
   }
 
   const filterOptions = (e) => {
