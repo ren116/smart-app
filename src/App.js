@@ -4,6 +4,7 @@ import Layout from "pages/Layout";
 import Home from "pages/Home";
 import NoPage from "pages/NoPage";
 import Buildings from "pages/Buildings/Buildings";
+import { Teletubbies } from "pages/Teletubbies";
 import "./App.css";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="*" element={<NoPage />} />
             <Route path="/buildings" element={<Buildings />} />
+            <Route path="/teletubbies" element={<Teletubbies />} />
           </Route>
         </Routes>
       </BrowserRouter>
