@@ -121,8 +121,8 @@ const Teletubbies = () => {
               p={2}
               my={2}
               direction={{
-                xs: index % 2 ? "row-reverse" : "",
-                md: "row",
+                md: index % 2 ? "row-reverse" : "",
+                xs: "row",
               }}
             >
               <Grid item xs={12} md={3} lg={3}>
